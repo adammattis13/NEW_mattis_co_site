@@ -94,11 +94,19 @@ class ComponentLoader {
     }
 }
 
+// Determine the root path based on the script location. This ensures
+// components are loaded correctly even when this script is included
+// from a subdirectory (e.g. pages/about.html).
+const SCRIPT_SRC = document.currentScript && document.currentScript.src;
+const ROOT_PATH = SCRIPT_SRC
+  ? SCRIPT_SRC.split('/javascript/components.js')[0] + '/'
+  : './';
+
 // Default component configurations
 const DEFAULT_COMPONENTS = {
     header: {
         selector: '#header',
-        path: 'components/header.html',
+        path: `${ROOT_PATH}components/header.html`,
         fallback: `
             <nav class="nav">
                 <div class="nav-container">
@@ -122,7 +130,7 @@ const DEFAULT_COMPONENTS = {
     },
     footer: {
         selector: '#footer',
-        path: 'components/footer.html',
+        path: `${ROOT_PATH}components/footer.html`,
         fallback: `
             <footer class="footer">
                 <div class="footer-content">
@@ -136,8 +144,8 @@ const DEFAULT_COMPONENTS = {
                         <li><a href="#theses">Theses</a></li>
                         <li><a href="#team">Team</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="pages/privacy.html">Privacy</a></li>
-                        <li><a href="pages/terms.html">Terms</a></li>
+                        <li><a href="${ROOT_PATH}pages/privacy.html">Privacy</a></li>
+                        <li><a href="${ROOT_PATH}pages/terms.html">Terms</a></li>
                     </ul>
                 </div>
                 <div class="container" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(212, 212, 212, 0.2); text-align: center;">
