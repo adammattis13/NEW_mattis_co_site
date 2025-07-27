@@ -1,0 +1,133 @@
+<script>
+// Simple immediate footer navigation setup
+document.addEventListener('DOMContentLoaded', function() {
+    setupFooterHomeLink();
+});
+
+// Also try when components are loaded (fallback)
+if (typeof document !== 'undefined') {
+    document.addEventListener('allComponentsLoaded', function() {
+        setupFooterHomeLink();
+    });
+}
+
+function setupFooterHomeLink() {
+    const footerHome = document.querySelector('.footer-home');
+    if (footerHome && !footerHome.hasAttribute('data-setup')) {
+        footerHome.setAttribute('data-setup', 'true');
+        footerHome.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Get current path
+            const currentPath = window.location.pathname;
+            
+            console.log('Clicked home, current path:', currentPath);
+            
+            // If we're already on the home page, scroll to top
+            if (currentPath.endsWith('index.html') || currentPath === '/' || currentPath === '') {
+                console.log('On home page, scrolling to top');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (currentPath.includes('pages/')) {
+                console.log('In pages directory, going to ../index.html');
+                window.location.assign('../index.html');
+            } else {
+                console.log('Default case, going to index.html');
+                window.location.assign('index.html');
+            }
+            
+            return false;
+        });
+    }
+}
+</script><!-- Footer Component - components/footer.html -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <ul class="footer-links">
+                <li><a href="javascript:void(0)" class="footer-home">Home</a></li>
+                <li><a href="pages/privacy.html">Privacy Policy</a></li>
+                <li><a href="pages/terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Mattis & Co. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* Enhanced Footer Styles */
+.footer-content {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 15px;
+    font-weight: 500;
+    position: relative;
+}
+
+.footer-links a:hover {
+    color: var(--accent-green);
+    transform: translateY(-1px);
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-green);
+    transition: width 0.2s ease;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Responsive Footer Design */
+@media (max-width: 768px) {
+    .footer-links {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .footer-bottom {
+        padding-top: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links a {
+        font-size: 14px;
+    }
+}
+</style>
