@@ -54,30 +54,48 @@ function setupRotatingText() {
     }
 }
 
-// Smooth scrolling for navigation links - ONLY call after components load
+// FIXED: Smooth scrolling for navigation links - ONLY call after components load
 function setupSmoothScrolling() {
     console.log('🔗 Setting up smooth scrolling...');
     
-    const navigationLinks = document.querySelectorAll('a[href^="#"]');
+    // Only select anchors that are pure hash links (no file paths)
+    const navigationLinks = document.querySelectorAll('a[href^="#"]:not([href="#"]):not([href*=".html"])');
     console.log(`Found ${navigationLinks.length} navigation links`);
     
     navigationLinks.forEach((anchor, index) => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const nav = document.querySelector('.nav');
-                const navHeight = nav ? nav.offsetHeight : 80;
-                const targetPosition = target.offsetTop - navHeight - 20;
+        if (!anchor.hasAttribute('data-scroll-initialized')) {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
                 
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+                // Double-check: skip if contains file path or is empty/invalid
+                if (!href || href === '#' || href.includes('.html') || href.startsWith('javascript:') || href.length <= 1) {
+                    return; // Let the browser handle the navigation normally
+                }
                 
-                console.log(`Smooth scrolling to: ${this.getAttribute('href')}`);
-            }
-        });
+                e.preventDefault();
+                
+                try {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        const nav = document.querySelector('.nav');
+                        const navHeight = nav ? nav.offsetHeight : 80;
+                        const targetPosition = target.offsetTop - navHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        console.log(`Smooth scrolling to: ${href}`);
+                    }
+                } catch (error) {
+                    console.warn('Invalid selector for smooth scrolling:', href, error);
+                    // If there's an error, let the browser handle it normally
+                    window.location.href = href;
+                }
+            });
+            anchor.setAttribute('data-scroll-initialized', 'true');
+        }
     });
 }
 

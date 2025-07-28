@@ -1,53 +1,11 @@
-<script>
-// Simple immediate footer navigation setup
-document.addEventListener('DOMContentLoaded', function() {
-    setupFooterHomeLink();
-});
-
-// Also try when components are loaded (fallback)
-if (typeof document !== 'undefined') {
-    document.addEventListener('allComponentsLoaded', function() {
-        setupFooterHomeLink();
-    });
-}
-
-function setupFooterHomeLink() {
-    const footerHome = document.querySelector('.footer-home');
-    if (footerHome && !footerHome.hasAttribute('data-setup')) {
-        footerHome.setAttribute('data-setup', 'true');
-        footerHome.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Get current path
-            const currentPath = window.location.pathname;
-            
-            console.log('Clicked home, current path:', currentPath);
-            
-            // If we're already on the home page, scroll to top
-            if (currentPath.endsWith('index.html') || currentPath === '/' || currentPath === '') {
-                console.log('On home page, scrolling to top');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (currentPath.includes('pages/')) {
-                console.log('In pages directory, going to ../index.html');
-                window.location.assign('../index.html');
-            } else {
-                console.log('Default case, going to index.html');
-                window.location.assign('index.html');
-            }
-            
-            return false;
-        });
-    }
-}
-</script><!-- Footer Component - components/footer.html -->
+<!-- Footer Component - components/footer.html -->
 <footer class="footer">
     <div class="container">
         <div class="footer-content">
             <ul class="footer-links">
-                <li><a href="javascript:void(0)" class="footer-home">Home</a></li>
-                <li><a href="pages/privacy.html">Privacy Policy</a></li>
-                <li><a href="pages/terms.html">Terms of Service</a></li>
+                <li><a href="javascript:void(0)" class="footer-home" id="footer-home">Home</a></li>
+                <li><a href="javascript:void(0)" id="footer-privacy">Privacy Policy</a></li>
+                <li><a href="javascript:void(0)" id="footer-terms">Terms of Service</a></li>
             </ul>
         </div>
         
