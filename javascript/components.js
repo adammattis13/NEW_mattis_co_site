@@ -1,5 +1,135 @@
+// Mattis & Co - Component Loader with Enhanced Navigation System
+// javascript/components.js
+
+class ComponentLoader {
+    constructor() {
+        this.components = new Map();
+        this.loadedComponents = new Set();
+    }
+
+    // Register a component for loading
+    register(name, selector, path, fallback = null) {
+        this.components.set(name, {
+            selector,
+            path,
+            fallback,
+            loaded: false
+        });
+    }
+
+    // Load a single component
+    async loadComponent(name) {
+        const component = this.components.get(name);
+        if (!component || component.loaded) return;
+
+        const element = document.querySelector(component.selector);
+        if (!element) {
+            console.warn(`Element not found for component ${name}: ${component.selector}`);
+            return;
+        }
+
+        try {
+            const response = await fetch(component.path);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const html = await response.text();
+            element.innerHTML = html;
+            component.loaded = true;
+            this.loadedComponents.add(name);
+            
+            // Setup navigation paths after component loads
+            this.setupComponentPaths(name);
+            
+            // Dispatch custom event
+            element.dispatchEvent(new CustomEvent('componentLoaded', { 
+                detail: { name, component } 
+            }));
+            
+            console.log(`✅ Loaded component: ${name}`);
+            
+        } catch (error) {
+            console.warn(`⚠️ Failed to load ${name} from ${component.path}:`, error);
+            
+            // Use fallback if provided or generate dynamically
+            if (element) {
+                let fallbackHTML = component.fallback;
+                
+                // Generate dynamic fallback for specific components
+                if (!fallbackHTML) {
+                    if (name === 'header') {
+                        fallbackHTML = generateNavigationHTML();
+                    } else if (name === 'footer') {
+                        fallbackHTML = generateFooterHTML();
+                    }
+                }
+                
+                if (fallbackHTML) {
+                    element.innerHTML = fallbackHTML;
+                    component.loaded = true;
+                    this.loadedComponents.add(name);
+                    
+                    // Setup navigation paths after fallback loads
+                    this.setupComponentPaths(name);
+                    
+                    console.log(`📦 Using ${component.fallback ? 'static' : 'dynamic'} fallback for: ${name}`);
+                    
+                    // Still dispatch event for fallback
+                    element.dispatchEvent(new CustomEvent('componentLoaded', { 
+                        detail: { name, component, fallback: true } 
+                    }));
+                }
+            }
+        }
+    }
+
+    // Setup component-specific functionality after loading
+    setupComponentPaths(componentName) {
+        setTimeout(() => {
+            if (componentName === 'header') {
+                setupNavigationPaths();
+            } else if (componentName === 'footer') {
+                setupFooterPaths();
+            }
+        }, 50); // Small delay to ensure DOM is updated
+    }
+
+    // Load all registered components
+    async loadAll() {
+        const loadPromises = Array.from(this.components.keys())
+            .map(name => this.loadComponent(name));
+        
+        await Promise.all(loadPromises);
+        
+        console.log('All components loaded:', Array.from(this.loadedComponents));
+        
+        // Dispatch event when all components are loaded
+        document.dispatchEvent(new CustomEvent('allComponentsLoaded', {
+            detail: { loaded: Array.from(this.loadedComponents) }
+        }));
+    }
+
+    // Get component status
+    getStatus(name) {
+        const component = this.components.get(name);
+        return component ? component.loaded : false;
+    }
+
+    // List all registered components
+    list() {
+        return Array.from(this.components.entries()).map(([name, component]) => ({
+            name,
+            loaded: component.loaded,
+            selector: component.selector,
+            path: component.path
+        }));
+    }
+}
+
+// Enhanced Navigation System Class
 class NavigationManager {
     constructor() {
+        console.log('🚀 NavigationManager: Starting initialization...');
+        
         this.config = {
             rootPath: this.detectRootPath(),
             currentPath: window.location.pathname,
@@ -7,6 +137,8 @@ class NavigationManager {
             depth: this.getPathDepth(),
             isMobile: window.innerWidth <= 768
         };
+        
+        console.log('📍 NavigationManager config:', this.config);
         
         // Define site structure for easier maintenance
         this.siteStructure = {
@@ -77,16 +209,20 @@ class NavigationManager {
     
     // Setup all navigation elements
     init() {
+        console.log('🎯 NavigationManager: Initializing features...');
         this.setupNavigation();
         this.setupBreadcrumbs();
         this.setupMobileMenu();
         this.setupActiveStates();
         this.setupScrollBehavior();
         this.handleDeepLinking();
+        console.log('✅ NavigationManager: All features initialized');
     }
     
     // Main navigation setup
     setupNavigation() {
+        console.log('🔧 Setting up navigation paths...');
+        
         // Wait for header to be loaded
         const checkHeader = setInterval(() => {
             const navElements = {
@@ -106,6 +242,7 @@ class NavigationManager {
                 clearInterval(checkHeader);
                 this.updateNavigationPaths(navElements);
                 this.setupDropdownBehavior();
+                console.log('✅ Navigation paths updated');
             }
         }, 100);
     }
@@ -156,6 +293,7 @@ class NavigationManager {
             
             // Add styles
             this.injectBreadcrumbStyles();
+            console.log('✅ Breadcrumbs created');
         }
     }
     
@@ -232,7 +370,11 @@ class NavigationManager {
     
     // Inject breadcrumb styles
     injectBreadcrumbStyles() {
+        // Check if styles already exist
+        if (document.getElementById('navigation-manager-styles')) return;
+        
         const style = document.createElement('style');
+        style.id = 'navigation-manager-styles';
         style.textContent = `
             .breadcrumb-container {
                 position: fixed;
@@ -240,7 +382,7 @@ class NavigationManager {
                 width: 100%;
                 background: rgba(255, 255, 255, 0.95);
                 backdrop-filter: blur(10px);
-                border-bottom: 1px solid var(--border-light);
+                border-bottom: 1px solid var(--border-light, #e9ecef);
                 z-index: 999;
                 transition: all 0.3s ease;
             }
@@ -250,7 +392,7 @@ class NavigationManager {
             }
             
             .breadcrumb {
-                max-width: var(--max-width, 1200px);
+                max-width: 1400px;
                 margin: 0 auto;
                 padding: 0 40px;
             }
@@ -264,23 +406,23 @@ class NavigationManager {
             }
             
             .breadcrumb-link {
-                color: var(--text-secondary);
+                color: #6c757d;
                 text-decoration: none;
                 transition: color 0.2s ease;
                 font-weight: 500;
             }
             
             .breadcrumb-link:hover {
-                color: var(--accent-green);
+                color: #bada55;
             }
             
             .breadcrumb-separator {
-                color: var(--text-light);
+                color: #adb5bd;
                 font-size: 12px;
             }
             
             .breadcrumb-current {
-                color: var(--text-primary);
+                color: #1a1a1a;
                 font-weight: 600;
             }
             
@@ -325,9 +467,12 @@ class NavigationManager {
         if (!toggle || !navRight) return;
         
         // Create mobile menu overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'mobile-overlay';
-        document.body.appendChild(overlay);
+        let overlay = document.querySelector('.mobile-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'mobile-overlay';
+            document.body.appendChild(overlay);
+        }
         
         toggle.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -352,6 +497,8 @@ class NavigationManager {
                 this.closeMobileMenu();
             }
         });
+        
+        console.log('✅ Mobile menu setup complete');
     }
     
     // Toggle mobile menu
@@ -553,150 +700,241 @@ class NavigationManager {
     }
 }
 
-// Additional mobile menu styles to inject
-const mobileMenuStyles = `
-    .mobile-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 998;
+// Helper function to get correct path based on current location
+function getComponentPath(filename) {
+    const currentPath = window.location.pathname;
+    
+    // Count directory depth by counting slashes (excluding leading slash)
+    const pathParts = currentPath.split('/').filter(part => part.length > 0);
+    
+    // Remove filename if present (if last part has extension)
+    if (pathParts.length > 0 && pathParts[pathParts.length - 1].includes('.')) {
+        pathParts.pop();
     }
     
-    .mobile-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
+    // Calculate how many levels to go up
+    const levelsUp = pathParts.length;
+    const prefix = '../'.repeat(levelsUp);
     
-    body.menu-open {
-        overflow: hidden;
-    }
-    
-    @media (max-width: 768px) {
-        .nav-right {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            max-width: 400px;
-            height: 100vh;
-            background: white;
-            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
-            transition: right 0.3s ease;
-            overflow-y: auto;
-            z-index: 1001;
-            padding: 80px 24px 24px;
-        }
-        
-        .nav-right.active {
-            right: 0;
-        }
-        
-        .nav-links {
-            flex-direction: column;
-            gap: 0;
-            width: 100%;
-        }
-        
-        .nav-links li {
-            width: 100%;
-            border-bottom: 1px solid var(--border-light);
-        }
-        
-        .nav-links a {
-            display: block;
-            padding: 16px 0;
-            font-size: 16px;
-        }
-        
-        .nav-dropdown-menu {
-            position: static !important;
-            display: none;
-            padding-left: 24px;
-            background: var(--background-light);
-            margin: 0;
-        }
-        
-        .nav-dropdown.active .nav-dropdown-menu {
-            display: block;
-        }
-        
-        .nav-cta {
-            flex-direction: column;
-            width: 100%;
-            margin-top: 24px;
-            gap: 12px;
-        }
-        
-        .nav-cta .btn {
-            width: 100%;
-            justify-content: center;
-        }
-        
-        .nav-toggle {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding: 8px;
-            cursor: pointer;
-            z-index: 1002;
-        }
-        
-        .nav-toggle span {
-            width: 24px;
-            height: 2px;
-            background: var(--text-primary);
-            transition: all 0.3s ease;
-            border-radius: 2px;
-        }
-        
-        .nav-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .nav-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .nav-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-    }
-    
-    /* Navigation hide on scroll (mobile) */
-    .nav.nav-hidden {
-        transform: translateY(-100%);
-    }
-    
-    .breadcrumb-container.breadcrumb-hidden {
-        transform: translateY(-100%);
-    }
-`;
-
-// Initialize navigation when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    // Inject mobile menu styles
-    const style = document.createElement('style');
-    style.textContent = mobileMenuStyles;
-    document.head.appendChild(style);
-    
-    // Initialize navigation manager
-    window.navigationManager = new NavigationManager();
-    
-    console.log('✅ Enhanced Navigation System initialized');
-});
-
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = NavigationManager;
+    return levelsUp === 0 ? `components/${filename}` : `${prefix}components/${filename}`;
 }
 
-// Event listeners for component loading - UPDATED VERSION
+// Helper function to get correct navigation paths based on current location (LEGACY - kept for compatibility)
+function getNavPath(targetPath) {
+    const currentPath = window.location.pathname;
+    
+    // Determine current directory level
+    let currentLevel = 'root';
+    if (currentPath.includes('/pages/theses/')) {
+        currentLevel = 'theses';
+    } else if (currentPath.includes('/pages/')) {
+        currentLevel = 'pages';
+    }
+    
+    // Define path mappings for each level
+    const pathMappings = {
+        'root': {
+            '': 'index.html',
+            'index.html': 'index.html',
+            'pages/about.html': 'pages/about.html',
+            'pages/portfolio.html': 'pages/portfolio.html',
+            'pages/team.html': 'pages/team.html',
+            'pages/contact.html': 'pages/contact.html',
+            'pages/privacy.html': 'pages/privacy.html',
+            'pages/terms.html': 'pages/terms.html'
+        },
+        'pages': {
+            '': '../index.html',
+            'index.html': '../index.html',
+            'pages/about.html': 'about.html',
+            'pages/portfolio.html': 'portfolio.html',
+            'pages/team.html': 'team.html',
+            'pages/contact.html': 'contact.html',
+            'pages/privacy.html': 'privacy.html',
+            'pages/terms.html': 'terms.html'
+        },
+        'theses': {
+            '': '../../index.html',
+            'index.html': '../../index.html',
+            'pages/about.html': '../about.html',
+            'pages/portfolio.html': '../portfolio.html',
+            'pages/team.html': '../team.html',
+            'pages/contact.html': '../contact.html',
+            'pages/privacy.html': '../privacy.html',
+            'pages/terms.html': '../terms.html'
+        }
+    };
+    
+    return pathMappings[currentLevel][targetPath] || targetPath;
+}
+
+// Function to setup navigation paths after header loads (LEGACY - now handled by NavigationManager)
+function setupNavigationPaths() {
+    console.log('🔍 Legacy setupNavigationPaths called - handled by NavigationManager');
+}
+
+// Function to setup footer paths after footer loads
+function setupFooterPaths() {
+    console.log('🔍 Setting up footer paths');
+    
+    // Similar logic for footer links
+    const footerLinks = {
+        about: document.querySelector('footer a[href*="about"]'),
+        portfolio: document.querySelector('footer a[href*="portfolio"]'),
+        team: document.querySelector('footer a[href*="team"]'),
+        contact: document.querySelector('footer a[href*="contact"]'),
+        privacy: document.querySelector('footer a[href*="privacy"]'),
+        terms: document.querySelector('footer a[href*="terms"]')
+    };
+    
+    if (footerLinks.about) footerLinks.about.href = getNavPath('pages/about.html');
+    if (footerLinks.portfolio) footerLinks.portfolio.href = getNavPath('pages/portfolio.html');
+    if (footerLinks.team) footerLinks.team.href = getNavPath('pages/team.html');
+    if (footerLinks.contact) footerLinks.contact.href = getNavPath('pages/contact.html');
+    if (footerLinks.privacy) footerLinks.privacy.href = getNavPath('pages/privacy.html');
+    if (footerLinks.terms) footerLinks.terms.href = getNavPath('pages/terms.html');
+    
+    console.log('✅ Footer paths set up successfully');
+}
+
+// Function to generate navigation HTML dynamically (fallback only)
+function generateNavigationHTML() {
+    return `
+        <nav class="nav">
+            <div class="nav-container">
+                <a href="${getNavPath('')}" class="logo">
+                    <span class="logo-primary">MATTIS</span><span class="logo-secondary">&CO</span>
+                </a>
+                
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="${getNavPath('index.html')}#private-equity" class="nav-anchor">Private Equity</a></li>
+                        <li><a href="${getNavPath('index.html')}#advisory" class="nav-anchor">Advisory</a></li>
+                        <li class="nav-dropdown">
+                            <a href="#" class="nav-dropdown-toggle">
+                                About
+                                <i data-lucide="chevron-down" class="dropdown-icon"></i>
+                            </a>
+                            <ul class="nav-dropdown-menu">
+                                <li><a href="${getNavPath('pages/about.html')}">Our Story</a></li>
+                                <li><a href="${getNavPath('pages/portfolio.html')}">Portfolio</a></li>
+                                <li><a href="${getNavPath('pages/team.html')}">Team</a></li>
+                                <li><a href="${getNavPath('index.html')}#theses" class="nav-anchor">Investment Theses</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="${getNavPath('pages/contact.html')}">Contact</a></li>
+                    </ul>
+                    
+                    <div class="nav-cta">
+                        <a href="${getNavPath('pages/contact.html')}" class="btn btn-secondary btn-nav">Send Us a Deal</a>
+                        <a href="${getNavPath('pages/contact.html')}" class="btn btn-primary btn-nav">Engage Advisors</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Navigation Toggle -->
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    `;
+}
+
+// Function to generate footer HTML dynamically (fallback only)
+function generateFooterHTML() {
+    return `
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <span class="logo-primary">MATTIS</span><span class="logo-secondary">&CO</span>
+                    </div>
+                    <div class="footer-links">
+                        <a href="${getNavPath('pages/about.html')}">About</a>
+                        <a href="${getNavPath('pages/portfolio.html')}">Portfolio</a>
+                        <a href="${getNavPath('pages/contact.html')}">Contact</a>
+                    </div>
+                    <div class="footer-copy">
+                        &copy; 2024 Mattis & Co. All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    `;
+}
+
+// Create instance of ComponentLoader
+const componentLoader = new ComponentLoader();
+
+// Register components to load
+function initializeComponents() {
+    console.log('Initializing components...');
+    
+    // Get the correct path based on current location
+    const headerPath = getComponentPath('header.html');
+    const footerPath = getComponentPath('footer.html');
+    
+    console.log('Component paths:', { headerPath, footerPath });
+    
+    // Register components
+    componentLoader.register('header', '#header', headerPath);
+    componentLoader.register('footer', '#footer', footerPath);
+    
+    // Load all components
+    componentLoader.loadAll().then(() => {
+        console.log('Components loaded successfully');
+        
+        // Initialize any component-dependent functionality
+        initializeComponentDependentFeatures();
+    }).catch(error => {
+        console.error('Error loading components:', error);
+    });
+}
+
+// Features that depend on components being loaded
+function initializeComponentDependentFeatures() {
+    // Wait a bit to ensure DOM is fully updated
+    setTimeout(() => {
+        // Smooth scrolling for dynamically loaded navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            if (!anchor.hasAttribute('data-scroll-initialized')) {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    
+                    // Skip empty hashes, javascript:void(0), and invalid selectors
+                    if (!href || href === '#' || href.startsWith('javascript:') || href.length <= 1) {
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    
+                    try {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            const nav = document.querySelector('.nav');
+                            const navHeight = nav?.offsetHeight || 80;
+                            const targetPosition = target.offsetTop - navHeight - 20;
+                            
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    } catch (error) {
+                        console.warn('Invalid selector for smooth scrolling:', href, error);
+                    }
+                });
+                anchor.setAttribute('data-scroll-initialized', 'true');
+            }
+        });
+        
+        console.log('Component-dependent features initialized');
+    }, 100);
+}
+
+// Event listeners for component loading
 document.addEventListener('componentLoaded', (e) => {
     console.log(`Component loaded: ${e.detail.name}${e.detail.fallback ? ' (using fallback)' : ''}`);
     
@@ -739,6 +977,7 @@ if (typeof window !== 'undefined') {
     window.ComponentLoader = ComponentLoader;
     window.componentLoader = componentLoader;
     window.initializeComponents = initializeComponents;
+    window.NavigationManager = NavigationManager;
 }
 
 // Auto-initialize if DOM is already loaded
