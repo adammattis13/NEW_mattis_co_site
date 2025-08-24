@@ -1266,3 +1266,220 @@ h3 {
         font-size: 1.2rem;
     }
 }
+
+/* ============================================
+   ENHANCED NAVIGATION SYSTEM STYLES
+   ============================================ */
+
+/* Enhanced Mobile Navigation */
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 998;
+}
+
+.mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Breadcrumb Navigation Styles */
+.breadcrumb-container {
+    position: fixed;
+    top: 80px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e9ecef;
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+.nav.scrolled + .breadcrumb-container {
+    top: 68px;
+}
+
+.breadcrumb {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.breadcrumb-inner {
+    padding: 12px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.breadcrumb-link {
+    color: #6c757d;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-weight: 500;
+}
+
+.breadcrumb-link:hover {
+    color: #bada55;
+}
+
+.breadcrumb-separator {
+    color: #adb5bd;
+    font-size: 12px;
+}
+
+.breadcrumb-current {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+/* Adjust body padding when breadcrumbs exist */
+body.has-breadcrumb {
+    padding-top: 120px;
+}
+
+/* Navigation hide on scroll (mobile) */
+.nav.nav-hidden {
+    transform: translateY(-100%);
+}
+
+.breadcrumb-container.breadcrumb-hidden {
+    transform: translateY(-100%);
+}
+
+/* Enhanced Mobile Menu Styles */
+@media (max-width: 768px) {
+    .breadcrumb-container {
+        top: 64px;
+    }
+    
+    .nav.scrolled + .breadcrumb-container {
+        top: 56px;
+    }
+    
+    .breadcrumb {
+        padding: 0 24px;
+    }
+    
+    .breadcrumb-inner {
+        padding: 10px 0;
+        font-size: 13px;
+    }
+    
+    /* Mobile slide-out menu */
+    .nav-right {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 400px;
+        height: 100vh;
+        background: white;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        overflow-y: auto;
+        z-index: 1001;
+        padding: 80px 24px 24px;
+        display: block !important;
+    }
+    
+    .nav-right.active {
+        right: 0;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+    
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    .nav-links a {
+        display: block;
+        padding: 16px 0;
+        font-size: 16px;
+    }
+    
+    .nav-dropdown-menu {
+        position: static !important;
+        display: none;
+        padding-left: 24px;
+        background: #fafafa;
+        margin: 0;
+    }
+    
+    .nav-dropdown.active .nav-dropdown-menu {
+        display: block;
+    }
+    
+    .nav-cta {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 24px;
+        gap: 12px;
+    }
+    
+    .nav-cta .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .nav-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 8px;
+        cursor: pointer;
+        z-index: 1002;
+    }
+    
+    .nav-toggle span {
+        width: 24px;
+        height: 2px;
+        background: #1f1f1f;
+        transition: all 0.3s ease;
+        border-radius: 2px;
+    }
+    
+    /* Hamburger animation */
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+    .breadcrumb-inner {
+        font-size: 12px;
+        gap: 6px;
+    }
+    
+    body.has-breadcrumb {
+        padding-top: 100px;
+    }
+}
