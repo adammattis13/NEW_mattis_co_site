@@ -1080,50 +1080,57 @@
     <!-- Premium Footer -->
     <footer id="footer"></footer>
 
-    <!-- Component Loader and Scripts -->
-    <script src="../javascript/components.js"></script>
-    <script src="../javascript/script.js"></script>
+<!-- Component Loader and Scripts -->
+<script src="../javascript/components.js"></script>
+<script>
+    // Override component paths for pages subdirectory immediately after components.js loads
+    if (window.componentLoader) {
+        window.componentLoader.register('header', '#header', '../components/header.html');
+        window.componentLoader.register('footer', '#footer', '../components/footer.html');
+    }
+</script>
+<script src="../javascript/script.js"></script>
 
-    <!-- JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            lucide.createIcons();
-            // Initialize basic functionality first
-            setupScrollAnimations();
-        });
+<!-- JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+        // Initialize basic functionality first
+        setupScrollAnimations();
+    });
 
-        // Listen for all components loaded event - same pattern as portfolio.html
-        document.addEventListener('allComponentsLoaded', function() {
-            console.log('🎯 About page: Components loaded, initializing navigation...');
-            
-            // Now it's safe to set up navigation and other component-dependent features
-            if (window.MattisApp && typeof window.MattisApp.setupNavigation === 'function') {
-                try {
-                    window.MattisApp.setupNavigation();
-                    window.MattisApp.setupSmoothScrolling();
-                    window.MattisApp.setupInteractions();
-                    console.log('✅ About page: All functionality initialized');
-                } catch (error) {
-                    console.error('Error initializing MattisApp functions:', error);
-                }
+    // Listen for all components loaded event
+    document.addEventListener('allComponentsLoaded', function() {
+        console.log('🎯 Page components loaded');
+        
+        // Navigation is handled by NavigationManager
+        // Just initialize page-specific features
+        if (window.MattisApp) {
+            try {
+                window.MattisApp.setupSmoothScrolling();
+                window.MattisApp.setupInteractions();
+                console.log('✅ Page functionality initialized');
+            } catch (error) {
+                console.error('Error initializing page functions:', error);
             }
-        });
-
-        function setupScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animationPlayState = 'running';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-            document.querySelectorAll('.fade-in').forEach(el => {
-                el.style.animationPlayState = 'paused';
-                observer.observe(el);
-            });
         }
-    </script>
+    });
+
+    function setupScrollAnimations() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    }
+</script>
 </body>
 </html>

@@ -695,3 +695,55 @@ document.addEventListener('DOMContentLoaded', () => {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = NavigationManager;
 }
+
+// Event listeners for component loading - UPDATED VERSION
+document.addEventListener('componentLoaded', (e) => {
+    console.log(`Component loaded: ${e.detail.name}${e.detail.fallback ? ' (using fallback)' : ''}`);
+    
+    // Initialize NavigationManager when header loads
+    if (e.detail.name === 'header' && !window.navigationManager) {
+        console.log('🚀 Initializing NavigationManager after header load...');
+        
+        // Small delay to ensure DOM is ready
+        setTimeout(() => {
+            if (typeof NavigationManager !== 'undefined') {
+                window.navigationManager = new NavigationManager();
+                console.log('✅ NavigationManager initialized successfully');
+            } else {
+                console.error('❌ NavigationManager class not found - ensure it\'s defined above');
+            }
+        }, 100);
+    }
+});
+
+document.addEventListener('allComponentsLoaded', (e) => {
+    console.log('All components loaded:', e.detail.loaded);
+    
+    // Ensure NavigationManager is initialized (backup)
+    if (!window.navigationManager) {
+        console.log('🚀 Initializing NavigationManager (backup)...');
+        
+        setTimeout(() => {
+            if (typeof NavigationManager !== 'undefined') {
+                window.navigationManager = new NavigationManager();
+                console.log('✅ NavigationManager initialized successfully (backup)');
+            } else {
+                console.error('❌ NavigationManager class not found');
+            }
+        }, 100);
+    }
+});
+
+// Export for external use
+if (typeof window !== 'undefined') {
+    window.ComponentLoader = ComponentLoader;
+    window.componentLoader = componentLoader;
+    window.initializeComponents = initializeComponents;
+}
+
+// Auto-initialize if DOM is already loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeComponents);
+} else {
+    initializeComponents();
+}

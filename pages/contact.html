@@ -966,153 +966,57 @@
     <!-- Premium Footer -->
     <footer id="footer"></footer>
 
-    <!-- Component Loader and Scripts -->
-    <script src="../javascript/components.js"></script>
-    <script>
-        // Override component paths for pages subdirectory immediately after components.js loads
-        if (window.componentLoader) {
-            window.componentLoader.register('header', '#header', '../components/header.html');
-            window.componentLoader.register('footer', '#footer', '../components/footer.html');
-        }
-    </script>
-    <script src="../javascript/script.js"></script>
+<!-- Component Loader and Scripts -->
+<script src="../javascript/components.js"></script>
+<script>
+    // Override component paths for pages subdirectory immediately after components.js loads
+    if (window.componentLoader) {
+        window.componentLoader.register('header', '#header', '../components/header.html');
+        window.componentLoader.register('footer', '#footer', '../components/footer.html');
+    }
+</script>
+<script src="../javascript/script.js"></script>
 
-    <!-- JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            lucide.createIcons();
-            // Initialize basic functionality first
-            setupScrollAnimations();
+<!-- JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+        // Initialize basic functionality first
+        setupScrollAnimations();
+    });
+
+    // Listen for all components loaded event
+    document.addEventListener('allComponentsLoaded', function() {
+        console.log('🎯 Page components loaded');
+        
+        // Navigation is handled by NavigationManager
+        // Just initialize page-specific features
+        if (window.MattisApp) {
+            try {
+                window.MattisApp.setupSmoothScrolling();
+                window.MattisApp.setupInteractions();
+                console.log('✅ Page functionality initialized');
+            } catch (error) {
+                console.error('Error initializing page functions:', error);
+            }
+        }
+    });
+
+    function setupScrollAnimations() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
         });
-
-        // Listen for all components loaded event - same pattern as other pages
-        document.addEventListener('allComponentsLoaded', function() {
-            console.log('🎯 Contact page: Components loaded, initializing navigation...');
-            
-            // Now it's safe to set up navigation and other component-dependent features
-            if (window.MattisApp && typeof window.MattisApp.setupNavigation === 'function') {
-                try {
-                    window.MattisApp.setupNavigation();
-                    window.MattisApp.setupSmoothScrolling();
-                    window.MattisApp.setupInteractions();
-                    setupContactForm();
-                    console.log('✅ Contact page: All functionality initialized');
-                } catch (error) {
-                    console.error('Error initializing MattisApp functions:', error);
-                }
-            }
-        });
-
-        function setupScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animationPlayState = 'running';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-            document.querySelectorAll('.fade-in').forEach(el => {
-                el.style.animationPlayState = 'paused';
-                observer.observe(el);
-            });
-        }
-
-        function setupContactForm() {
-            const form = document.querySelector('.contact-form');
-            if (!form) return;
-
-            const selects = form.querySelectorAll('.form-select');
-            selects.forEach(select => {
-                select.addEventListener('change', function() {
-                    if (this.value) {
-                        this.style.color = 'var(--text-primary)';
-                    } else {
-                        this.style.color = 'var(--text-light)';
-                    }
-                });
-            });
-
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const formData = new FormData(form);
-                const data = {};
-                for (let [key, value] of formData.entries()) {
-                    data[key] = value;
-                }
-                
-                // Validation
-                if (!data.firstName || !data.lastName || !data.email || !data.message || !data.interest) {
-                    showFormMessage('Please fill in all required fields.', 'error');
-                    return;
-                }
-                
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(data.email)) {
-                    showFormMessage('Please enter a valid email address.', 'error');
-                    return;
-                }
-                
-                const submitButton = form.querySelector('button[type="submit"]');
-                const originalText = submitButton.textContent;
-                
-                submitButton.textContent = 'Sending...';
-                submitButton.disabled = true;
-                submitButton.style.opacity = '0.7';
-                
-                // Simulate form submission
-                setTimeout(() => {
-                    showFormMessage('Message sent successfully! We\'ll get back to you within 24 hours.', 'success');
-                    form.reset();
-                    
-                    // Reset select colors
-                    selects.forEach(select => {
-                        select.style.color = 'var(--text-light)';
-                    });
-                    
-                    submitButton.textContent = originalText;
-                    submitButton.disabled = false;
-                    submitButton.style.opacity = '1';
-                }, 2000);
-                
-                console.log('Contact form submitted:', data);
-            });
-        }
-
-        function showFormMessage(message, type) {
-            const existingMessage = document.querySelector('.form-message');
-            if (existingMessage) {
-                existingMessage.remove();
-            }
-            
-            const messageEl = document.createElement('div');
-            messageEl.className = `form-message form-message--${type}`;
-            messageEl.textContent = message;
-            
-            messageEl.style.cssText = `
-                padding: 16px 24px;
-                border-radius: var(--border-radius);
-                margin-bottom: 24px;
-                text-align: center;
-                font-weight: 500;
-                border: 2px solid;
-                ${type === 'error' 
-                    ? 'background: #fef2f2; color: #dc2626; border-color: #fecaca;' 
-                    : 'background: rgba(186, 218, 85, 0.1); color: var(--text-primary); border-color: var(--accent-green);'
-                }
-            `;
-            
-            const form = document.querySelector('.contact-form');
-            if (form) {
-                form.insertBefore(messageEl, form.firstChild);
-                
-                setTimeout(() => {
-                    messageEl.remove();
-                }, 5000);
-            }
-        }
-    </script>
+    }
+</script>
 </body>
 </html>
