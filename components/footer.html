@@ -2,11 +2,27 @@
 <footer class="footer">
     <div class="container">
         <div class="footer-content">
-            <ul class="footer-links">
-                <li><a href="javascript:void(0)" class="footer-home" id="footer-home">Home</a></li>
-                <li><a href="javascript:void(0)" id="footer-privacy">Privacy Policy</a></li>
-                <li><a href="javascript:void(0)" id="footer-terms">Terms of Service</a></li>
-            </ul>
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <span class="logo-primary">MATTIS</span><span class="logo-secondary">&CO</span>
+                </div>
+                <p class="footer-tagline">The PE firm that doesn't feel like PE.</p>
+            </div>
+            
+            <div class="footer-nav">
+                <ul class="footer-links">
+                    <li><a href="javascript:void(0)" id="footer-home">Home</a></li>
+                    <li><a href="javascript:void(0)" id="footer-about">About</a></li>
+                    <li><a href="javascript:void(0)" id="footer-portfolio">Portfolio</a></li>
+                    <li><a href="javascript:void(0)" id="footer-team">Team</a></li>
+                    <li><a href="javascript:void(0)" id="footer-contact">Contact</a></li>
+                </ul>
+                
+                <ul class="footer-links footer-legal">
+                    <li><a href="javascript:void(0)" id="footer-privacy">Privacy Policy</a></li>
+                    <li><a href="javascript:void(0)" id="footer-terms">Terms of Service</a></li>
+                </ul>
+            </div>
         </div>
         
         <div class="footer-bottom">
@@ -17,30 +33,79 @@
 
 <style>
 /* Enhanced Footer Styles */
+.footer {
+    background: #1f1f1f;
+    color: white;
+    padding: 60px 0 30px;
+    margin-top: 80px;
+}
+
 .footer-content {
-    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 60px;
+    align-items: start;
     margin-bottom: 40px;
+}
+
+.footer-brand {
+    max-width: 400px;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+}
+
+.footer-logo .logo-primary {
+    font-weight: 800;
+    color: white;
+}
+
+.footer-logo .logo-secondary {
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-tagline {
+    color: #bada55;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 60px;
 }
 
 .footer-links {
     display: flex;
-    gap: 32px;
+    gap: 24px;
     list-style: none;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-links.footer-legal {
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    padding-left: 24px;
 }
 
 .footer-links a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    transition: var(--transition);
-    font-size: 15px;
+    transition: all 0.2s ease;
+    font-size: 14px;
     font-weight: 500;
     position: relative;
 }
 
 .footer-links a:hover {
-    color: var(--accent-green);
+    color: #bada55;
     transform: translateY(-1px);
 }
 
@@ -51,7 +116,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--accent-green);
+    background: #bada55;
     transition: width 0.2s ease;
 }
 
@@ -67,15 +132,32 @@
 
 .footer-bottom p {
     color: rgba(255, 255, 255, 0.5);
-    font-size: 14px;
+    font-size: 13px;
     margin: 0;
 }
 
 /* Responsive Footer Design */
 @media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-nav {
+        flex-direction: column;
+        gap: 24px;
+    }
+    
     .footer-links {
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
+    }
+    
+    .footer-links.footer-legal {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-left: 0;
+        padding-top: 24px;
     }
     
     .footer-bottom {
@@ -84,6 +166,10 @@
 }
 
 @media (max-width: 480px) {
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
     .footer-links a {
         font-size: 14px;
     }

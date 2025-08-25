@@ -96,7 +96,7 @@
 
 .logo-secondary {
     font-weight: 400;
-    color: #495057; /* Deeper charcoal gray */
+    color: #495057;
     transition: color 0.2s ease;
 }
 
@@ -112,14 +112,14 @@
 .nav-right {
     display: flex;
     align-items: center;
-    gap: 80px; /* Increased from 60px */
-    margin-right: 20px; /* Added margin from edge */
+    gap: 80px;
+    margin-right: 20px;
 }
 
 /* Enhanced nav links with better typography */
 .nav-links {
     display: flex;
-    gap: 48px; /* Increased from 40px */
+    gap: 48px;
     list-style: none;
     align-items: center;
 }
@@ -129,7 +129,7 @@
     color: var(--text-primary);
     font-weight: 500;
     font-size: 15px;
-    letter-spacing: 0.01em; /* Subtle letter spacing */
+    letter-spacing: 0.01em;
     transition: var(--transition);
     position: relative;
     padding: 8px 0;
@@ -189,7 +189,7 @@
 .btn-secondary.btn-nav {
     background: transparent;
     color: var(--text-secondary);
-    border: 2px solid #dee2e6; /* Light gray border */
+    border: 2px solid #dee2e6;
 }
 
 .btn-secondary.btn-nav:hover {
@@ -271,7 +271,45 @@
     display: none !important;
 }
 
-/* Mobile dropdown styles */
+/* CRITICAL: Mobile Navigation Toggle Button */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 1002;
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary, #1f1f1f);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+/* Hamburger animation */
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Mobile Navigation Styles */
 @media (max-width: 768px) {
     .nav-container {
         padding: 16px 24px;
@@ -281,9 +319,33 @@
         padding: 12px 24px;
     }
     
+    /* CRITICAL: Show hamburger menu on mobile */
+    .nav-toggle {
+        display: flex !important;
+    }
+    
+    /* Hide nav-right by default, show when active */
     .nav-right {
-        display: none;
-        margin-right: 0;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 400px;
+        height: 100vh;
+        background: white;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        overflow-y: auto;
+        z-index: 1001;
+        padding: 80px 24px 24px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+    }
+    
+    /* Slide in when active */
+    .nav-right.active {
+        right: 0 !important;
     }
     
     .logo {
@@ -291,21 +353,20 @@
     }
     
     .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: var(--primary-white);
         flex-direction: column;
-        padding: 20px 24px;
-        box-shadow: var(--shadow-medium);
-        border-top: 1px solid var(--border-light);
-        gap: 20px;
+        gap: 0;
+        width: 100%;
     }
     
-    .nav-links.active {
-        display: flex;
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid var(--border-light, #e9ecef);
+    }
+    
+    .nav-links a {
+        display: block;
+        padding: 16px 0;
+        font-size: 16px;
     }
     
     .nav-dropdown-menu {
@@ -315,7 +376,7 @@
         transform: none;
         box-shadow: none;
         border: none;
-        background: var(--background-light);
+        background: var(--background-light, #fafafa);
         margin: 8px 0 0 0;
         border-radius: var(--border-radius);
         display: none;
@@ -332,6 +393,18 @@
     
     .nav-dropdown-menu a:hover {
         padding-left: 20px !important;
+    }
+    
+    .nav-cta {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 24px;
+        gap: 12px;
+    }
+    
+    .nav-cta .btn {
+        width: 100%;
+        justify-content: center;
     }
 }
 
@@ -360,5 +433,28 @@
 /* Active states for current page */
 .nav-links a.active {
     color: var(--accent-green);
+}
+
+/* Mobile overlay (added by NavigationManager) */
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 998;
+}
+
+.mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.menu-open {
+    overflow: hidden;
 }
 </style>
