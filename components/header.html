@@ -53,11 +53,6 @@
     transition: all 0.3s ease;
 }
 
-.nav.scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-}
-
 .nav-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -65,11 +60,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    transition: padding 0.3s ease;
-}
-
-.nav.scrolled .nav-container {
-    padding: 14px 40px;
 }
 
 /* Logo */
@@ -80,31 +70,16 @@
     font-size: 1.5rem;
     letter-spacing: -0.02em;
     z-index: 1002;
-    transition: transform 0.2s ease;
-}
-
-.logo:hover {
-    transform: scale(1.02);
 }
 
 .logo-primary {
     font-weight: 800;
     color: #1f1f1f;
-    transition: color 0.2s ease;
 }
 
 .logo-secondary {
     font-weight: 400;
     color: #495057;
-    transition: color 0.2s ease;
-}
-
-.logo:hover .logo-primary {
-    color: #bada55;
-}
-
-.logo:hover .logo-secondary {
-    color: #a6cb4f;
 }
 
 /* Desktop Navigation */
@@ -123,57 +98,31 @@
     padding: 0;
 }
 
-.nav-links li {
-    list-style: none;
-}
-
 .nav-links a {
     text-decoration: none;
     color: #1f1f1f;
     font-weight: 500;
     font-size: 15px;
-    letter-spacing: 0.01em;
-    transition: all 0.2s ease;
-    position: relative;
-    padding: 8px 0;
+    transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
     color: #bada55;
 }
 
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #bada55;
-    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    width: 100%;
-}
-
 /* CTA Buttons */
 .nav-cta {
     display: flex;
     gap: 16px;
-    align-items: center;
 }
 
 .btn-nav {
     padding: 10px 24px;
     font-size: 14px;
-    letter-spacing: 0.01em;
     font-weight: 600;
     border-radius: 8px;
     text-decoration: none;
     transition: all 0.2s ease;
-    display: inline-block;
     border: 2px solid transparent;
 }
 
@@ -183,24 +132,10 @@
     border-color: #1f1f1f;
 }
 
-.btn-primary.btn-nav:hover {
-    background: #bada55;
-    border-color: #bada55;
-    color: #1f1f1f;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
 .btn-secondary.btn-nav {
     background: transparent;
     color: #6c757d;
     border-color: #dee2e6;
-}
-
-.btn-secondary.btn-nav:hover {
-    border-color: #1f1f1f;
-    color: #1f1f1f;
-    transform: translateY(-1px);
 }
 
 /* Dropdown */
@@ -218,11 +153,6 @@
 .dropdown-icon {
     width: 16px;
     height: 16px;
-    transition: transform 0.2s ease;
-}
-
-.nav-dropdown.active .dropdown-icon {
-    transform: rotate(180deg);
 }
 
 .nav-dropdown-menu {
@@ -238,13 +168,11 @@
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.2s ease;
-    z-index: 1000;
     padding: 8px 0;
     margin-top: 8px;
 }
 
-.nav-dropdown:hover .nav-dropdown-menu,
-.nav-dropdown.active .nav-dropdown-menu {
+.nav-dropdown:hover .nav-dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -258,25 +186,15 @@
     display: block !important;
     padding: 12px 24px !important;
     color: #1f1f1f !important;
-    text-decoration: none;
     font-size: 14px !important;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    transition: all 0.2s ease;
-    border-radius: 0 !important;
 }
 
 .nav-dropdown-menu a:hover {
     background: #fafafa;
     color: #bada55 !important;
-    padding-left: 28px !important;
 }
 
-.nav-dropdown-menu a::after {
-    display: none !important;
-}
-
-/* Mobile Toggle - Hidden by default */
+/* Mobile Toggle */
 .nav-toggle {
     display: none;
     width: 40px;
@@ -287,8 +205,6 @@
     gap: 4px;
     cursor: pointer;
     z-index: 1002;
-    background: transparent;
-    border: none;
 }
 
 .nav-toggle span {
@@ -313,15 +229,11 @@
 }
 
 /* ========================================
-   MOBILE STYLES - TOP ALIGNED
+   MOBILE STYLES - PROPERLY ALIGNED
    ======================================== */
 @media (max-width: 768px) {
     .nav-container {
         padding: 16px 24px;
-    }
-    
-    .nav.scrolled .nav-container {
-        padding: 12px 24px;
     }
     
     /* Show hamburger */
@@ -329,48 +241,45 @@
         display: flex !important;
     }
     
-    /* Mobile Menu Container - TOP ALIGNED */
+    /* FIXED MOBILE MENU CONTAINER */
     .nav-right {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 80%;
-        max-width: 350px;
-        height: 100vh;
-        background: white;
-        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
-        transition: right 0.3s ease;
-        z-index: 1001;
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important;
+        width: 80% !important;
+        max-width: 350px !important;
+        height: 100vh !important;
+        background: white !important;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1) !important;
+        transition: right 0.3s ease !important;
+        z-index: 1001 !important;
         
-        /* TOP ALIGNED LAYOUT */
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start; /* Align to top */
-        align-items: stretch;
-        padding: 80px 0 0 0;
-        gap: 0;
-        overflow-y: auto;
+        /* CRITICAL FIX: Remove flex and use block layout */
+        display: block !important;
+        padding: 0 !important;
+        gap: 0 !important;
+        overflow-y: auto !important;
     }
     
     /* Slide in when active */
     .nav-right.active {
-        right: 0;
+        right: 0 !important;
     }
     
-    /* Mobile Navigation Links - AT TOP */
+    /* FIXED MOBILE NAVIGATION WRAPPER */
     .nav-links {
-        flex-direction: column;
-        gap: 0;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        display: flex !important;
+        display: block !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 60px 0 0 0 !important; /* Just enough space for close button */
+        gap: 0 !important;
     }
     
     .nav-links li {
         width: 100%;
         border-bottom: 1px solid #f0f0f0;
         list-style: none;
+        margin: 0;
     }
     
     .nav-links a {
@@ -378,17 +287,13 @@
         padding: 18px 24px;
         font-size: 16px;
         font-weight: 500;
+        color: #1f1f1f;
     }
     
     .nav-links a:hover,
     .nav-links a.active {
         background: #fafafa;
         color: #bada55;
-        padding-left: 30px;
-    }
-    
-    .nav-links a::after {
-        display: none !important;
     }
     
     /* Mobile Dropdown */
@@ -417,32 +322,29 @@
     .nav-dropdown-menu a {
         padding: 14px 24px 14px 40px !important;
         font-size: 15px !important;
-        background: #f8f8f8;
     }
     
-    .nav-dropdown-menu a:hover {
-        background: #f0f0f0;
-        color: #bada55 !important;
-        padding-left: 44px !important;
-    }
-    
-    /* Mobile CTA Buttons - BELOW LINKS */
+    /* FIXED MOBILE CTA BUTTONS */
     .nav-cta {
-        display: flex !important;
-        flex-direction: column;
-        width: 100%;
-        padding: 24px;
-        gap: 12px;
-        margin: 0;
+        display: block !important;
+        width: 100% !important;
+        padding: 24px !important;
+        gap: 0 !important;
+        margin: 0 !important;
         border-top: 2px solid #f0f0f0;
         background: #fafafa;
     }
     
     .nav-cta .btn {
+        display: block;
         width: 100%;
         text-align: center;
         padding: 14px;
-        display: block;
+        margin-bottom: 12px;
+    }
+    
+    .nav-cta .btn:last-child {
+        margin-bottom: 0;
     }
     
     .logo {
@@ -450,6 +352,7 @@
     }
 }
 
+/* Tablet adjustments */
 @media (max-width: 1024px) {
     .nav-cta {
         display: none;
@@ -457,17 +360,10 @@
     
     .nav-right {
         gap: 40px;
-        margin-right: 0;
     }
     
     .nav-links {
         gap: 32px;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo {
-        font-size: 1.2rem;
     }
 }
 
@@ -494,10 +390,5 @@
 
 body.menu-open {
     overflow: hidden;
-}
-
-/* Active states */
-.nav-links a.active {
-    color: #bada55;
 }
 </style>
