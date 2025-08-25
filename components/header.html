@@ -112,14 +112,14 @@
 .nav-right {
     display: flex;
     align-items: center;
-    gap: 80px; /* Increased from 60px */
+    gap: 80px; /* Desktop spacing */
     margin-right: 20px; /* Added margin from edge */
 }
 
 /* Enhanced nav links with better typography */
 .nav-links {
     display: flex;
-    gap: 48px; /* Increased from 40px */
+    gap: 48px; /* Desktop spacing */
     list-style: none;
     align-items: center;
 }
@@ -129,7 +129,7 @@
     color: var(--text-primary);
     font-weight: 500;
     font-size: 15px;
-    letter-spacing: 0.01em; /* Subtle letter spacing */
+    letter-spacing: 0.01em;
     transition: var(--transition);
     position: relative;
     padding: 8px 0;
@@ -162,15 +162,18 @@
     align-items: center;
 }
 
-/* Updated button styles with swapped hierarchy */
+/* Updated button styles */
 .btn-nav {
     padding: 10px 24px;
     font-size: 14px;
     letter-spacing: 0.01em;
     font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--transition);
 }
 
-/* Primary button - now filled */
+/* Primary button - filled */
 .btn-primary.btn-nav {
     background: var(--text-primary);
     color: var(--primary-white);
@@ -185,11 +188,11 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* Secondary button - now outline only */
+/* Secondary button - outline */
 .btn-secondary.btn-nav {
     background: transparent;
     color: var(--text-secondary);
-    border: 2px solid #dee2e6; /* Light gray border */
+    border: 2px solid #dee2e6;
 }
 
 .btn-secondary.btn-nav:hover {
@@ -277,20 +280,20 @@
     flex-direction: column;
     cursor: pointer;
     padding: 5px;
-    z-index: 1001;
+    z-index: 1002;
 }
 
 .nav-toggle span {
     width: 25px;
     height: 3px;
     background: var(--text-primary);
-    margin: 2px 0;
+    margin: 3px 0;
     transition: var(--transition);
     border-radius: 2px;
 }
 
 .nav-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: rotate(45deg) translate(6px, 6px);
 }
 
 .nav-toggle.active span:nth-child(2) {
@@ -298,10 +301,12 @@
 }
 
 .nav-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+    transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* FIXED Mobile dropdown styles with proper spacing */
+/* ========================================= */
+/* FIXED MOBILE STYLES WITH PROPER SPACING  */
+/* ========================================= */
 @media (max-width: 768px) {
     .nav-container {
         padding: 16px 24px;
@@ -311,58 +316,84 @@
         padding: 12px 24px;
     }
     
+    /* Hide nav-right by default on mobile */
     .nav-right {
         display: none;
         position: fixed;
         top: 60px; /* Below nav header */
-        left: 0;
-        width: 100%;
+        right: 0;
+        width: 80%;
+        max-width: 350px;
         height: calc(100vh - 60px);
         background: var(--primary-white);
         flex-direction: column;
         padding: 24px;
-        box-shadow: var(--shadow-medium);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
         overflow-y: auto;
-        gap: 20px !important; /* FIXED: Reduced from 80px */
+        gap: 16px !important; /* FIXED: Reduced from 80px */
         margin-right: 0;
+        z-index: 1001;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
+    /* Show nav-right when active with slide animation */
     .nav-right.active {
-        display: flex;
+        display: flex !important;
+        transform: translateX(0);
+    }
+    
+    /* Mobile overlay */
+    .nav-right.active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 80%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
     }
     
     .logo {
         font-size: 1.3rem;
+        z-index: 1002;
     }
     
+    /* Navigation links container */
     .nav-links {
-        display: flex;
+        display: flex !important; /* Always flex on mobile */
         flex-direction: column;
         width: 100%;
-        gap: 8px !important; /* FIXED: Tighter spacing between links */
+        gap: 4px !important; /* FIXED: Very tight spacing between links */
         padding: 0;
+        list-style: none;
     }
     
     .nav-links li {
         width: 100%;
+        margin: 0; /* Remove all margins */
     }
     
     .nav-links a {
         display: block;
-        padding: 12px 0;
+        padding: 12px 0; /* Consistent vertical padding */
         font-size: 16px;
         border-bottom: 1px solid transparent;
+        transition: all 0.2s ease;
     }
     
     .nav-links a:hover {
         padding-left: 8px;
-        border-bottom: 1px solid var(--border-light);
+        color: var(--accent-green);
+        border-bottom-color: var(--border-light);
     }
     
     .nav-links a::after {
-        display: none;
+        display: none; /* Remove desktop underline effect */
     }
     
+    /* Dropdown menu on mobile */
     .nav-dropdown-menu {
         position: static;
         opacity: 1;
@@ -370,11 +401,11 @@
         transform: none;
         box-shadow: none;
         border: none;
-        background: var(--background-light);
-        margin: 8px 0 0 0;
-        border-radius: var(--border-radius);
-        display: none;
+        background: #f8f9fa; /* Light background for submenu */
+        margin: 4px 0 0 16px; /* Indent submenu */
         padding: 4px 0; /* FIXED: Reduced padding */
+        border-radius: 4px;
+        display: none;
     }
     
     .nav-dropdown.active .nav-dropdown-menu {
@@ -382,35 +413,39 @@
     }
     
     .nav-dropdown-menu a {
-        padding: 10px 16px !important; /* FIXED: Tighter padding */
-        font-size: 15px !important;
+        padding: 10px 16px !important; /* FIXED: Smaller padding for submenu */
+        font-size: 14px !important; /* Slightly smaller font */
     }
     
     .nav-dropdown-menu a:hover {
-        padding-left: 20px !important;
+        padding-left: 24px !important;
     }
     
+    /* CTA buttons on mobile */
     .nav-cta {
-        display: flex;
+        display: flex !important; /* Always show on mobile */
         flex-direction: column;
         width: 100%;
-        gap: 12px !important; /* FIXED: Reduced button spacing */
-        margin-top: auto;
-        padding-top: 20px;
+        gap: 10px !important; /* FIXED: Tight button spacing */
+        margin-top: auto; /* Push to bottom */
+        padding-top: 16px;
         border-top: 1px solid var(--border-light);
     }
     
     .btn-nav {
         width: 100%;
-        padding: 14px 24px;
+        padding: 12px 20px;
         text-align: center;
+        font-size: 14px;
     }
     
+    /* Hamburger menu visible */
     .nav-toggle {
         display: flex;
     }
 }
 
+/* Tablet adjustments */
 @media (max-width: 1024px) {
     .nav-cta {
         display: none;
@@ -437,6 +472,7 @@
     }
     
     .nav-right {
+        width: 85%;
         padding: 20px;
     }
 }
