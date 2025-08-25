@@ -125,7 +125,10 @@ class ComponentLoader {
     }
 }
 
-// Enhanced Navigation System Class
+// ============================================
+// ENHANCED NAVIGATION SYSTEM
+// ============================================
+
 class NavigationManager {
     constructor() {
         console.log('🚀 NavigationManager: Starting initialization...');
@@ -207,10 +210,11 @@ class NavigationManager {
         return this.config.rootPath + relativePath;
     }
     
-    // Setup all navigation elements
+    // Initialize all navigation features
     init() {
         console.log('🎯 NavigationManager: Initializing features...');
         this.setupNavigation();
+        this.setupFooterNavigation();
         this.setupBreadcrumbs();
         this.setupMobileMenu();
         this.setupActiveStates();
@@ -267,14 +271,73 @@ class NavigationManager {
         }
         
         // Update page links
-        elements.about.href = this.getAbsolutePath('pages/about.html');
-        elements.portfolio.href = this.getAbsolutePath('pages/portfolio.html');
-        elements.team.href = this.getAbsolutePath('pages/team.html');
-        elements.contact.href = this.getAbsolutePath('pages/contact.html');
+        if (elements.about) elements.about.href = this.getAbsolutePath('pages/about.html');
+        if (elements.portfolio) elements.portfolio.href = this.getAbsolutePath('pages/portfolio.html');
+        if (elements.team) elements.team.href = this.getAbsolutePath('pages/team.html');
+        if (elements.contact) elements.contact.href = this.getAbsolutePath('pages/contact.html');
         
         // Update CTA buttons
-        elements.ctaDeal.href = this.getAbsolutePath('pages/contact.html#deal');
-        elements.ctaAdvisors.href = this.getAbsolutePath('pages/contact.html#advisory');
+        if (elements.ctaDeal) elements.ctaDeal.href = this.getAbsolutePath('pages/contact.html#deal');
+        if (elements.ctaAdvisors) elements.ctaAdvisors.href = this.getAbsolutePath('pages/contact.html#advisory');
+    }
+    
+    // Footer navigation setup
+    setupFooterNavigation() {
+        console.log('🔧 Setting up footer navigation paths...');
+        
+        // Wait for footer to be loaded
+        const checkFooter = setInterval(() => {
+            const footerElements = {
+                home: document.getElementById('footer-home'),
+                about: document.getElementById('footer-about'),
+                portfolio: document.getElementById('footer-portfolio'),
+                team: document.getElementById('footer-team'),
+                contact: document.getElementById('footer-contact'),
+                privacy: document.getElementById('footer-privacy'),
+                terms: document.getElementById('footer-terms')
+            };
+            
+            if (footerElements.home || footerElements.privacy) {
+                clearInterval(checkFooter);
+                
+                // Update all footer links if they exist
+                if (footerElements.home) {
+                    footerElements.home.href = this.getAbsolutePath('index.html');
+                    
+                    // Add special home link behavior
+                    footerElements.home.addEventListener('click', (e) => {
+                        const currentPath = window.location.pathname;
+                        
+                        // If we're already on home page, scroll to top instead
+                        if (currentPath.endsWith('index.html') || currentPath === '/' || currentPath === '') {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    });
+                }
+                
+                if (footerElements.about) {
+                    footerElements.about.href = this.getAbsolutePath('pages/about.html');
+                }
+                if (footerElements.portfolio) {
+                    footerElements.portfolio.href = this.getAbsolutePath('pages/portfolio.html');
+                }
+                if (footerElements.team) {
+                    footerElements.team.href = this.getAbsolutePath('pages/team.html');
+                }
+                if (footerElements.contact) {
+                    footerElements.contact.href = this.getAbsolutePath('pages/contact.html');
+                }
+                if (footerElements.privacy) {
+                    footerElements.privacy.href = this.getAbsolutePath('pages/privacy.html');
+                }
+                if (footerElements.terms) {
+                    footerElements.terms.href = this.getAbsolutePath('pages/terms.html');
+                }
+                
+                console.log('✅ Footer navigation paths updated');
+            }
+        }, 100);
     }
     
     // Create and insert breadcrumb navigation
@@ -426,7 +489,6 @@ class NavigationManager {
                 font-weight: 600;
             }
             
-            /* Adjust main content for breadcrumb */
             body.has-breadcrumb {
                 padding-top: 120px;
             }
@@ -700,14 +762,16 @@ class NavigationManager {
     }
 }
 
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
+
 // Helper function to get correct path based on current location
 function getComponentPath(filename) {
     const currentPath = window.location.pathname;
-    
-    // Count directory depth by counting slashes (excluding leading slash)
     const pathParts = currentPath.split('/').filter(part => part.length > 0);
     
-    // Remove filename if present (if last part has extension)
+    // Remove filename if present
     if (pathParts.length > 0 && pathParts[pathParts.length - 1].includes('.')) {
         pathParts.pop();
     }
@@ -719,7 +783,7 @@ function getComponentPath(filename) {
     return levelsUp === 0 ? `components/${filename}` : `${prefix}components/${filename}`;
 }
 
-// Helper function to get correct navigation paths based on current location (LEGACY - kept for compatibility)
+// Helper function to get correct navigation paths (LEGACY - kept for compatibility)
 function getNavPath(targetPath) {
     const currentPath = window.location.pathname;
     
@@ -768,33 +832,14 @@ function getNavPath(targetPath) {
     return pathMappings[currentLevel][targetPath] || targetPath;
 }
 
-// Function to setup navigation paths after header loads (LEGACY - now handled by NavigationManager)
+// Legacy function - now handled by NavigationManager
 function setupNavigationPaths() {
     console.log('🔍 Legacy setupNavigationPaths called - handled by NavigationManager');
 }
 
-// Function to setup footer paths after footer loads
+// Legacy function - now handled by NavigationManager
 function setupFooterPaths() {
-    console.log('🔍 Setting up footer paths');
-    
-    // Similar logic for footer links
-    const footerLinks = {
-        about: document.querySelector('footer a[href*="about"]'),
-        portfolio: document.querySelector('footer a[href*="portfolio"]'),
-        team: document.querySelector('footer a[href*="team"]'),
-        contact: document.querySelector('footer a[href*="contact"]'),
-        privacy: document.querySelector('footer a[href*="privacy"]'),
-        terms: document.querySelector('footer a[href*="terms"]')
-    };
-    
-    if (footerLinks.about) footerLinks.about.href = getNavPath('pages/about.html');
-    if (footerLinks.portfolio) footerLinks.portfolio.href = getNavPath('pages/portfolio.html');
-    if (footerLinks.team) footerLinks.team.href = getNavPath('pages/team.html');
-    if (footerLinks.contact) footerLinks.contact.href = getNavPath('pages/contact.html');
-    if (footerLinks.privacy) footerLinks.privacy.href = getNavPath('pages/privacy.html');
-    if (footerLinks.terms) footerLinks.terms.href = getNavPath('pages/terms.html');
-    
-    console.log('✅ Footer paths set up successfully');
+    console.log('🔍 Legacy setupFooterPaths called - handled by NavigationManager');
 }
 
 // Function to generate navigation HTML dynamically (fallback only)
@@ -857,13 +902,17 @@ function generateFooterHTML() {
                         <a href="${getNavPath('pages/contact.html')}">Contact</a>
                     </div>
                     <div class="footer-copy">
-                        &copy; 2024 Mattis & Co. All rights reserved.
+                        &copy; 2025 Mattis & Co. All rights reserved.
                     </div>
                 </div>
             </div>
         </footer>
     `;
 }
+
+// ============================================
+// INITIALIZATION
+// ============================================
 
 // Create instance of ComponentLoader
 const componentLoader = new ComponentLoader();
@@ -934,6 +983,10 @@ function initializeComponentDependentFeatures() {
     }, 100);
 }
 
+// ============================================
+// EVENT LISTENERS
+// ============================================
+
 // Event listeners for component loading
 document.addEventListener('componentLoaded', (e) => {
     console.log(`Component loaded: ${e.detail.name}${e.detail.fallback ? ' (using fallback)' : ''}`);
@@ -948,7 +1001,7 @@ document.addEventListener('componentLoaded', (e) => {
                 window.navigationManager = new NavigationManager();
                 console.log('✅ NavigationManager initialized successfully');
             } else {
-                console.error('❌ NavigationManager class not found - ensure it\'s defined above');
+                console.error('❌ NavigationManager class not found');
             }
         }, 100);
     }
@@ -971,6 +1024,10 @@ document.addEventListener('allComponentsLoaded', (e) => {
         }, 100);
     }
 });
+
+// ============================================
+// EXPORTS
+// ============================================
 
 // Export for external use
 if (typeof window !== 'undefined') {
