@@ -1,32 +1,38 @@
 <!-- Header Component - components/header.html -->
 <nav class="nav">
     <div class="nav-container">
-        <a href="javascript:void(0)" class="logo" id="nav-logo">
+        <!-- Logo - ID for dynamic path update -->
+        <a href="#" class="logo" id="nav-logo">
             <span class="logo-primary">MATTIS</span><span class="logo-secondary">&CO</span>
         </a>
         
+        <!-- Navigation Container -->
         <div class="nav-right">
+            <!-- Main Navigation Links -->
             <ul class="nav-links">
-                <li><a href="#private-equity" class="nav-anchor" id="nav-pe">Private Equity</a></li>
-                <li><a href="#advisory" class="nav-anchor" id="nav-advisory">Advisory</a></li>
+                <li><a href="#" class="nav-anchor" id="nav-pe">Private Equity</a></li>
+                <li><a href="#" class="nav-anchor" id="nav-advisory">Advisory</a></li>
                 <li class="nav-dropdown">
                     <a href="javascript:void(0)" class="nav-dropdown-toggle">
                         About
-                        <i data-lucide="chevron-down" class="dropdown-icon"></i>
+                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
                     </a>
                     <ul class="nav-dropdown-menu">
-                        <li><a href="javascript:void(0)" id="nav-about">Our Story</a></li>
-                        <li><a href="javascript:void(0)" id="nav-portfolio">Portfolio</a></li>
-                        <li><a href="javascript:void(0)" id="nav-team">Team</a></li>
-                        <li><a href="#theses" class="nav-anchor" id="nav-theses">Investment Theses</a></li>
+                        <li><a href="#" id="nav-about">Our Story</a></li>
+                        <li><a href="#" id="nav-portfolio">Portfolio</a></li>
+                        <li><a href="#" id="nav-team">Team</a></li>
+                        <li><a href="#" class="nav-anchor" id="nav-theses">Investment Theses</a></li>
                     </ul>
                 </li>
-                <li><a href="javascript:void(0)" id="nav-contact">Contact</a></li>
+                <li><a href="#" id="nav-contact">Contact</a></li>
             </ul>
             
+            <!-- CTA Buttons -->
             <div class="nav-cta">
-                <a href="javascript:void(0)" class="btn btn-secondary btn-nav" id="nav-cta-deal">Send Us a Deal</a>
-                <a href="javascript:void(0)" class="btn btn-primary btn-nav" id="nav-cta-advisors">Engage Advisors</a>
+                <a href="#" class="btn btn-secondary btn-nav" id="nav-cta-deal">Send Us a Deal</a>
+                <a href="#" class="btn btn-primary btn-nav" id="nav-cta-advisors">Engage Advisors</a>
             </div>
         </div>
         
@@ -40,6 +46,21 @@
 </nav>
 
 <style>
+/* CSS Variables (fallback if not loaded) */
+:root {
+    --text-primary: #1f1f1f;
+    --text-secondary: #6c757d;
+    --accent-green: #bada55;
+    --accent-green-dark: #9fc443;
+    --primary-white: #ffffff;
+    --background-light: #f8f9fa;
+    --border-light: #e9ecef;
+    --border-radius: 8px;
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --transition: all 0.3s ease;
+}
+
 /* Enhanced navigation with scroll states */
 .nav {
     position: fixed;
@@ -58,9 +79,9 @@
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Adjusted nav container with better spacing */
+/* Navigation container */
 .nav-container {
-    max-width: var(--max-width);
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -69,12 +90,11 @@
     transition: padding 0.3s ease;
 }
 
-/* Thinner nav on scroll */
 .nav.scrolled .nav-container {
     padding: 14px 40px;
 }
 
-/* Premium text-based logo */
+/* Logo styles */
 .logo {
     display: flex;
     align-items: baseline;
@@ -82,6 +102,7 @@
     font-size: 1.5rem;
     letter-spacing: -0.02em;
     transition: var(--transition);
+    z-index: 1002;
 }
 
 .logo:hover {
@@ -96,7 +117,7 @@
 
 .logo-secondary {
     font-weight: 400;
-    color: #495057; /* Deeper charcoal gray */
+    color: #495057;
     transition: color 0.2s ease;
 }
 
@@ -108,20 +129,27 @@
     color: var(--accent-green-dark);
 }
 
-/* Right-aligned navigation wrapper with better spacing */
+/* Right navigation container */
 .nav-right {
     display: flex;
     align-items: center;
-    gap: 80px; /* Desktop spacing */
-    margin-right: 20px; /* Added margin from edge */
+    gap: 80px;
+    margin-right: 20px;
 }
 
-/* Enhanced nav links with better typography */
+/* Navigation links */
 .nav-links {
     display: flex;
-    gap: 48px; /* Desktop spacing */
+    gap: 48px;
     list-style: none;
     align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links a {
@@ -155,53 +183,7 @@
     width: 100%;
 }
 
-/* Refined CTA button hierarchy */
-.nav-cta {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-}
-
-/* Updated button styles */
-.btn-nav {
-    padding: 10px 24px;
-    font-size: 14px;
-    letter-spacing: 0.01em;
-    font-weight: 600;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-/* Primary button - filled */
-.btn-primary.btn-nav {
-    background: var(--text-primary);
-    color: var(--primary-white);
-    border: 2px solid var(--text-primary);
-}
-
-.btn-primary.btn-nav:hover {
-    background: var(--accent-green);
-    border-color: var(--accent-green);
-    color: var(--text-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
-/* Secondary button - outline */
-.btn-secondary.btn-nav {
-    background: transparent;
-    color: var(--text-secondary);
-    border: 2px solid #dee2e6;
-}
-
-.btn-secondary.btn-nav:hover {
-    border-color: var(--text-primary);
-    color: var(--text-primary);
-    transform: translateY(-1px);
-}
-
-/* Dropdown Navigation Styles */
+/* Dropdown menu */
 .nav-dropdown {
     position: relative;
 }
@@ -239,6 +221,7 @@
     z-index: 1000;
     padding: 8px 0;
     margin-top: 8px;
+    list-style: none;
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
@@ -250,6 +233,8 @@
 
 .nav-dropdown-menu li {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-dropdown-menu a {
@@ -274,16 +259,64 @@
     display: none !important;
 }
 
+/* CTA Buttons */
+.nav-cta {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.btn-nav {
+    padding: 10px 24px;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.btn-primary.btn-nav {
+    background: var(--text-primary);
+    color: var(--primary-white);
+    border: 2px solid var(--text-primary);
+}
+
+.btn-primary.btn-nav:hover {
+    background: var(--accent-green);
+    border-color: var(--accent-green);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.btn-secondary.btn-nav {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 2px solid #dee2e6;
+}
+
+.btn-secondary.btn-nav:hover {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
 /* Mobile Navigation Toggle */
 .nav-toggle {
     display: none;
     flex-direction: column;
+    justify-content: center;
+    width: 30px;
+    height: 24px;
     cursor: pointer;
     padding: 5px;
     z-index: 1002;
 }
 
 .nav-toggle span {
+    display: block;
     width: 25px;
     height: 3px;
     background: var(--text-primary);
@@ -292,6 +325,7 @@
     border-radius: 2px;
 }
 
+/* Hamburger animation */
 .nav-toggle.active span:nth-child(1) {
     transform: rotate(45deg) translate(6px, 6px);
 }
@@ -304,9 +338,9 @@
     transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* ========================================= */
-/* FIXED MOBILE STYLES WITH PROPER SPACING  */
-/* ========================================= */
+/* ============================================ */
+/* MOBILE STYLES WITH PROPER SPACING           */
+/* ============================================ */
 @media (max-width: 768px) {
     .nav-container {
         padding: 16px 24px;
@@ -320,7 +354,7 @@
     .nav-right {
         display: none;
         position: fixed;
-        top: 60px; /* Below nav header */
+        top: 60px;
         right: 0;
         width: 80%;
         max-width: 350px;
@@ -330,20 +364,21 @@
         padding: 24px;
         box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
         overflow-y: auto;
-        gap: 16px !important; /* FIXED: Reduced from 80px */
+        gap: 20px; /* Default gap */
         margin-right: 0;
         z-index: 1001;
         transform: translateX(100%);
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    /* Show nav-right when active with slide animation */
+    /* Show with slide animation when active */
     .nav-right.active {
         display: flex !important;
-        transform: translateX(0);
+        transform: translateX(0) !important;
+        gap: 16px !important; /* Override to smaller gap */
     }
     
-    /* Mobile overlay */
+    /* Mobile overlay effect */
     .nav-right.active::before {
         content: '';
         position: fixed;
@@ -357,43 +392,42 @@
     
     .logo {
         font-size: 1.3rem;
-        z-index: 1002;
     }
     
-    /* Navigation links container */
+    /* Navigation links on mobile */
     .nav-links {
-        display: flex !important; /* Always flex on mobile */
+        display: flex !important;
         flex-direction: column;
         width: 100%;
-        gap: 4px !important; /* FIXED: Very tight spacing between links */
-        padding: 0;
-        list-style: none;
+        gap: 4px !important; /* Tight spacing between links */
+        padding: 0 !important;
+        margin: 0 !important;
     }
     
     .nav-links li {
         width: 100%;
-        margin: 0; /* Remove all margins */
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
     .nav-links a {
         display: block;
-        padding: 12px 0; /* Consistent vertical padding */
+        padding: 12px 0 !important;
         font-size: 16px;
         border-bottom: 1px solid transparent;
-        transition: all 0.2s ease;
     }
     
     .nav-links a:hover {
-        padding-left: 8px;
+        padding-left: 8px !important;
         color: var(--accent-green);
         border-bottom-color: var(--border-light);
     }
     
     .nav-links a::after {
-        display: none; /* Remove desktop underline effect */
+        display: none;
     }
     
-    /* Dropdown menu on mobile */
+    /* Dropdown on mobile */
     .nav-dropdown-menu {
         position: static;
         opacity: 1;
@@ -401,9 +435,9 @@
         transform: none;
         box-shadow: none;
         border: none;
-        background: #f8f9fa; /* Light background for submenu */
-        margin: 4px 0 0 16px; /* Indent submenu */
-        padding: 4px 0; /* FIXED: Reduced padding */
+        background: #f8f9fa;
+        margin: 4px 0 0 16px !important;
+        padding: 4px 0 !important;
         border-radius: 4px;
         display: none;
     }
@@ -413,8 +447,8 @@
     }
     
     .nav-dropdown-menu a {
-        padding: 10px 16px !important; /* FIXED: Smaller padding for submenu */
-        font-size: 14px !important; /* Slightly smaller font */
+        padding: 10px 16px !important;
+        font-size: 14px !important;
     }
     
     .nav-dropdown-menu a:hover {
@@ -423,11 +457,11 @@
     
     /* CTA buttons on mobile */
     .nav-cta {
-        display: flex !important; /* Always show on mobile */
+        display: flex !important;
         flex-direction: column;
         width: 100%;
-        gap: 10px !important; /* FIXED: Tight button spacing */
-        margin-top: auto; /* Push to bottom */
+        gap: 10px !important; /* Tight button spacing */
+        margin-top: auto;
         padding-top: 16px;
         border-top: 1px solid var(--border-light);
     }
@@ -439,13 +473,13 @@
         font-size: 14px;
     }
     
-    /* Hamburger menu visible */
+    /* Show hamburger menu */
     .nav-toggle {
         display: flex;
     }
 }
 
-/* Tablet adjustments */
+/* Tablet styles */
 @media (max-width: 1024px) {
     .nav-cta {
         display: none;
@@ -461,7 +495,7 @@
     }
 }
 
-/* Small screens */
+/* Small mobile screens */
 @media (max-width: 480px) {
     .logo {
         font-size: 1.2rem;
@@ -477,7 +511,7 @@
     }
 }
 
-/* Active states for current page */
+/* Active state for current page */
 .nav-links a.active {
     color: var(--accent-green);
 }

@@ -13,7 +13,6 @@ document.addEventListener('allComponentsLoaded', function() {
     console.log('🎯 Components loaded, initializing navigation and links...');
     
     // Now it's safe to set up navigation and smooth scrolling
-    setupNavigation();
     setupSmoothScrolling();
     
     console.log('✅ Navigation and smooth scrolling initialized');
@@ -122,71 +121,6 @@ function setupScrollAnimations() {
     });
     
     console.log(`✅ Scroll animations setup for ${fadeElements.length} elements`);
-}
-
-// Navigation scroll effects ONLY - mobile menu is handled by NavigationManager
-function setupNavigation() {
-    console.log('🧭 Setting up navigation...');
-    
-    const nav = document.querySelector('.nav');
-    const navToggle = document.querySelector('.nav-toggle');
-    const navRight = document.querySelector('.nav-right');
-    
-    // Debug logging
-    console.log('Navigation elements check:', {
-        nav: nav ? 'FOUND' : 'NOT FOUND',
-        navToggle: navToggle ? 'FOUND' : 'NOT FOUND', 
-        navRight: navRight ? 'FOUND' : 'NOT FOUND'
-    });
-    
-    // Exit early if nav elements don't exist
-    if (!nav) {
-        console.error('❌ Navigation elements not found! Components may not be loaded.');
-        return;
-    }
-    
-    console.log('✅ Navigation elements found');
-    
-    // Remove any existing scroll listener to prevent duplicates
-    if (window.navigationScrollListener) {
-        window.removeEventListener('scroll', window.navigationScrollListener);
-        console.log('🗑️ Removed existing scroll listener');
-    }
-    
-    // Navigation background on scroll
-    const scrollListener = function() {
-        // Extra safety check
-        const currentNav = document.querySelector('.nav');
-        if (!currentNav) {
-            console.warn('⚠️ Nav element disappeared during scroll');
-            return;
-        }
-        
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        try {
-            if (scrollTop > 100) {
-                currentNav.classList.add('scrolled');
-            } else {
-                currentNav.classList.remove('scrolled');
-            }
-        } catch (error) {
-            console.error('❌ Error in scroll listener:', error);
-        }
-    };
-    
-    // Store reference globally to prevent duplicates
-    window.navigationScrollListener = scrollListener;
-    window.addEventListener('scroll', scrollListener);
-    console.log('✅ Scroll listener added');
-    
-    // =========================================================
-    // IMPORTANT: Mobile menu is handled by NavigationManager
-    // in components.js - DO NOT add duplicate handlers here!
-    // =========================================================
-    console.log('📱 Mobile menu handled by NavigationManager in components.js');
-    
-    console.log('✅ Navigation setup completed successfully');
 }
 
 // Interactive elements
