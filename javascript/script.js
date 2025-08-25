@@ -24,7 +24,6 @@ function initializeApp() {
     console.log('🚀 Initializing app...');
     
     setupRotatingText();
-    // REMOVED THE PROBLEMATIC LINE: setupScrollAnimations() was here causing the error
     setupInteractions();
     
     // DON'T setup navigation or smooth scrolling here - wait for components
@@ -125,19 +124,19 @@ function setupScrollAnimations() {
     console.log(`✅ Scroll animations setup for ${fadeElements.length} elements`);
 }
 
-// Navigation scroll effects and mobile toggle - ONLY call after components load
+// Navigation scroll effects ONLY - mobile menu is handled by NavigationManager
 function setupNavigation() {
     console.log('🧭 Setting up navigation...');
     
     const nav = document.querySelector('.nav');
     const navToggle = document.querySelector('.nav-toggle');
-    const navRight = document.querySelector('.nav-right'); // FIXED: Changed from nav-links to nav-right
+    const navRight = document.querySelector('.nav-right');
     
     // Debug logging
     console.log('Navigation elements check:', {
         nav: nav ? 'FOUND' : 'NOT FOUND',
         navToggle: navToggle ? 'FOUND' : 'NOT FOUND', 
-        navRight: navRight ? 'FOUND' : 'NOT FOUND' // Updated label
+        navRight: navRight ? 'FOUND' : 'NOT FOUND'
     });
     
     // Exit early if nav elements don't exist
@@ -181,40 +180,11 @@ function setupNavigation() {
     window.addEventListener('scroll', scrollListener);
     console.log('✅ Scroll listener added');
     
-    // Mobile navigation toggle - FIXED to use nav-right
-    if (navToggle && navRight) {
-        console.log('📱 Setting up mobile navigation');
-        
-        navToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navRight.classList.toggle('active');
-            navToggle.classList.toggle('active');
-            document.body.style.overflow = navRight.classList.contains('active') ? 'hidden' : '';
-            console.log('📱 Mobile nav toggled');
-        });
-        
-        // Close mobile nav when clicking on a link
-        navRight.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navRight.classList.remove('active');
-                navToggle.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-        
-        // Close mobile nav when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!nav.contains(e.target) && navRight.classList.contains('active')) {
-                navRight.classList.remove('active');
-                navToggle.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-        
-        console.log('✅ Mobile navigation setup complete');
-    } else {
-        console.log('⚠️ Mobile navigation elements not found');
-    }
+    // =========================================================
+    // IMPORTANT: Mobile menu is handled by NavigationManager
+    // in components.js - DO NOT add duplicate handlers here!
+    // =========================================================
+    console.log('📱 Mobile menu handled by NavigationManager in components.js');
     
     console.log('✅ Navigation setup completed successfully');
 }
