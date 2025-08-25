@@ -103,32 +103,24 @@ function setupSmoothScrolling() {
 
 // Setup navigation behavior
 function setupNavigation() {
-    // This is now handled by NavigationManager
-    console.log('Navigation handled by NavigationManager');
-}
-
-// Scroll animations
-function setupScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animationPlayState = 'running';
-                observer.unobserve(entry.target);
+    const nav = document.querySelector('.nav');
+    const navToggle = document.querySelector('.nav-toggle');
+    const navRight = document.querySelector('.nav-right'); // Changed from .nav-links
+    
+    if (navToggle && navRight) {
+        navToggle.addEventListener('click', () => {
+            navRight.classList.toggle('active'); // Toggle nav-right, not nav-links
+            navToggle.classList.toggle('active');
+        });
+        
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target)) {
+                navRight.classList.remove('active');
+                navToggle.classList.remove('active');
             }
         });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-in').forEach(el => {
-        el.style.animationPlayState = 'paused';
-        observer.observe(el);
-    });
-    
-    console.log('✅ Scroll animations setup');
+    }
 }
 
 // Interactive elements
