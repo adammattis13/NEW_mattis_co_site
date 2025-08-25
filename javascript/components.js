@@ -1009,7 +1009,8 @@ document.addEventListener('componentLoaded', (e) => {
 document.addEventListener('allComponentsLoaded', (e) => {
     console.log('All components loaded:', e.detail.loaded);
     
-    // Ensure NavigationManager is initialized (backup)
+    // DISABLED - Using navigation-config.js instead of NavigationManager
+    /*
     if (!window.navigationManager) {
         console.log('🚀 Initializing NavigationManager (backup)...');
         
@@ -1022,7 +1023,27 @@ document.addEventListener('allComponentsLoaded', (e) => {
             }
         }, 100);
     }
+    */
+    
+    // Just log that we're using navigation-config.js instead
+    if (window.navConfig) {
+        console.log('✅ Using navigation-config.js for navigation management');
+    }
 });
+
+// ALSO: Optionally add this check at the beginning of NavigationManager constructor (line ~124):
+class NavigationManager {
+    constructor() {
+        // Skip if navigation-config.js is handling navigation
+        if (window.navConfig) {
+            console.log('✅ NavigationConfig detected, skipping NavigationManager initialization');
+            return; // Exit early, don't initialize NavigationManager
+        }
+        
+        console.log('🚀 NavigationManager: Starting initialization...');
+        // ... rest of the constructor code ...
+    }
+}
 
 // ============================================
 // EXPORTS

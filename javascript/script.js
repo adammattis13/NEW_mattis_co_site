@@ -10,12 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Listen for all components loaded event
 document.addEventListener('allComponentsLoaded', function() {
-    console.log('🎯 Components loaded, initializing navigation and links...');
+    console.log('🎯 Components loaded, initializing features...');
     
-    // Now it's safe to set up navigation and smooth scrolling
+    // Only setup smooth scrolling - navigation is handled by navigation-config.js
+    // REMOVED: setupNavigation() - this function no longer exists
     setupSmoothScrolling();
     
-    console.log('✅ Navigation and smooth scrolling initialized');
+    console.log('✅ Smooth scrolling initialized');
 });
 
 // Initialize all app functionality
@@ -25,7 +26,6 @@ function initializeApp() {
     setupRotatingText();
     setupInteractions();
     
-    // DON'T setup navigation or smooth scrolling here - wait for components
     console.log('✅ Basic app functionality initialized');
 }
 
@@ -52,11 +52,10 @@ function setupRotatingText() {
     }
 }
 
-// FIXED: Smooth scrolling for navigation links - ONLY call after components load
+// Smooth scrolling for navigation links
 function setupSmoothScrolling() {
     console.log('🔗 Setting up smooth scrolling...');
     
-    // Only select anchors that are pure hash links (no file paths)
     const navigationLinks = document.querySelectorAll('a[href^="#"]:not([href="#"]):not([href*=".html"])');
     console.log(`Found ${navigationLinks.length} navigation links`);
     
@@ -65,9 +64,8 @@ function setupSmoothScrolling() {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
                 
-                // Double-check: skip if contains file path or is empty/invalid
                 if (!href || href === '#' || href.includes('.html') || href.startsWith('javascript:') || href.length <= 1) {
-                    return; // Let the browser handle the navigation normally
+                    return;
                 }
                 
                 e.preventDefault();
@@ -88,7 +86,6 @@ function setupSmoothScrolling() {
                     }
                 } catch (error) {
                     console.warn('Invalid selector for smooth scrolling:', href, error);
-                    // If there's an error, let the browser handle it normally
                     window.location.href = href;
                 }
             });
@@ -113,7 +110,6 @@ function setupScrollAnimations() {
         });
     }, observerOptions);
 
-    // Observe all fade-in elements
     const fadeElements = document.querySelectorAll('.fade-in');
     fadeElements.forEach(el => {
         el.style.animationPlayState = 'paused';
@@ -192,7 +188,6 @@ function setupButtonEffects() {
         });
     });
     
-    // Add ripple animation if not already added
     if (!document.querySelector('#ripple-style')) {
         const style = document.createElement('style');
         style.id = 'ripple-style';
@@ -242,14 +237,13 @@ function setupContactForm() {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             console.log('Contact form submitted');
-            // Add form handling logic here
         });
     }
 }
 
 // Export functions for use in other scripts
+// REMOVED setupNavigation from exports - it no longer exists
 window.MattisApp = {
-    setupNavigation,
     setupSmoothScrolling,
     setupInteractions,
     setupScrollAnimations

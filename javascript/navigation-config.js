@@ -1,6 +1,5 @@
 // javascript/navigation-config.js
 // Universal Navigation Configuration for Mattis & Co
-// This file handles all navigation paths and mobile menu functionality
 
 class NavigationConfig {
     constructor() {
@@ -16,18 +15,16 @@ class NavigationConfig {
     }
     
     detectLevel() {
-        // Detect which directory level we're at
         if (this.currentPath.includes('/pages/theses/')) {
-            return 'theses'; // Two levels deep
+            return 'theses';
         }
         if (this.currentPath.includes('/pages/')) {
-            return 'pages'; // One level deep
+            return 'pages';
         }
-        return 'root'; // Root level
+        return 'root';
     }
     
     getBasePath() {
-        // Return the correct path prefix based on directory level
         const levels = {
             'root': '',
             'pages': '../',
@@ -36,15 +33,12 @@ class NavigationConfig {
         return levels[this.currentLevel] || '';
     }
     
-    // Adjust path for current directory level
     adjustPath(path) {
-        // For pages directory, adjust paths
         if (this.currentLevel === 'pages') {
             if (path.startsWith('pages/')) {
                 return path.replace('pages/', '');
             }
         }
-        // For theses directory, adjust paths
         else if (this.currentLevel === 'theses') {
             if (path.startsWith('pages/')) {
                 return '../' + path.replace('pages/', '');
@@ -53,7 +47,6 @@ class NavigationConfig {
         return this.basePath + path;
     }
     
-    // Generate consistent navigation links for any page
     getNavLinks() {
         return {
             home: this.adjustPath('index.html'),
@@ -69,7 +62,6 @@ class NavigationConfig {
         };
     }
     
-    // Get component paths
     getComponentPaths() {
         return {
             header: this.basePath + 'components/header.html',
@@ -77,61 +69,67 @@ class NavigationConfig {
         };
     }
     
-    // Initialize navigation after components load
-   initializeNavigation() {
-    if (this.isInitialized) {
-        console.log('⚠️ Navigation already initialized, skipping...');
-        return;
+    initializeNavigation() {
+        if (this.isInitialized) {
+            console.log('⚠️ Navigation already initialized, skipping...');
+            return;
+        }
+        
+        const links = this.getNavLinks();
+        
+        // Update header navigation links
+        this.updateElement('nav-logo', links.home);
+        this.updateElement('nav-pe', links.privateEquity);
+        this.updateElement('nav-advisory', links.advisory);
+        this.updateElement('nav-about', links.about);
+        this.updateElement('nav-portfolio', links.portfolio);
+        this.updateElement('nav-team', links.team);
+        this.updateElement('nav-theses', links.theses);
+        this.updateElement('nav-contact', links.contact);
+        this.updateElement('nav-cta-deal', links.contact);
+        this.updateElement('nav-cta-advisors', links.contact);
+        
+        // Update ALL footer navigation links
+        this.updateElement('footer-home', links.home);
+        this.updateElement('footer-about', links.about);
+        this.updateElement('footer-portfolio', links.portfolio);
+        this.updateElement('footer-team', links.team);
+        this.updateElement('footer-contact', links.contact);
+        this.updateElement('footer-pe', links.privateEquity);
+        this.updateElement('footer-advisory', links.advisory);
+        this.updateElement('footer-theses', links.theses);
+        this.updateElement('footer-privacy', links.privacy);
+        this.updateElement('footer-terms', links.terms);
+        
+        // Add special handling for anchor links
+        this.setupAnchorLinks();
+        
+        this.isInitialized = true;
+        console.log('✅ Navigation links initialized for level:', this.currentLevel);
     }
     
-    const links = this.getNavLinks();
+    updateElement(id, href) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.href = href;
+            console.log(`Updated ${id}: ${href}`);
+        } else {
+            console.warn(`Element not found: ${id}`);
+        }
+    }
     
-    // Update header navigation links
-    this.updateElement('nav-logo', links.home);
-    this.updateElement('nav-pe', links.privateEquity);
-    this.updateElement('nav-advisory', links.advisory);
-    this.updateElement('nav-about', links.about);
-    this.updateElement('nav-portfolio', links.portfolio);
-    this.updateElement('nav-team', links.team);
-    this.updateElement('nav-theses', links.theses);
-    this.updateElement('nav-contact', links.contact);
-    this.updateElement('nav-cta-deal', links.contact);
-    this.updateElement('nav-cta-advisors', links.contact);
-    
-    // Update ALL footer navigation links
-    this.updateElement('footer-home', links.home);
-    this.updateElement('footer-about', links.about);
-    this.updateElement('footer-portfolio', links.portfolio);
-    this.updateElement('footer-team', links.team);
-    this.updateElement('footer-contact', links.contact);
-    this.updateElement('footer-pe', links.privateEquity);
-    this.updateElement('footer-advisory', links.advisory);
-    this.updateElement('footer-theses', links.theses);
-    this.updateElement('footer-privacy', links.privacy);
-    this.updateElement('footer-terms', links.terms);
-    
-    // Add special handling for anchor links
-    this.setupAnchorLinks();
-    
-    this.isInitialized = true;
-    console.log('✅ Navigation links initialized for level:', this.currentLevel);
-}
-    
-    // Handle anchor links that should close mobile menu
     setupAnchorLinks() {
         document.querySelectorAll('.nav-anchor').forEach(link => {
             link.addEventListener('click', (e) => {
                 const navRight = document.querySelector('.nav-right');
                 const navToggle = document.querySelector('.nav-toggle');
                 
-                // Close mobile menu if open
                 if (navRight && navToggle) {
                     navRight.classList.remove('active');
                     navToggle.classList.remove('active');
                     document.body.style.overflow = '';
                 }
                 
-                // Handle smooth scrolling for same-page anchors
                 const href = link.getAttribute('href');
                 if (href && href.startsWith('#') && !href.includes('.html')) {
                     e.preventDefault();
@@ -148,7 +146,6 @@ class NavigationConfig {
         });
     }
     
-    // Setup mobile menu with single handler
     setupMobileMenu() {
         const navToggle = document.querySelector('.nav-toggle');
         const navRight = document.querySelector('.nav-right');
@@ -158,7 +155,7 @@ class NavigationConfig {
             return;
         }
         
-        // Remove any existing listeners by cloning
+        // Remove existing listeners by cloning
         const newToggle = navToggle.cloneNode(true);
         navToggle.parentNode.replaceChild(newToggle, navToggle);
         
@@ -205,7 +202,6 @@ class NavigationConfig {
         console.log('✅ Mobile menu setup complete');
     }
     
-    // Load components dynamically
     async loadComponents() {
         const paths = this.getComponentPaths();
         
@@ -222,7 +218,7 @@ class NavigationConfig {
             
             console.log('✅ Components loaded successfully');
             
-            // Initialize navigation after components are loaded
+            // FIX: Use arrow function to preserve 'this' context
             setTimeout(() => {
                 this.initializeNavigation();
                 this.setupMobileMenu();
