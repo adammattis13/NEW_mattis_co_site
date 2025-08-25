@@ -1,707 +1,360 @@
-/* Mattis & Co - Main Stylesheet */
-/* css/styles.css */
+// ============================================
+// MATTIS & CO - COMPONENT LOADER SYSTEM
+// ============================================
 
-/* Import Variables */
-@import '../stylesheet/variables.css';
-
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    color: var(--text-primary);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-.mono {
-    font-family: 'IBM Plex Mono', monospace;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-}
-
-h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-}
-
-h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-}
-
-h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-/* Layout Components */
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.section {
-    padding: 6rem 0;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.section-subtitle {
-    text-align: center;
-    font-size: 1.25rem;
-    color: var(--text-secondary);
-    margin-bottom: 4rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Navigation Styles - ENHANCED */
-.nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    padding: 1rem 0;
-    transition: var(--transition);
-    border-bottom: 1px solid rgba(212, 212, 212, 0.2);
-}
-
-.nav.scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: var(--shadow-light);
-}
-
-.nav-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-}
-
-.logo {
-    font-weight: 900;
-    font-size: 1.5rem;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
-    text-decoration: none;
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-primary);
-    font-weight: 500;
-    transition: var(--transition);
-    position: relative;
-}
-
-.nav-links a:hover {
-    color: var(--accent-green);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent-green);
-    transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-/* Mobile Overlay */
-.mobile-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 998;
-}
-
-.mobile-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-body.menu-open {
-    overflow: hidden;
-}
-
-/* Button Styles */
-.btn {
-    padding: 1rem 2rem;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition);
-    display: inline-block;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.btn-primary {
-    background: var(--accent-green);
-    color: var(--dark-grey);
-    border-color: var(--accent-green);
-}
-
-.btn-primary:hover {
-    background: transparent;
-    color: var(--accent-green);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--dark-grey);
-    border-color: var(--dark-grey);
-}
-
-.btn-secondary:hover {
-    background: var(--dark-grey);
-    color: white;
-}
-
-/* Grid Layouts */
-.grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
-
-/* Cards */
-.card {
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    transition: var(--transition);
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-}
-
-/* Animations */
-.fade-in {
-    animation: fadeIn 0.8s ease-out;
-    animation-fill-mode: both;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+class ComponentLoader {
+    constructor() {
+        this.components = new Map();
+        this.loaded = new Set();
+        this.fallbackAttempted = new Set();
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    // Register a component
+    register(name, selector, path, fallback = null) {
+        this.components.set(name, {
+            selector,
+            path,
+            fallback,
+            loaded: false
+        });
+    }
+
+    // Load a single component
+    async load(name) {
+        const component = this.components.get(name);
+        if (!component || component.loaded) return;
+
+        const element = document.querySelector(component.selector);
+        if (!element) {
+            console.warn(`Element not found for ${name}: ${component.selector}`);
+            return;
+        }
+
+        try {
+            const response = await fetch(component.path);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const html = await response.text();
+            element.innerHTML = html;
+            component.loaded = true;
+            this.loaded.add(name);
+            
+            // Dispatch custom event
+            document.dispatchEvent(new CustomEvent('componentLoaded', {
+                detail: { name, element }
+            }));
+            
+            console.log(`✅ Loaded: ${name}`);
+            
+        } catch (error) {
+            console.error(`❌ Failed to load ${name}:`, error);
+            
+            // Try fallback if available and not already attempted
+            if (component.fallback && !this.fallbackAttempted.has(name)) {
+                this.fallbackAttempted.add(name);
+                console.log(`🔄 Attempting fallback for ${name}...`);
+                element.innerHTML = component.fallback;
+                component.loaded = true;
+                this.loaded.add(name);
+            } else if (!component.fallback && (name === 'header' || name === 'footer')) {
+                // Generate dynamic fallback for header/footer
+                this.fallbackAttempted.add(name);
+                const fallbackHTML = name === 'header' ? generateNavigationHTML() : generateFooterHTML();
+                element.innerHTML = fallbackHTML;
+                component.loaded = true;
+                this.loaded.add(name);
+                console.log(`📦 Using generated fallback for ${name}`);
+            }
+        }
+    }
+
+    // Load all registered components
+    async loadAll() {
+        const loadPromises = Array.from(this.components.keys()).map(name => 
+            this.load(name)
+        );
+        
+        await Promise.all(loadPromises);
+        
+        // Dispatch event when all components are loaded
+        document.dispatchEvent(new CustomEvent('allComponentsLoaded', {
+            detail: { loaded: Array.from(this.loaded) }
+        }));
+    }
+
+    // Check if a component is loaded
+    isLoaded(name) {
+        const component = this.components.get(name);
+        return component?.loaded || false;
+    }
+
+    // Get component info
+    getComponent(name) {
+        return this.components.get(name);
+    }
+
+    // Update component path (for dynamic routing)
+    updatePath(name, newPath) {
+        const component = this.components.get(name);
+        if (component) {
+            component.path = newPath;
+            component.loaded = false;
+        }
+    }
+
+    // Reload a component
+    async reload(name) {
+        const component = this.components.get(name);
+        if (component) {
+            component.loaded = false;
+            await this.load(name);
+        }
+    }
+
+    // List all registered components
+    list() {
+        return Array.from(this.components.entries()).map(([name, component]) => ({
+            name,
+            loaded: component.loaded,
+            selector: component.selector,
+            path: component.path
+        }));
     }
 }
 
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
 
-/* Footer */
-.footer {
-    background: var(--dark-grey);
-    color: white;
-    padding: 4rem 0 2rem;
-    margin-top: 6rem;
-}
-
-.footer-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
-
-.footer-logo {
-    font-weight: 900;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
-
-.footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.footer-links a {
-    color: rgba(255,255,255,0.7);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.footer-links a:hover {
-    color: var(--accent-green);
-}
-
-.footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 2rem;
-    text-align: center;
-    color: rgba(255,255,255,0.5);
-}
-
-/* ============================================
-   HAMBURGER MENU BUTTON STYLES
-   ============================================ */
-   
-/* Hamburger button - hidden by default */
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    position: relative;
-    z-index: 1002;
-}
-
-/* The 3 hamburger lines */
-.nav-toggle span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: #1f1f1f;
-    margin: 4px 0;
-    transition: all 0.3s ease;
-    border-radius: 2px;
-    position: relative;
-}
-
-/* Hamburger animation when menu is open */
-.nav-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
-
-.nav-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.nav-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
-
-/* ============================================
-   ENHANCED MOBILE RESPONSIVE STYLES
-   ============================================ */
-
-/* Tablet Styles */
-@media (max-width: 1024px) {
-    .container {
-        padding: 0 1.5rem;
+// Helper function to get correct path based on current location
+function getComponentPath(filename) {
+    const currentPath = window.location.pathname;
+    const pathParts = currentPath.split('/').filter(part => part.length > 0);
+    
+    // Remove filename if present
+    if (pathParts.length > 0 && pathParts[pathParts.length - 1].includes('.')) {
+        pathParts.pop();
     }
     
-    .grid-3 {
-        grid-template-columns: 1fr 1fr;
-    }
+    // Calculate how many levels to go up
+    const levelsUp = pathParts.length;
+    const prefix = '../'.repeat(levelsUp);
     
-    .nav-cta {
-        display: none;
-    }
-    
-    .nav-right {
-        gap: 40px;
-        margin-right: 0;
-    }
-    
-    .nav-links {
-        gap: 32px;
-    }
+    return levelsUp === 0 ? `components/${filename}` : `${prefix}components/${filename}`;
 }
 
-/* Mobile Styles - CRITICAL FOR HAMBURGER MENU */
-@media (max-width: 768px) {
-    /* Typography adjustments */
-    h1 {
-        font-size: 2rem;
+// Helper function to get correct navigation paths (LEGACY - kept for compatibility)
+function getNavPath(targetPath) {
+    const currentPath = window.location.pathname;
+    
+    // Determine current directory level
+    let currentLevel = 'root';
+    if (currentPath.includes('/pages/theses/')) {
+        currentLevel = 'theses';
+    } else if (currentPath.includes('/pages/')) {
+        currentLevel = 'pages';
     }
     
-    h2 {
-        font-size: 1.75rem;
-    }
+    // Define path mappings for each level
+    const pathMappings = {
+        'root': {
+            '': 'index.html',
+            'index.html': 'index.html',
+            'pages/about.html': 'pages/about.html',
+            'pages/portfolio.html': 'pages/portfolio.html',
+            'pages/team.html': 'pages/team.html',
+            'pages/contact.html': 'pages/contact.html',
+            'pages/privacy.html': 'pages/privacy.html',
+            'pages/terms.html': 'pages/terms.html'
+        },
+        'pages': {
+            '': '../index.html',
+            'index.html': '../index.html',
+            'pages/about.html': 'about.html',
+            'pages/portfolio.html': 'portfolio.html',
+            'pages/team.html': 'team.html',
+            'pages/contact.html': 'contact.html',
+            'pages/privacy.html': 'privacy.html',
+            'pages/terms.html': 'terms.html'
+        },
+        'theses': {
+            '': '../../index.html',
+            'index.html': '../../index.html',
+            'pages/about.html': '../about.html',
+            'pages/portfolio.html': '../portfolio.html',
+            'pages/team.html': '../team.html',
+            'pages/contact.html': '../contact.html',
+            'pages/privacy.html': '../privacy.html',
+            'pages/terms.html': '../terms.html'
+        }
+    };
     
-    h3 {
-        font-size: 1.25rem;
-    }
-    
-    /* Layout adjustments */
-    .section {
-        padding: 3rem 0;
-    }
-    
-    .grid-2,
-    .grid-3 {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    /* Navigation Mobile Styles */
-    .nav-container {
-        padding: 0 1rem;
-    }
-    
-    /* Show hamburger button on mobile */
-    .nav-toggle {
-        display: flex !important;
-    }
-    
-    /* MOBILE SLIDE-OUT MENU */
-    .nav-right {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 75%;
-        max-width: 320px;
-        height: 100vh;
-        background: #ffffff;
-        box-shadow: -4px 0 30px rgba(0, 0, 0, 0.15);
-        z-index: 1001;
-        transform: translateX(100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        overflow-y: auto;
-    }
-    
-    /* Show and slide in menu when active */
-    .nav-right.active {
-        display: flex !important;
-        flex-direction: column;
-        transform: translateX(0) !important;
-        padding: 80px 30px 30px;
-        gap: 0;
-    }
-    
-    /* Dark overlay behind menu */
-    .mobile-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 999;
-        pointer-events: none;
-    }
-    
-    .mobile-overlay.active {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: all;
-    }
-    
-    /* Prevent scrolling when menu is open */
-    body.menu-open {
-        overflow: hidden;
-    }
-    
-    /* Navigation links styling */
-    .nav-links {
-        display: flex !important;
-        flex-direction: column;
-        gap: 0;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    }
-    
-    .nav-links li {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        border-bottom: 1px solid #f0f0f0;
-    }
-    
-    .nav-links a {
-        display: block;
-        padding: 18px 0;
-        color: #1f1f1f;
-        text-decoration: none;
-        font-size: 16px;
-        font-weight: 500;
-        transition: all 0.2s ease;
-    }
-    
-    .nav-links a:hover {
-        color: #bada55;
-        padding-left: 10px;
-    }
-    
-    /* Remove desktop hover effects */
-    .nav-links a::after {
-        display: none !important;
-    }
-    
-    /* Dropdown menu on mobile */
-    .nav-dropdown {
-        position: relative;
-    }
-    
-    .nav-dropdown-menu {
-        position: static !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none !important;
-        box-shadow: none !important;
-        border: none !important;
-        background: #f8f9fa;
-        margin: 0 0 0 20px;
-        padding: 0;
-        border-radius: 8px;
-        display: none;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-    
-    .nav-dropdown.active .nav-dropdown-menu {
-        display: block;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-    
-    .nav-dropdown-menu a {
-        padding: 12px 16px !important;
-        font-size: 14px !important;
-        border-bottom: none !important;
-    }
-    
-    .nav-dropdown-menu a:hover {
-        background: #f0f0f0;
-        padding-left: 20px !important;
-    }
-    
-    /* CTA buttons in mobile menu */
-    .nav-cta {
-        display: flex !important;
-        flex-direction: column;
-        width: 100%;
-        gap: 15px;
-        margin-top: 30px;
-        padding-top: 30px;
-        border-top: 2px solid #f0f0f0;
-    }
-    
-    .nav-cta .btn {
-        width: 100%;
-        text-align: center;
-        padding: 14px 20px;
-        border-radius: 8px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.2s ease;
-    }
-    
-    .btn-primary.btn-nav {
-        background: #bada55;
-        color: #1f1f1f;
-        border: 2px solid #bada55;
-    }
-    
-    .btn-primary.btn-nav:hover {
-        background: #a8c845;
-        border-color: #a8c845;
-    }
-    
-    .btn-secondary.btn-nav {
-        background: transparent;
-        color: #1f1f1f;
-        border: 2px solid #1f1f1f;
-    }
-    
-    .btn-secondary.btn-nav:hover {
-        background: #1f1f1f;
-        color: white;
-    }
-    
-    /* Footer mobile adjustments */
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
+    return pathMappings[currentLevel][targetPath] || targetPath;
 }
 
-/* Small Mobile Styles */
-@media (max-width: 480px) {
-    .container {
-        padding: 0 1rem;
+// Function to detect base path
+function getBasePath() {
+    const path = window.location.pathname;
+    const depth = path.split('/').filter(p => p).length - 1;
+    return depth > 0 ? '../'.repeat(depth) : './';
+}
+
+// Legacy function - now handled by navigation-config.js
+function setupNavigationPaths() {
+    console.log('🔍 Legacy setupNavigationPaths called - handled by navigation-config.js');
+}
+
+// Legacy function - now handled by navigation-config.js  
+function setupFooterPaths() {
+    console.log('🔍 Legacy setupFooterPaths called - handled by navigation-config.js');
+}
+
+// Function to generate navigation HTML dynamically (fallback only)
+function generateNavigationHTML() {
+    return `
+        <nav class="nav">
+            <div class="nav-container">
+                <a href="${getNavPath('')}" class="logo">
+                    <span class="logo-primary">MATTIS</span><span class="logo-secondary">&CO</span>
+                </a>
+                
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="${getNavPath('index.html')}#private-equity" class="nav-anchor">Private Equity</a></li>
+                        <li><a href="${getNavPath('index.html')}#advisory" class="nav-anchor">Advisory</a></li>
+                        <li class="nav-dropdown">
+                            <a href="#" class="nav-dropdown-toggle">
+                                About
+                                <i data-lucide="chevron-down" class="dropdown-icon"></i>
+                            </a>
+                            <ul class="nav-dropdown-menu">
+                                <li><a href="${getNavPath('pages/about.html')}">Our Story</a></li>
+                                <li><a href="${getNavPath('pages/portfolio.html')}">Portfolio</a></li>
+                                <li><a href="${getNavPath('pages/team.html')}">Team</a></li>
+                                <li><a href="${getNavPath('index.html')}#theses" class="nav-anchor">Investment Theses</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="${getNavPath('pages/contact.html')}">Contact</a></li>
+                    </ul>
+                    
+                    <div class="nav-cta">
+                        <a href="${getNavPath('pages/contact.html')}" class="btn btn-secondary btn-nav">Send Us a Deal</a>
+                        <a href="${getNavPath('pages/contact.html')}" class="btn btn-primary btn-nav">Engage Advisors</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Navigation Toggle -->
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    `;
+}
+
+// Function to generate footer HTML dynamically (fallback only)
+function generateFooterHTML() {
+    return `
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <span class="logo-primary">MATTIS</span><span class="logo-secondary">&CO</span>
+                    </div>
+                    <div class="footer-links">
+                        <a href="${getNavPath('pages/about.html')}">About</a>
+                        <a href="${getNavPath('pages/portfolio.html')}">Portfolio</a>
+                        <a href="${getNavPath('pages/contact.html')}">Contact</a>
+                    </div>
+                    <div class="footer-copy">
+                        &copy; 2025 Mattis & Co. All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    `;
+}
+
+// ============================================
+// COMPONENT INITIALIZATION
+// ============================================
+
+// Create global component loader instance
+const componentLoader = new ComponentLoader();
+
+// Register default components
+function registerDefaultComponents() {
+    const basePath = getBasePath();
+    const componentPath = basePath + 'components/';
+    
+    // Register header and footer
+    componentLoader.register('header', '#header', componentPath + 'header.html');
+    componentLoader.register('footer', '#footer', componentPath + 'footer.html');
+    
+    console.log('📦 Components registered with base path:', basePath);
+}
+
+// Initialize components when DOM is ready
+async function initializeComponents() {
+    console.log('🚀 Initializing component system...');
+    
+    // Register components
+    registerDefaultComponents();
+    
+    // Load all components
+    await componentLoader.loadAll();
+    
+    console.log('✅ Component system initialized');
+}
+
+// ============================================
+// EVENT LISTENERS
+// ============================================
+
+// Listen for component loaded events
+document.addEventListener('componentLoaded', (e) => {
+    console.log(`📢 Component loaded: ${e.detail.name}`);
+    
+    // Initialize lucide icons if they exist in the loaded component
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
     }
     
-    .logo {
-        font-size: 1.2rem;
+    // Navigation is handled by navigation-config.js
+    if (e.detail.name === 'header' && window.navConfig) {
+        console.log('✅ Navigation handled by navigation-config.js');
     }
+});
+
+document.addEventListener('allComponentsLoaded', (e) => {
+    console.log('All components loaded:', e.detail.loaded);
     
-    body {
-        font-size: 14px;
+    // Just log that we're using navigation-config.js
+    if (window.navConfig) {
+        console.log('✅ Using navigation-config.js for navigation management');
     }
+});
+
+// ============================================
+// EXPORTS
+// ============================================
+
+// Export for external use
+if (typeof window !== 'undefined') {
+    window.ComponentLoader = ComponentLoader;
+    window.componentLoader = componentLoader;
+    window.initializeComponents = initializeComponents;
+    window.getNavPath = getNavPath;
+    window.setupNavigationPaths = setupNavigationPaths;
+    window.setupFooterPaths = setupFooterPaths;
+    // NOTE: NavigationManager removed - handled by navigation-config.js
 }
 
-/* ============================================
-   BREADCRUMB NAVIGATION STYLES
-   ============================================ */
-.breadcrumb-container {
-    position: fixed;
-    top: 80px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #e9ecef;
-    z-index: 999;
-    transition: all 0.3s ease;
+// Auto-initialize if DOM is already loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeComponents);
+} else {
+    initializeComponents();
 }
-
-.nav.scrolled + .breadcrumb-container {
-    top: 68px;
-}
-
-.breadcrumb {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 40px;
-}
-
-.breadcrumb-inner {
-    padding: 12px 0;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.breadcrumb-link {
-    color: #6c757d;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    font-weight: 500;
-}
-
-.breadcrumb-link:hover {
-    color: #bada55;
-}
-
-.breadcrumb-separator {
-    color: #adb5bd;
-    font-size: 12px;
-}
-
-.breadcrumb-current {
-    color: #1a1a1a;
-    font-weight: 600;
-}
-
-/* Adjust body padding when breadcrumbs exist */
-body.has-breadcrumb {
-    padding-top: 120px;
-}
-
-/* Navigation hide on scroll (mobile) */
-.nav.nav-hidden {
-    transform: translateY(-100%);
-}
-
-.breadcrumb-container.breadcrumb-hidden {
-    transform: translateY(-100%);
-}
-
-@media (max-width: 768px) {
-    .breadcrumb-container {
-        top: 64px;
-    }
-    
-    .nav.scrolled + .breadcrumb-container {
-        top: 56px;
-    }
-    
-    .breadcrumb {
-        padding: 0 24px;
-    }
-    
-    .breadcrumb-inner {
-        padding: 10px 0;
-        font-size: 13px;
-    }
-    
-    body.has-breadcrumb {
-        padding-top: 100px;
-    }
-}
-
-/* Active link states */
-.nav-links a.active {
-    color: var(--accent-green);
-}
-
-/* Utility Classes */
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-.mt-1 { margin-top: 1rem; }
-.mt-2 { margin-top: 2rem; }
-.mt-3 { margin-top: 3rem; }
-.mb-1 { margin-bottom: 1rem; }
-.mb-2 { margin-bottom: 2rem; }
-.mb-3 { margin-bottom: 3rem; }
-.py-1 { padding-top: 1rem; padding-bottom: 1rem; }
-.py-2 { padding-top: 2rem; padding-bottom: 2rem; }
-.py-3 { padding-top: 3rem; padding-bottom: 3rem; }
