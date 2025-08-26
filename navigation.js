@@ -12,6 +12,8 @@
     const navigationConfig = {
         logo: {
             text: 'MATTIS&CO',
+            imageSrc: '/assets/mattisco - logo.webp',
+            imageAlt: 'Mattis & Co',
             href: '/' // Will be adjusted based on current page location
         },
         mainMenu: [
@@ -40,10 +42,9 @@
                 href: '/pages/portfolio.html'
             },
             {
-                text: 'Investment Theses',
+                text: 'Theses',
                 href: '/pages/theses.html',
                 dropdown: [
-                    { text: 'AI', href: '/pages/theses/ai.html' },
                     { text: 'Adaptivity', href: '/pages/theses/adaptivity.html' },
                     { text: 'Consolidation', href: '/pages/theses/consolidation.html' },
                     { text: 'Infrastructure', href: '/pages/theses/infrastructure.html' }
@@ -72,11 +73,11 @@
                     ]
                 },
                 {
-                    title: 'INVESTMENT FOCUS',
+                    title: 'FOCUS',
                     links: [
                         { text: 'Private Equity', href: '/#private-equity' },
                         { text: 'Strategic Advisory', href: '/#advisory' },
-                        { text: 'Investment Theses', href: '/pages/theses.html' }
+                        { text: 'Theses', href: '/pages/theses.html' }
                     ]
                 },
                 {
@@ -95,7 +96,7 @@
     };
 
     // Utility function to get the correct path based on current page location
-    function getCorrectPath(href) {
+    function getCorrectPath(href, isImage = false) {
         const currentPath = window.location.pathname;
         
         // Handle local file system paths (file://) and local servers differently
@@ -106,6 +107,16 @@
         let isInTheses = currentPath.includes('/pages/theses/');
         let isInPages = !isInTheses && currentPath.includes('/pages/');
         let isRoot = !isInPages && !isInTheses;
+        
+        // Handle image paths specifically
+        if (isImage) {
+            if (href.startsWith('/assets/')) {
+                const filename = href.replace('/assets/', '');
+                if (isInTheses) return '../../assets/' + filename;
+                if (isInPages) return '../assets/' + filename;
+                return 'assets/' + filename;
+            }
+        }
         
         // For root references
         if (href === '/') {
@@ -143,10 +154,14 @@
     // Function to generate navigation HTML
     function generateNavigation() {
         const nav = navigationConfig.mainMenu;
+        const logoImagePath = getCorrectPath(navigationConfig.logo.imageSrc, true);
+        
         let navHTML = `
             <div class="nav-container">
                 <div class="logo">
-                    <a href="${getCorrectPath(navigationConfig.logo.href)}">${navigationConfig.logo.text}</a>
+                    <a href="${getCorrectPath(navigationConfig.logo.href)}">
+                        <img src="${logoImagePath}" alt="${navigationConfig.logo.imageAlt}" class="logo-image" />
+                    </a>
                 </div>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
                     <span></span>

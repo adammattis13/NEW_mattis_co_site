@@ -1638,3 +1638,38 @@ html {
         padding-top: 0;
     }
 }
+
+/* ===================================
+   LOGO STYLING UPDATES
+   Add these to your styles.css file
+   =================================== */
+
+/* Replace the existing .logo a styles with: */
+.logo a {
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+}
+
+.logo a:hover {
+    color: var(--accent-green);
+}
+
+/* Add new logo image styles: */
+.logo-image {
+    height: 40px;
+    width: auto;
+    display: block;
+    transition: var(--transition);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.logo a:hover .logo-image {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
