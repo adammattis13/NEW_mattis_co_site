@@ -42,7 +42,7 @@
                 href: '/pages/portfolio.html'
             },
             {
-                text: 'Theses',
+                text: 'Investment Theses',
                 href: '/pages/theses.html',
                 dropdown: [
                     { text: 'Adaptivity', href: '/pages/theses/adaptivity.html' },
@@ -73,11 +73,11 @@
                     ]
                 },
                 {
-                    title: 'FOCUS',
+                    title: 'INVESTMENT FOCUS',
                     links: [
                         { text: 'Private Equity', href: '/#private-equity' },
                         { text: 'Strategic Advisory', href: '/#advisory' },
-                        { text: 'Theses', href: '/pages/theses.html' }
+                        { text: 'Investment Theses', href: '/pages/theses.html' }
                     ]
                 },
                 {
@@ -199,10 +199,14 @@
     // Function to generate footer HTML
     function generateFooter() {
         const footer = navigationConfig.footer;
+        const footerLogoPath = getCorrectPath('/assets/logo.png', true);
+        
         let footerHTML = `
             <div class="footer-container">
                 <div class="footer-column footer-brand">
-                    <h3>${footer.brand.title}</h3>
+                    <div class="footer-logo">
+                        <img src="${footerLogoPath}" alt="Mattis & Co" class="footer-logo-image" />
+                    </div>
                     <p class="footer-tagline">${footer.brand.tagline}</p>
                     <p class="footer-subtitle">${footer.brand.subtitle}</p>
                 </div>`;

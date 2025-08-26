@@ -1673,3 +1673,49 @@ html {
     transform: scale(1.05);
     filter: brightness(1.1);
 }
+
+/* ===================================
+   FOOTER LOGO STYLING
+   Add these to your styles.css file
+   =================================== */
+
+/* Footer Logo Styles */
+.footer-logo {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.footer-logo-image {
+    height: 45px;  /* Slightly larger than header to match h3 visual weight */
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);  /* Makes the logo white for dark background */
+    opacity: 0.95;
+    transition: var(--transition);
+}
+
+.footer-logo-image:hover {
+    opacity: 1;
+    transform: scale(1.03);
+}
+
+/* ===================================
+   RESPONSIVE FOOTER LOGO
+   Add to the @media (max-width: 768px) section
+   =================================== */
+
+@media (max-width: 768px) {
+    /* Footer logo responsive */
+    .footer-logo-image {
+        height: 36px;
+    }
+}
+
+/* ===================================
+   OPTIONAL: If you want the logo to have accent color on hover
+   =================================== */
+.footer-brand:hover .footer-logo-image {
+    filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(45deg) brightness(1.2);
+    /* This creates a green tint similar to var(--accent-green) */
+}
