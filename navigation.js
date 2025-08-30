@@ -40,10 +40,6 @@
                 ]
             },
             {
-                text: 'Portfolio',
-                href: '/pages/portfolio.html'
-            },
-            {
                 text: 'Investment Theses',
                 href: '/pages/theses.html',
                 dropdown: [
@@ -68,13 +64,12 @@
                     links: [
                         { text: 'Home', href: '/' },
                         { text: 'About', href: '/pages/about.html' },
-                        { text: 'Portfolio', href: '/pages/portfolio.html' },
                         { text: 'Team', href: '/pages/team.html' },
                         { text: 'Contact', href: '/pages/contact.html' }
                     ]
                 },
                 {
-                    title: 'INVESTMENT FOCUS',
+                    title: 'AREAS OF FOCUS',
                     links: [
                         { text: 'Private Equity', href: '/#private-equity' },
                         { text: 'Strategic Advisory', href: '/#advisory' },
