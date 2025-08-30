@@ -25,7 +25,9 @@
                 text: 'Services',
                 dropdown: [
                     { text: 'Private Equity', href: '/#private-equity' },
-                    { text: 'Strategic Advisory', href: '/#advisory' }
+                    { text: 'Strategic Advisory', href: '/#advisory' },
+                    { text: 'AI Operationalization', href: '/pages/theses/ai.html' },
+                    { text: 'Adaptive Enterprise', href: '/pages/theses/adaptivity.html' }
                 ]
             },
             {
@@ -45,9 +47,8 @@
                 text: 'Investment Theses',
                 href: '/pages/theses.html',
                 dropdown: [
-                    { text: 'Adaptivity', href: '/pages/theses/adaptivity.html' },
-                    { text: 'Consolidation', href: '/pages/theses/consolidation.html' },
-                    { text: 'Infrastructure', href: '/pages/theses/infrastructure.html' }
+                    { text: 'Service Consolidation', href: '/pages/theses/consolidation.html' },
+                    { text: 'Essential Infrastructure', href: '/pages/theses/infrastructure.html' }
                 ]
             },
             {
@@ -58,7 +59,7 @@
         footer: {
             brand: {
                 title: 'MATTIS&CO',
-                tagline: 'The PE firm that doesn\'t feel like PE.',
+                tagline: 'The firm that doesn\'t feel like a firm.',
                 subtitle: 'Capital for growth. Clarity for scale.'
             },
             columns: [

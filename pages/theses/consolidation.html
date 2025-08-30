@@ -3,13 +3,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consolidation - Mattis&Co</title>
+    <title>Regional Service Consolidation - Mattis & Co</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Rolling up fragmented local services to create efficient, reliable, customer-centric regional champions through AI and operational excellence.">
+    <meta name="keywords" content="service consolidation, regional rollup, local services, operational efficiency, customer experience, mattis & co">
+    <meta name="author" content="Mattis & Co">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="../../styles.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+    
+    <!-- Page-specific styles -->
+    <style>
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, 
+                #1a1a1a 0%, 
+                #2a3f2a 50%,
+                #1a1a1a 100%);
+            padding: 160px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 10% 50%, rgba(186, 218, 85, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 90% 20%, rgba(186, 218, 85, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 50% 80%, rgba(186, 218, 85, 0.06) 0%, transparent 60%);
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .page-tagline {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            margin-bottom: 32px;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--primary-white);
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Overview Section */
+        .overview-section {
+            background: var(--primary-white);
+            padding: 100px 0;
+        }
+
+        .overview-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .overview-lead {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .overview-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        /* Strategy Section */
+        .strategy-section {
+            background: var(--background-light);
+            padding: 100px 0;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .strategy-card {
+            background: var(--primary-white);
+            padding: 48px 40px;
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-light);
+            transition: var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .strategy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-green);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: var(--transition);
+        }
+
+        .strategy-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--accent-green);
+        }
+
+        .strategy-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            margin-bottom: 24px;
+            background: rgba(186, 218, 85, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        .strategy-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .strategy-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .strategy-list {
+            list-style: none;
+        }
+
+        .strategy-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .strategy-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        /* Transformation Section */
+        .transformation-section {
+            background: var(--primary-white);
+            padding: 100px 0;
+        }
+
+        .transformation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .transformation-card {
+            text-align: center;
+            padding: 32px 24px;
+            background: var(--background-light);
+            border-radius: var(--border-radius-large);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .transformation-card:hover {
+            background: var(--primary-white);
+            border-color: var(--accent-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .transformation-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            margin: 0 auto 20px;
+        }
+
+        .transformation-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .transformation-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Success Metrics Section */
+        .metrics-section {
+            background: var(--dark-grey);
+            color: var(--primary-white);
+            padding: 100px 0;
+        }
+
+        .metrics-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .metric-item {
+            text-align: center;
+        }
+
+        .metric-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            display: block;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .metric-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Opportunity Section */
+        .opportunity-section {
+            background: var(--background-light);
+            padding: 100px 0;
+        }
+
+        .opportunity-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .opportunity-quote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .opportunity-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .opportunity-card {
+            background: var(--primary-white);
+            padding: 32px;
+            border-radius: var(--border-radius-large);
+            border: 1px solid var(--border-light);
+            text-align: left;
+        }
+
+        .opportunity-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        .opportunity-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .opportunity-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary-white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+        }
+
+        .cta-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .transformation-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+
+            .opportunity-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 140px 0 80px;
+            }
+
+            .overview-section,
+            .strategy-section,
+            .transformation-section,
+            .metrics-section,
+            .opportunity-section,
+            .cta-section {
+                padding: 60px 0;
+            }
+
+            .overview-lead {
+                font-size: 1.25rem;
+            }
+
+            .strategy-card {
+                padding: 40px 32px;
+            }
+
+            .opportunity-quote {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .strategy-card {
+                padding: 32px 24px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .metric-number {
+                font-size: 2.5rem;
+            }
+
+            .opportunity-card {
+                padding: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Navigation -->
@@ -21,20 +448,310 @@
 
     <!-- Main Content -->
     <main>
-        <div class="page-header">
+        <!-- Page Header -->
+        <section class="page-header">
             <div class="container">
-                <h1>Consolidation - Mattis&Co</h1>
-            </div>
-        </div>
-        
-        <div class="container">
-            <div class="page-content">
-                <p>Page content goes here.</p>
-                <div class="content-placeholder">
-                    [Page Content]
+                <div class="page-header-content">
+                    <div class="page-tagline">Investment Thesis</div>
+                    <h1 class="page-title">Regional Service Consolidation</h1>
+                    <p class="page-description">
+                        Rolling up fragmented local service providers to create efficient, reliable, 
+                        customer-centric regional champions powered by technology and operational excellence.
+                    </p>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section class="overview-section">
+            <div class="container">
+                <div class="overview-content fade-in">
+                    <p class="overview-lead">
+                        Thousands of local service businesses. Fragmented markets. Inconsistent quality. 
+                        <strong>We see opportunity where others see chaos.</strong>
+                    </p>
+                    
+                    <p class="overview-text">
+                        Every community depends on local service providers—HVAC repair, plumbing, electrical, 
+                        landscaping, home services. These businesses keep our communities running, but most operate 
+                        with outdated systems, inconsistent service quality, and limited growth potential. Customers 
+                        suffer from unreliable scheduling, poor communication, and unpredictable pricing.
+                    </p>
+                    
+                    <p class="overview-text">
+                        We consolidate these fragmented markets into regional service platforms that preserve local 
+                        relationships while delivering enterprise-level efficiency. By applying modern technology, 
+                        AI-powered operations, and world-class experience design, we transform mom-and-pop shops 
+                        into customer service machines.
+                    </p>
+                    
+                    <p class="overview-text">
+                        <strong>This isn't corporate takeover. It's local elevation.</strong> We keep the local brands, 
+                        the local teams, and the community connections. We just make everything work better—for customers, 
+                        employees, and owners who want to retire with dignity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section class="strategy-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="fade-in">The Consolidation Playbook</h2>
+                    <p class="section-subtitle fade-in stagger-1">
+                        Proven strategies for rolling up fragmented service markets.
+                    </p>
+                </div>
+                
+                <div class="strategy-grid">
+                    <div class="strategy-card fade-in stagger-2">
+                        <div class="strategy-icon">
+                            <i data-lucide="target"></i>
+                        </div>
+                        <h3 class="strategy-title">Strategic Acquisition</h3>
+                        <p class="strategy-description">
+                            Identify and acquire strong local operators with established customer bases, 
+                            solid reputations, and owners ready for succession.
+                        </p>
+                        <ul class="strategy-list">
+                            <li>Target 3-5 initial platforms per region</li>
+                            <li>Focus on $2-10M revenue businesses</li>
+                            <li>Prioritize customer density and reputation</li>
+                            <li>Seller-friendly terms with earnouts</li>
+                            <li>Keep key employees and local brands</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="strategy-card fade-in stagger-3">
+                        <div class="strategy-icon">
+                            <i data-lucide="cpu"></i>
+                        </div>
+                        <h3 class="strategy-title">Technology Integration</h3>
+                        <p class="strategy-description">
+                            Deploy modern operational platforms that unify scheduling, dispatch, customer 
+                            communication, and service delivery across all locations.
+                        </p>
+                        <ul class="strategy-list">
+                            <li>Unified CRM and service management</li>
+                            <li>AI-powered scheduling optimization</li>
+                            <li>Mobile workforce management</li>
+                            <li>Automated customer communications</li>
+                            <li>Real-time performance dashboards</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="strategy-card fade-in stagger-4">
+                        <div class="strategy-icon">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <h3 class="strategy-title">Experience Architecture</h3>
+                        <p class="strategy-description">
+                            Redesign the entire customer journey from first contact to service completion, 
+                            creating consistent, delightful experiences at every touchpoint.
+                        </p>
+                        <ul class="strategy-list">
+                            <li>Online booking and instant quotes</li>
+                            <li>Proactive service reminders</li>
+                            <li>Real-time technician tracking</li>
+                            <li>Transparent pricing models</li>
+                            <li>Satisfaction guarantees</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="strategy-card fade-in stagger-5">
+                        <div class="strategy-icon">
+                            <i data-lucide="trending-up"></i>
+                        </div>
+                        <h3 class="strategy-title">Operational Excellence</h3>
+                        <p class="strategy-description">
+                            Implement best practices across the platform while preserving local autonomy 
+                            for customer relationships and market-specific needs.
+                        </p>
+                        <ul class="strategy-list">
+                            <li>Centralized dispatch and routing</li>
+                            <li>Shared procurement and inventory</li>
+                            <li>Standardized training programs</li>
+                            <li>Performance management systems</li>
+                            <li>Cross-selling opportunities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transformation Section -->
+        <section class="transformation-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="fade-in">The Transformation Impact</h2>
+                    <p class="section-subtitle fade-in stagger-1">
+                        What changes when local services get enterprise capabilities.
+                    </p>
+                </div>
+                
+                <div class="transformation-grid">
+                    <div class="transformation-card fade-in stagger-2">
+                        <div class="transformation-icon">
+                            <i data-lucide="clock"></i>
+                        </div>
+                        <h4 class="transformation-title">Same-Day Service</h4>
+                        <p class="transformation-description">
+                            AI-optimized routing and capacity management enable same-day service for most requests.
+                        </p>
+                    </div>
+                    
+                    <div class="transformation-card fade-in stagger-3">
+                        <div class="transformation-icon">
+                            <i data-lucide="smartphone"></i>
+                        </div>
+                        <h4 class="transformation-title">Digital-First Experience</h4>
+                        <p class="transformation-description">
+                            Book online, track technicians, pay digitally—modern convenience for traditional services.
+                        </p>
+                    </div>
+                    
+                    <div class="transformation-card fade-in stagger-4">
+                        <div class="transformation-icon">
+                            <i data-lucide="dollar-sign"></i>
+                        </div>
+                        <h4 class="transformation-title">Transparent Pricing</h4>
+                        <p class="transformation-description">
+                            Upfront quotes, no surprises, fair prices backed by quality guarantees.
+                        </p>
+                    </div>
+                    
+                    <div class="transformation-card fade-in stagger-5">
+                        <div class="transformation-icon">
+                            <i data-lucide="star"></i>
+                        </div>
+                        <h4 class="transformation-title">Consistent Quality</h4>
+                        <p class="transformation-description">
+                            Standardized training and processes ensure reliable service across all providers.
+                        </p>
+                    </div>
+                    
+                    <div class="transformation-card fade-in stagger-6">
+                        <div class="transformation-icon">
+                            <i data-lucide="headphones"></i>
+                        </div>
+                        <h4 class="transformation-title">24/7 Support</h4>
+                        <p class="transformation-description">
+                            Centralized customer service provides round-the-clock emergency response.
+                        </p>
+                    </div>
+                    
+                    <div class="transformation-card fade-in stagger-7">
+                        <div class="transformation-icon">
+                            <i data-lucide="users-2"></i>
+                        </div>
+                        <h4 class="transformation-title">Career Paths</h4>
+                        <p class="transformation-description">
+                            Create real career opportunities for technicians with training and advancement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Metrics Section -->
+        <section class="metrics-section">
+            <div class="container">
+                <div class="metrics-content fade-in">
+                    <h2 style="color: var(--primary-white); margin-bottom: 24px;">Consolidation Creates Value</h2>
+                    <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 16px; color: rgba(255, 255, 255, 0.9);">
+                        Typical results from our regional consolidation playbook.
+                    </p>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-item stagger-2">
+                            <span class="metric-number">35%</span>
+                            <div class="metric-label">EBITDA Improvement</div>
+                        </div>
+                        
+                        <div class="metric-item stagger-3">
+                            <span class="metric-number">2.5x</span>
+                            <div class="metric-label">Customer Retention</div>
+                        </div>
+                        
+                        <div class="metric-item stagger-4">
+                            <span class="metric-number">45%</span>
+                            <div class="metric-label">Revenue Growth</div>
+                        </div>
+                        
+                        <div class="metric-item stagger-5">
+                            <span class="metric-number">4.8</span>
+                            <div class="metric-label">Star Rating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Opportunity Section -->
+        <section class="opportunity-section">
+            <div class="container">
+                <div class="opportunity-content fade-in">
+                    <p class="opportunity-quote">
+                        "The $600 billion local services market is ripe for consolidation. 
+                        Winners will combine local trust with enterprise efficiency."
+                    </p>
+                    
+                    <div class="opportunity-grid">
+                        <div class="opportunity-card stagger-2">
+                            <div class="opportunity-label">Market Size</div>
+                            <h4 class="opportunity-title">$600B+ Addressable Market</h4>
+                            <p class="opportunity-description">
+                                Home services alone represent over $600 billion in annual spending, 
+                                with 90% of providers having fewer than 10 employees.
+                            </p>
+                        </div>
+                        
+                        <div class="opportunity-card stagger-3">
+                            <div class="opportunity-label">Demographics</div>
+                            <h4 class="opportunity-title">Silver Tsunami Creates Sellers</h4>
+                            <p class="opportunity-description">
+                                70% of service business owners are over 50, with most lacking 
+                                succession plans—creating unprecedented acquisition opportunities.
+                            </p>
+                        </div>
+                        
+                        <div class="opportunity-card stagger-4">
+                            <div class="opportunity-label">Technology Gap</div>
+                            <h4 class="opportunity-title">Digital Transformation Needed</h4>
+                            <p class="opportunity-description">
+                                Less than 20% of local service providers offer online booking or 
+                                digital payment—massive opportunity for tech-enabled improvement.
+                            </p>
+                        </div>
+                        
+                        <div class="opportunity-card stagger-5">
+                            <div class="opportunity-label">Customer Demand</div>
+                            <h4 class="opportunity-title">Consumers Want Better</h4>
+                            <p class="opportunity-description">
+                                87% of consumers say they'd pay more for guaranteed service windows 
+                                and transparent pricing—exactly what consolidation enables.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content fade-in">
+                    <h3 class="cta-title">Own a Service Business?</h3>
+                    <p class="cta-description">
+                        If you're a service business owner thinking about succession, or an operator 
+                        looking to build a regional platform, let's discuss how consolidation can 
+                        create value for everyone—owners, employees, and customers.
+                    </p>
+                    <a href="../../contact.html" class="btn btn-primary btn-large">Explore Partnership Options</a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -44,10 +761,49 @@
 
     <!-- Load Navigation Script -->
     <script src="../../navigation.js"></script>
+    
+    <!-- Initialize Lucide Icons and animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            lucide.createIcons();
+            
+            // Setup scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-<!-- Cookie Consent -->
-<script>
-</script>
-<script src="../../cookie-consent.js"></script>
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Cookie Consent -->
+    <script>
+    </script>
+    <script src="../../cookie-consent.js"></script>
 </body>
 </html>

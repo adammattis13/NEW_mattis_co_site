@@ -3,14 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms - Mattis&Co</title>
+    <title>Terms of Service - Mattis & Co</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Terms of Service for Mattis & Co. Read our terms and conditions for using our website and services.">
+    <meta name="keywords" content="terms of service, terms and conditions, legal, mattis & co">
+    <meta name="author" content="Mattis & Co">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="../styles.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+    
+    <!-- Page-specific styles -->
+    <style>
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, 
+                var(--dark-grey) 0%, 
+                #2a2a2a 100%);
+            padding: 140px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -20%;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, 
+                rgba(186, 218, 85, 0.05) 0%, 
+                transparent 70%);
+            transform: rotate(15deg);
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .page-tagline {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            margin-bottom: 32px;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 0.95;
+            color: var(--primary-white);
+        }
+
+        .page-description {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Legal Content */
+        .legal-content {
+            background: var(--primary-white);
+            padding: 80px 0;
+        }
+
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .legal-section {
+            margin-bottom: 60px;
+        }
+
+        .legal-section h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent-green);
+        }
+
+        .legal-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 32px 0 16px;
+        }
+
+        .legal-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .legal-section ul {
+            margin: 20px 0 20px 24px;
+            list-style: none;
+        }
+
+        .legal-section ul li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .legal-section ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .effective-date {
+            background: var(--background-light);
+            padding: 20px 24px;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent-green);
+            margin-bottom: 40px;
+        }
+
+        .effective-date p {
+            margin: 0;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .contact-info-box {
+            background: var(--background-light);
+            padding: 32px;
+            border-radius: var(--border-radius-large);
+            border: 1px solid var(--border-light);
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .contact-info-box h3 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .contact-info-box p {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .contact-info-box a {
+            color: var(--accent-green);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .contact-info-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--background-light);
+            padding: 32px;
+            border-radius: var(--border-radius-large);
+            margin-bottom: 60px;
+        }
+
+        .toc h3 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 12px;
+        }
+
+        .toc-list a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toc-list a:hover {
+            color: var(--accent-green);
+            padding-left: 8px;
+        }
+
+        .toc-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 120px 0 60px;
+            }
+
+            .legal-container {
+                padding: 0 24px;
+            }
+
+            .legal-content {
+                padding: 60px 0;
+            }
+
+            .legal-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .legal-section h3 {
+                font-size: 1.15rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .legal-container {
+                padding: 0 20px;
+            }
+
+            .contact-info-box {
+                padding: 24px 20px;
+            }
+
+            .toc {
+                padding: 24px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Navigation -->
@@ -22,20 +271,210 @@
 
     <!-- Main Content -->
     <main>
-        <div class="page-header">
+        <!-- Page Header -->
+        <section class="page-header">
             <div class="container">
-                <h1>Terms</h1>
-            </div>
-        </div>
-        
-        <div class="container">
-            <div class="page-content">
-                <p>Page content goes here.</p>
-                <div class="content-placeholder">
-                    [Page Content]
+                <div class="page-header-content">
+                    <div class="page-tagline">Legal</div>
+                    <h1 class="page-title">Terms of Service</h1>
+                    <p class="page-description">
+                        Please read these terms carefully before using our website and services.
+                    </p>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Legal Content -->
+        <section class="legal-content">
+            <div class="legal-container">
+                <div class="effective-date fade-in">
+                    <p>Effective Date: January 15, 2025</p>
+                </div>
+
+                <!-- Table of Contents -->
+                <div class="toc fade-in stagger-1">
+                    <h3>Table of Contents</h3>
+                    <ul class="toc-list">
+                        <li><a href="#acceptance"><span class="toc-number">1.</span> Acceptance of Terms</a></li>
+                        <li><a href="#services"><span class="toc-number">2.</span> Description of Services</a></li>
+                        <li><a href="#use"><span class="toc-number">3.</span> Use of Website</a></li>
+                        <li><a href="#intellectual"><span class="toc-number">4.</span> Intellectual Property</a></li>
+                        <li><a href="#privacy"><span class="toc-number">5.</span> Privacy Policy</a></li>
+                        <li><a href="#disclaimers"><span class="toc-number">6.</span> Disclaimers</a></li>
+                        <li><a href="#limitation"><span class="toc-number">7.</span> Limitation of Liability</a></li>
+                        <li><a href="#indemnification"><span class="toc-number">8.</span> Indemnification</a></li>
+                        <li><a href="#modifications"><span class="toc-number">9.</span> Modifications</a></li>
+                        <li><a href="#governing"><span class="toc-number">10.</span> Governing Law</a></li>
+                        <li><a href="#contact"><span class="toc-number">11.</span> Contact Information</a></li>
+                    </ul>
+                </div>
+
+                <!-- Terms Content -->
+                <div class="legal-section fade-in stagger-2" id="acceptance">
+                    <h2>1. Acceptance of Terms</h2>
+                    <p>
+                        By accessing and using the Mattis & Co website ("Website"), you accept and agree to be bound by the terms 
+                        and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                    </p>
+                    <p>
+                        These Terms of Service apply to all users of the Website, including without limitation users who are browsers, 
+                        vendors, customers, merchants, and/or contributors of content.
+                    </p>
+                </div>
+
+                <div class="legal-section fade-in stagger-3" id="services">
+                    <h2>2. Description of Services</h2>
+                    <p>
+                        Mattis & Co provides private equity investment and strategic advisory services. The Website provides information 
+                        about our firm, investment approach, portfolio, and team. The information presented on this Website is for 
+                        informational purposes only and does not constitute:
+                    </p>
+                    <ul>
+                        <li>An offer to sell or solicitation to buy any securities</li>
+                        <li>Investment advice or recommendations</li>
+                        <li>Legal, tax, or accounting advice</li>
+                        <li>A guarantee of any investment returns or outcomes</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section fade-in stagger-4" id="use">
+                    <h2>3. Use of Website</h2>
+                    <h3>Permitted Use</h3>
+                    <p>
+                        You may use the Website for lawful purposes only. You agree to use the Website only to access information 
+                        about Mattis & Co and our services in accordance with these Terms of Service.
+                    </p>
+                    
+                    <h3>Prohibited Use</h3>
+                    <p>You agree not to:</p>
+                    <ul>
+                        <li>Use the Website for any unlawful purpose or to solicit others to perform unlawful acts</li>
+                        <li>Violate any international, federal, provincial, or state regulations, rules, laws, or local ordinances</li>
+                        <li>Infringe upon or violate our intellectual property rights or the intellectual property rights of others</li>
+                        <li>Submit false or misleading information</li>
+                        <li>Upload or transmit viruses or any other type of malicious code</li>
+                        <li>Collect or track the personal information of others</li>
+                        <li>Spam, phish, pharm, pretext, spider, crawl, or scrape</li>
+                        <li>Interfere with or circumvent the security features of the Website</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section fade-in stagger-5" id="intellectual">
+                    <h2>4. Intellectual Property</h2>
+                    <p>
+                        The Website and its original content, features, and functionality are and will remain the exclusive property 
+                        of Mattis & Co and its licensors. The Website is protected by copyright, trademark, and other laws of both 
+                        the United States and foreign countries. Our trademarks and trade dress may not be used in connection with 
+                        any product or service without our prior written consent.
+                    </p>
+                    <p>
+                        All content on this Website, including but not limited to text, graphics, logos, images, audio clips, digital 
+                        downloads, and data compilations, is the property of Mattis & Co or its content suppliers and is protected by 
+                        United States and international copyright laws.
+                    </p>
+                </div>
+
+                <div class="legal-section fade-in" id="privacy">
+                    <h2>5. Privacy Policy</h2>
+                    <p>
+                        Your use of the Website is also governed by our Privacy Policy. Please review our Privacy Policy, which also 
+                        governs the Website and informs users of our data collection practices. By using the Website, you consent to 
+                        all actions taken by us with respect to your information in compliance with the Privacy Policy.
+                    </p>
+                </div>
+
+                <div class="legal-section fade-in" id="disclaimers">
+                    <h2>6. Disclaimers</h2>
+                    <h3>No Investment Advice</h3>
+                    <p>
+                        The information on this Website is provided for informational purposes only. Nothing contained on this Website 
+                        constitutes investment, legal, tax, or other advice, nor is it to be relied upon in making an investment or 
+                        other decision.
+                    </p>
+                    
+                    <h3>No Warranties</h3>
+                    <p>
+                        The information on this Website is provided "as is" without any representations or warranties, express or 
+                        implied. Mattis & Co makes no representations or warranties in relation to the information on this Website.
+                    </p>
+                    
+                    <h3>Forward-Looking Statements</h3>
+                    <p>
+                        This Website may contain forward-looking statements. These statements are based on current expectations and 
+                        are subject to risks and uncertainties that could cause actual results to differ materially from those expressed 
+                        or implied.
+                    </p>
+                </div>
+
+                <div class="legal-section fade-in" id="limitation">
+                    <h2>7. Limitation of Liability</h2>
+                    <p>
+                        In no event shall Mattis & Co, nor its directors, employees, partners, agents, suppliers, or affiliates, be 
+                        liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, 
+                        loss of profits, data, use, goodwill, or other intangible losses, resulting from your use of the Website.
+                    </p>
+                    <p>
+                        Mattis & Co will not be liable for any damages arising out of or in connection with your use of the Website. 
+                        This limitation of liability applies to all damages of any kind, including compensatory, direct, indirect, or 
+                        consequential damages.
+                    </p>
+                </div>
+
+                <div class="legal-section fade-in" id="indemnification">
+                    <h2>8. Indemnification</h2>
+                    <p>
+                        You agree to defend, indemnify, and hold harmless Mattis & Co and its licensees and licensors, and their 
+                        employees, contractors, agents, officers and directors, from and against any and all claims, damages, 
+                        obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney's fees), 
+                        resulting from or arising out of:
+                    </p>
+                    <ul>
+                        <li>Your use and access of the Website</li>
+                        <li>Your violation of any term of these Terms of Service</li>
+                        <li>Your violation of any third party right, including without limitation any copyright, property, or privacy right</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section fade-in" id="modifications">
+                    <h2>9. Modifications</h2>
+                    <p>
+                        Mattis & Co reserves the right, at our sole discretion, to modify or replace these Terms of Service at any time. 
+                        If a revision is material, we will provide at least 30 days notice prior to any new terms taking effect.
+                    </p>
+                    <p>
+                        By continuing to access or use our Website after any revisions become effective, you agree to be bound by the 
+                        revised terms. If you do not agree to the new terms, you are no longer authorized to use the Website.
+                    </p>
+                </div>
+
+                <div class="legal-section fade-in" id="governing">
+                    <h2>10. Governing Law</h2>
+                    <p>
+                        These Terms of Service and any separate agreements whereby we provide you services shall be governed by and 
+                        construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict 
+                        of law provisions.
+                    </p>
+                    <p>
+                        Our failure to enforce any right or provision of these Terms of Service will not be considered a waiver of 
+                        those rights. If any provision of these Terms of Service is held to be invalid or unenforceable by a court, 
+                        the remaining provisions of these Terms of Service will remain in effect.
+                    </p>
+                </div>
+
+                <div class="legal-section fade-in" id="contact">
+                    <h2>11. Contact Information</h2>
+                    <p>
+                        If you have any questions about these Terms of Service, please contact us:
+                    </p>
+                    <div class="contact-info-box">
+                        <h3>Mattis & Co</h3>
+                        <p>Email: <a href="mailto:legal@mattisco.com">legal@mattisco.com</a></p>
+                        <p>Phone: 1-800-MATTIS-1</p>
+                        <p>Address: 123 Main Street, Suite 100<br>Anytown, DE 19901</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -45,10 +484,49 @@
 
     <!-- Load Navigation Script -->
     <script src="../navigation.js"></script>
+    
+    <!-- Initialize animations and smooth scroll -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            lucide.createIcons();
+            
+            // Setup scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-<!-- Cookie Consent -->
-<script>
-</script>
-<script src="../cookie-consent.js"></script>
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Cookie Consent -->
+    <script>
+    </script>
+    <script src="../cookie-consent.js"></script>
 </body>
 </html>

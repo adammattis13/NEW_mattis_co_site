@@ -3,13 +3,451 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infrastructure - Mattis&Co</title>
+    <title>Essential Infrastructure - Mattis & Co</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Investing in the infrastructure that powers the data economy: next-generation fiber networks and decentralized energy systems including micro-nuclear.">
+    <meta name="keywords" content="infrastructure investment, fiber optic networks, decentralized energy, micro-nuclear, power grid, mattis & co">
+    <meta name="author" content="Mattis & Co">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="../../styles.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+    
+    <!-- Page-specific styles -->
+    <style>
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, 
+                #0a0a0a 0%, 
+                #1a2a3a 50%,
+                #0a0a0a 100%);
+            padding: 160px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(186, 218, 85, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(186, 218, 85, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(186, 218, 85, 0.05) 0%, transparent 70%);
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .page-tagline {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            margin-bottom: 32px;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--primary-white);
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Overview Section */
+        .overview-section {
+            background: var(--primary-white);
+            padding: 100px 0;
+        }
+
+        .overview-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .overview-lead {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .overview-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        /* Infrastructure Pillars Section */
+        .pillars-section {
+            background: var(--background-light);
+            padding: 100px 0;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .pillar-card {
+            background: var(--primary-white);
+            padding: 48px 40px;
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-light);
+            transition: var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pillar-card.featured {
+            grid-column: span 2;
+            background: linear-gradient(135deg, var(--primary-white), rgba(186, 218, 85, 0.02));
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-green);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: var(--transition);
+        }
+
+        .pillar-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--accent-green);
+        }
+
+        .pillar-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            margin-bottom: 24px;
+            background: rgba(186, 218, 85, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        .pillar-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .pillar-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .pillar-list {
+            list-style: none;
+        }
+
+        .pillar-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .pillar-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        /* Opportunity Section */
+        .opportunity-section {
+            background: var(--primary-white);
+            padding: 100px 0;
+        }
+
+        .opportunity-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .opportunity-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: var(--background-light);
+            border-radius: var(--border-radius-large);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .opportunity-card:hover {
+            background: var(--primary-white);
+            border-color: var(--accent-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .opportunity-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            margin: 0 auto 24px;
+            background: rgba(186, 218, 85, 0.1);
+            border-radius: 50%;
+        }
+
+        .opportunity-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .opportunity-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Market Dynamics Section */
+        .dynamics-section {
+            background: var(--dark-grey);
+            color: var(--primary-white);
+            padding: 100px 0;
+        }
+
+        .dynamics-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .dynamics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .dynamic-item {
+            text-align: center;
+        }
+
+        .dynamic-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            display: block;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .dynamic-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Investment Focus Section */
+        .focus-section {
+            background: var(--background-light);
+            padding: 100px 0;
+        }
+
+        .focus-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .focus-quote {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .focus-card {
+            background: var(--primary-white);
+            padding: 32px;
+            border-radius: var(--border-radius-large);
+            border: 1px solid var(--border-light);
+            text-align: left;
+        }
+
+        .focus-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        .focus-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .focus-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary-white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+        }
+
+        .cta-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pillar-card.featured {
+                grid-column: span 1;
+            }
+
+            .opportunity-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .dynamics-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+
+            .focus-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 140px 0 80px;
+            }
+
+            .overview-section,
+            .pillars-section,
+            .opportunity-section,
+            .dynamics-section,
+            .focus-section,
+            .cta-section {
+                padding: 60px 0;
+            }
+
+            .overview-lead {
+                font-size: 1.25rem;
+            }
+
+            .pillar-card {
+                padding: 40px 32px;
+            }
+
+            .focus-quote {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pillar-card {
+                padding: 32px 24px;
+            }
+
+            .dynamics-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .dynamic-number {
+                font-size: 2.5rem;
+            }
+
+            .focus-card {
+                padding: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Navigation -->
@@ -21,20 +459,302 @@
 
     <!-- Main Content -->
     <main>
-        <div class="page-header">
+        <!-- Page Header -->
+        <section class="page-header">
             <div class="container">
-                <h1>Infrastructure - Mattis&Co</h1>
-            </div>
-        </div>
-        
-        <div class="container">
-            <div class="page-content">
-                <p>Page content goes here.</p>
-                <div class="content-placeholder">
-                    [Page Content]
+                <div class="page-header-content">
+                    <div class="page-tagline">Investment Thesis</div>
+                    <h1 class="page-title">Essential Infrastructure</h1>
+                    <p class="page-description">
+                        Building the backbone of the data economy through next-generation fiber networks 
+                        and decentralized energy systems. The future runs on information and power—we're 
+                        investing in both.
+                    </p>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section class="overview-section">
+            <div class="container">
+                <div class="overview-content fade-in">
+                    <p class="overview-lead">
+                        The entire economy is becoming a data economy. <strong>But data without infrastructure 
+                        is just noise, and infrastructure without power is just expensive dirt.</strong>
+                    </p>
+                    
+                    <p class="overview-text">
+                        Every breakthrough in AI, every autonomous vehicle, every smart city initiative, every 
+                        remote surgery, every precision agriculture system—they all depend on two things: 
+                        ultra-reliable connectivity and abundant, resilient power. Yet most of America still 
+                        operates on copper wires laid in the 1960s and a centralized grid designed before 
+                        computers existed.
+                    </p>
+                    
+                    <p class="overview-text">
+                        We're investing in the unglamorous systems that make the future possible. Next-generation 
+                        fiber optic networks that deliver gigabit speeds to overlooked communities. Decentralized 
+                        energy infrastructure including micro-nuclear reactors that provide clean, reliable power 
+                        at the edge. The picks and shovels of the information age.
+                    </p>
+                    
+                    <p class="overview-text">
+                        <strong>This isn't about building the cloud. It's about building what the cloud runs on.</strong> 
+                        While others chase software unicorns, we're laying the fiber and building the power systems 
+                        that every unicorn depends on.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Infrastructure Pillars Section -->
+        <section class="pillars-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="fade-in">The Infrastructure Stack</h2>
+                    <p class="section-subtitle fade-in stagger-1">
+                        Two pillars supporting the entire digital economy.
+                    </p>
+                </div>
+                
+                <div class="pillars-grid">
+                    <div class="pillar-card fade-in stagger-2">
+                        <div class="pillar-icon">
+                            <i data-lucide="wifi"></i>
+                        </div>
+                        <h3 class="pillar-title">Next-Generation Connectivity</h3>
+                        <p class="pillar-description">
+                            Deploying fiber optic infrastructure across underserved markets, delivering 
+                            symmetrical gigabit speeds where incumbents offer decades-old DSL.
+                        </p>
+                        <ul class="pillar-list">
+                            <li>Middle-mile fiber backbone development</li>
+                            <li>Last-mile fiber-to-the-home deployment</li>
+                            <li>5G small cell and edge computing sites</li>
+                            <li>Rural broadband expansion initiatives</li>
+                            <li>Municipal partnership models</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pillar-card fade-in stagger-3">
+                        <div class="pillar-icon">
+                            <i data-lucide="zap"></i>
+                        </div>
+                        <h3 class="pillar-title">Decentralized Energy Systems</h3>
+                        <p class="pillar-description">
+                            Building resilient, distributed power generation including micro-nuclear reactors 
+                            that provide clean baseload power independent of aging grid infrastructure.
+                        </p>
+                        <ul class="pillar-list">
+                            <li>Micro-nuclear reactor deployment</li>
+                            <li>Distributed solar + storage systems</li>
+                            <li>Microgrid development and operation</li>
+                            <li>Grid-edge intelligence platforms</li>
+                            <li>Energy-as-a-Service models</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pillar-card featured fade-in stagger-4">
+                        <div class="pillar-icon">
+                            <i data-lucide="atom"></i>
+                        </div>
+                        <h3 class="pillar-title">The Micro-Nuclear Revolution</h3>
+                        <p class="pillar-description">
+                            Small Modular Reactors (SMRs) and micro-reactors are changing the energy equation. 
+                            Factory-built, inherently safe, and deployable at the point of need, they provide 
+                            24/7 carbon-free power for data centers, industrial facilities, and entire communities. 
+                            We're investing in deployment infrastructure, regulatory navigation, and operational 
+                            excellence to make distributed nuclear power a reality.
+                        </p>
+                        <ul class="pillar-list">
+                            <li>1-20 MW micro-reactor installations</li>
+                            <li>Data center co-location opportunities</li>
+                            <li>Industrial facility power partnerships</li>
+                            <li>Remote community energy independence</li>
+                            <li>Grid resilience and backup power</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Opportunity Section -->
+        <section class="opportunity-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="fade-in">The Infrastructure Opportunity</h2>
+                    <p class="section-subtitle fade-in stagger-1">
+                        Massive demand meets chronic underinvestment.
+                    </p>
+                </div>
+                
+                <div class="opportunity-grid">
+                    <div class="opportunity-card fade-in stagger-2">
+                        <div class="opportunity-icon">
+                            <i data-lucide="trending-up"></i>
+                        </div>
+                        <h4 class="opportunity-title">Exponential Data Growth</h4>
+                        <p class="opportunity-description">
+                            Global data creation doubles every two years. By 2025, we'll generate 463 exabytes 
+                            daily—but infrastructure isn't keeping pace.
+                        </p>
+                    </div>
+                    
+                    <div class="opportunity-card fade-in stagger-3">
+                        <div class="opportunity-icon">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <h4 class="opportunity-title">The Rural Opportunity</h4>
+                        <p class="opportunity-description">
+                            39% of rural Americans lack access to broadband. That's 60 million people waiting 
+                            for modern connectivity.
+                        </p>
+                    </div>
+                    
+                    <div class="opportunity-card fade-in stagger-4">
+                        <div class="opportunity-icon">
+                            <i data-lucide="battery-charging"></i>
+                        </div>
+                        <h4 class="opportunity-title">Power Demand Surge</h4>
+                        <p class="opportunity-description">
+                            AI data centers alone will require 200+ TWh by 2030—equivalent to Argentina's 
+                            entire electricity consumption.
+                        </p>
+                    </div>
+                    
+                    <div class="opportunity-card fade-in stagger-5">
+                        <div class="opportunity-icon">
+                            <i data-lucide="shield-alert"></i>
+                        </div>
+                        <h4 class="opportunity-title">Grid Vulnerability</h4>
+                        <p class="opportunity-description">
+                            70% of transmission lines are over 25 years old. Decentralized generation is 
+                            essential for resilience.
+                        </p>
+                    </div>
+                    
+                    <div class="opportunity-card fade-in stagger-6">
+                        <div class="opportunity-icon">
+                            <i data-lucide="dollar-sign"></i>
+                        </div>
+                        <h4 class="opportunity-title">Federal Investment</h4>
+                        <p class="opportunity-description">
+                            $65B in broadband funding and $100B+ in energy infrastructure creates unprecedented 
+                            deployment opportunities.
+                        </p>
+                    </div>
+                    
+                    <div class="opportunity-card fade-in stagger-7">
+                        <div class="opportunity-icon">
+                            <i data-lucide="factory"></i>
+                        </div>
+                        <h4 class="opportunity-title">Onshoring Demands</h4>
+                        <p class="opportunity-description">
+                            Manufacturing reshoring requires reliable power and connectivity—creating new 
+                            infrastructure markets.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Dynamics Section -->
+        <section class="dynamics-section">
+            <div class="container">
+                <div class="dynamics-content fade-in">
+                    <h2 style="color: var(--primary-white); margin-bottom: 24px;">The Infrastructure Imperative</h2>
+                    <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 16px; color: rgba(255, 255, 255, 0.9);">
+                        The numbers tell the story of unprecedented opportunity.
+                    </p>
+                    
+                    <div class="dynamics-grid">
+                        <div class="dynamic-item stagger-2">
+                            <span class="dynamic-number">$2.6T</span>
+                            <div class="dynamic-label">Infrastructure Gap</div>
+                        </div>
+                        
+                        <div class="dynamic-item stagger-3">
+                            <span class="dynamic-number">10x</span>
+                            <div class="dynamic-label">Data Growth by 2030</div>
+                        </div>
+                        
+                        <div class="dynamic-item stagger-4">
+                            <span class="dynamic-number">400+</span>
+                            <div class="dynamic-label">SMR Projects Globally</div>
+                        </div>
+                        
+                        <div class="dynamic-item stagger-5">
+                            <span class="dynamic-number">25%</span>
+                            <div class="dynamic-label">Annual Returns</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Focus Section -->
+        <section class="focus-section">
+            <div class="container">
+                <div class="focus-content fade-in">
+                    <p class="focus-quote">
+                        "The companies that control the pipes and power of the digital age will be the 
+                        Standard Oils and Union Pacifics of the 21st century."
+                    </p>
+                    
+                    <div class="focus-grid">
+                        <div class="focus-card stagger-2">
+                            <div class="focus-label">Connectivity Focus</div>
+                            <h4 class="focus-title">Open Access Networks</h4>
+                            <p class="focus-description">
+                                Building carrier-neutral fiber infrastructure that any service provider can use, 
+                                creating competition and lowering costs while maximizing asset utilization.
+                            </p>
+                        </div>
+                        
+                        <div class="focus-card stagger-3">
+                            <div class="focus-label">Energy Focus</div>
+                            <h4 class="focus-title">Behind-the-Meter Generation</h4>
+                            <p class="focus-description">
+                                Installing power generation at the point of consumption—data centers, factories, 
+                                hospitals—eliminating transmission losses and grid dependency.
+                            </p>
+                        </div>
+                        
+                        <div class="focus-card stagger-4">
+                            <div class="focus-label">Integration Play</div>
+                            <h4 class="focus-title">Power + Connectivity Bundles</h4>
+                            <p class="focus-description">
+                                Co-locating fiber and power infrastructure creates compelling economics—shared 
+                                trenching, unified operations, and integrated customer offerings.
+                            </p>
+                        </div>
+                        
+                        <div class="focus-card stagger-5">
+                            <div class="focus-label">Technology Edge</div>
+                            <h4 class="focus-title">Smart Infrastructure</h4>
+                            <p class="focus-description">
+                                Embedding intelligence into infrastructure—predictive maintenance, dynamic routing, 
+                                automated healing—turning dumb pipes into smart systems.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content fade-in">
+                    <h3 class="cta-title">Building Tomorrow's Infrastructure?</h3>
+                    <p class="cta-description">
+                        If you're developing next-generation connectivity or decentralized energy projects, 
+                        let's discuss how patient capital and operational expertise can accelerate deployment.
+                    </p>
+                    <a href="../../contact.html" class="btn btn-primary btn-large">Explore Infrastructure Partnerships</a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -44,10 +764,49 @@
 
     <!-- Load Navigation Script -->
     <script src="../../navigation.js"></script>
+    
+    <!-- Initialize Lucide Icons and animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            lucide.createIcons();
+            
+            // Setup scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-<!-- Cookie Consent -->
-<script>
-</script>
-<script src="../../cookie-consent.js"></script>
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Cookie Consent -->
+    <script>
+    </script>
+    <script src="../../cookie-consent.js"></script>
 </body>
 </html>

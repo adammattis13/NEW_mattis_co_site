@@ -1,18 +1,403 @@
-<!-- TEMPLATE FOR ALL PAGES -->
-<!-- For pages in /pages/ directory -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI - Mattis&Co</title>
+    <title>AI Operationalization - Mattis & Co</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Building disciplined AI cultures that enable speed with safety. SAI AI-Native partner delivering secure, compliant enterprise AI transformation.">
+    <meta name="keywords" content="AI operationalization, enterprise AI, AI governance, responsible AI, human-in-the-loop, mattis & co">
+    <meta name="author" content="Mattis & Co">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="../../styles.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+    
+    <!-- Page-specific styles -->
+    <style>
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, 
+                #0f0f0f 0%, 
+                #1a2332 50%,
+                #0f0f0f 100%);
+            padding: 160px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 30% 20%, rgba(186, 218, 85, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(186, 218, 85, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 90%, rgba(186, 218, 85, 0.05) 0%, transparent 60%);
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .page-tagline {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            margin-bottom: 32px;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--primary-white);
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Overview Section */
+        .overview-section {
+            background: var(--primary-white);
+            padding: 100px 0;
+        }
+
+        .overview-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .overview-lead {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .overview-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .partner-badge {
+            background: linear-gradient(135deg, rgba(186, 218, 85, 0.1), rgba(186, 218, 85, 0.05));
+            border-left: 4px solid var(--accent-green);
+            padding: 28px 36px;
+            border-radius: var(--border-radius);
+            margin: 48px auto;
+            max-width: 800px;
+        }
+
+        .partner-badge h3 {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .partner-badge p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Framework Section */
+        .framework-section {
+            background: var(--background-light);
+            padding: 100px 0;
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .framework-card {
+            background: var(--primary-white);
+            padding: 48px 40px;
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-light);
+            transition: var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .framework-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-green);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: var(--transition);
+        }
+
+        .framework-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .framework-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--accent-green);
+        }
+
+        .framework-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            margin-bottom: 24px;
+            background: rgba(186, 218, 85, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        .framework-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .framework-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .framework-list {
+            list-style: none;
+        }
+
+        .framework-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .framework-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        /* Principles Section */
+        .principles-section {
+            background: var(--primary-white);
+            padding: 100px 0;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .principle-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: var(--background-light);
+            border-radius: var(--border-radius-large);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .principle-card:hover {
+            background: var(--primary-white);
+            border-color: var(--accent-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .principle-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            margin: 0 auto 24px;
+            background: rgba(186, 218, 85, 0.1);
+            border-radius: 50%;
+        }
+
+        .principle-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .principle-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Implementation Section */
+        .implementation-section {
+            background: var(--dark-grey);
+            color: var(--primary-white);
+            padding: 100px 0;
+        }
+
+        .implementation-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .implementation-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .implementation-item {
+            text-align: center;
+        }
+
+        .implementation-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            display: block;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .implementation-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--background-light);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+        }
+
+        .cta-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .framework-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .principles-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .implementation-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 140px 0 80px;
+            }
+
+            .overview-section,
+            .framework-section,
+            .principles-section,
+            .implementation-section,
+            .cta-section {
+                padding: 60px 0;
+            }
+
+            .overview-lead {
+                font-size: 1.25rem;
+            }
+
+            .framework-card {
+                padding: 40px 32px;
+            }
+
+            .principle-card {
+                padding: 32px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .framework-card {
+                padding: 32px 24px;
+            }
+
+            .implementation-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .implementation-number {
+                font-size: 2.5rem;
+            }
+
+            .partner-badge {
+                padding: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Navigation -->
@@ -24,20 +409,273 @@
 
     <!-- Main Content -->
     <main>
-        <div class="page-header">
+        <!-- Page Header -->
+        <section class="page-header">
             <div class="container">
-                <h1>[Page Heading]</h1>
-            </div>
-        </div>
-        
-        <div class="container">
-            <div class="page-content">
-                <p>Page content goes here.</p>
-                <div class="content-placeholder">
-                    [Page Content]
+                <div class="page-header-content">
+                    <div class="page-tagline">Investment Thesis</div>
+                    <h1 class="page-title">AI Operationalization</h1>
+                    <p class="page-description">
+                        Building disciplined AI cultures that enable teams to move fast with confidence. 
+                        We ensure enterprise AI adoption is safe, secure, compliant—and always keeps 
+                        humans in control.
+                    </p>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section class="overview-section">
+            <div class="container">
+                <div class="overview-content fade-in">
+                    <p class="overview-lead">
+                        AI isn't the wild west anymore. <strong>Winners build disciplined AI cultures 
+                        where teams can innovate rapidly without breaking things that matter.</strong>
+                    </p>
+                    
+                    <p class="overview-text">
+                        Every enterprise wants to harness AI's power. Most are paralyzed by fear—of data breaches, 
+                        compliance violations, runaway costs, or AI making critical decisions without oversight. 
+                        This fear creates AI theater: lots of talk, pilot projects that never scale, and competitors 
+                        pulling ahead while you're stuck in committee meetings.
+                    </p>
+                    
+                    <p class="overview-text">
+                        We operationalize AI the right way. Not with restrictive policies that kill innovation, 
+                        but with intelligent guardrails that let teams run fast while protecting what matters: 
+                        your data, your customers, your reputation, and your competitive advantage.
+                    </p>
+                    
+                    <p class="overview-text">
+                        <strong>Speed and safety aren't opposites. They're partners.</strong> We build AI operating 
+                        systems where employees can experiment freely within secure boundaries, where every AI 
+                        decision has human accountability, and where innovation happens at enterprise scale—not 
+                        just in isolated labs.
+                    </p>
+                    
+                    <div class="partner-badge fade-in stagger-2">
+                        <h3><span style="color: var(--accent-green);">SAI AI-Native Partner</span></h3>
+                        <p>
+                            As an official AI-Native Partner with SAI, we bring enterprise-grade AI expertise backed by 
+                            industry-leading certifications, frameworks, and implementation methodologies. Our partnership 
+                            ensures your AI transformation follows proven patterns while pushing the boundaries of what's possible.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Framework Section -->
+        <section class="framework-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="fade-in">The Disciplined AI Framework</h2>
+                    <p class="section-subtitle fade-in stagger-1">
+                        Enterprise AI that moves fast without breaking things.
+                    </p>
+                </div>
+                
+                <div class="framework-grid">
+                    <div class="framework-card fade-in stagger-2">
+                        <div class="framework-icon">
+                            <i data-lucide="shield-check"></i>
+                        </div>
+                        <h3 class="framework-title">Secure AI Foundation</h3>
+                        <p class="framework-description">
+                            Rock-solid data governance and security protocols that protect company and customer 
+                            information while enabling broad AI adoption.
+                        </p>
+                        <ul class="framework-list">
+                            <li>Data classification and access controls</li>
+                            <li>Encryption at rest and in transit</li>
+                            <li>PII detection and masking</li>
+                            <li>Audit trails and compliance logging</li>
+                            <li>Zero-trust AI architectures</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="framework-card fade-in stagger-3">
+                        <div class="framework-icon">
+                            <i data-lucide="users-check"></i>
+                        </div>
+                        <h3 class="framework-title">Human-in-the-Loop Systems</h3>
+                        <p class="framework-description">
+                            AI amplifies human intelligence, it doesn't replace it. Every critical decision 
+                            maintains human oversight and accountability.
+                        </p>
+                        <ul class="framework-list">
+                            <li>Decision thresholds and escalation paths</li>
+                            <li>Explainable AI interfaces</li>
+                            <li>Human review checkpoints</li>
+                            <li>Override capabilities</li>
+                            <li>Continuous feedback loops</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="framework-card fade-in stagger-4">
+                        <div class="framework-icon">
+                            <i data-lucide="scale"></i>
+                        </div>
+                        <h3 class="framework-title">Compliance & Governance</h3>
+                        <p class="framework-description">
+                            Comprehensive governance frameworks that ensure AI usage meets regulatory requirements 
+                            and ethical standards without slowing innovation.
+                        </p>
+                        <ul class="framework-list">
+                            <li>Industry-specific compliance mapping</li>
+                            <li>Automated policy enforcement</li>
+                            <li>Risk assessment protocols</li>
+                            <li>Bias detection and mitigation</li>
+                            <li>Regular compliance audits</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="framework-card fade-in stagger-5">
+                        <div class="framework-icon">
+                            <i data-lucide="rocket"></i>
+                        </div>
+                        <h3 class="framework-title">Rapid Experimentation</h3>
+                        <p class="framework-description">
+                            Sandboxed environments and clear guidelines that let teams experiment with AI quickly 
+                            while maintaining enterprise standards.
+                        </p>
+                        <ul class="framework-list">
+                            <li>AI experimentation platforms</li>
+                            <li>Pre-approved use case templates</li>
+                            <li>Rapid prototyping frameworks</li>
+                            <li>Cost controls and monitoring</li>
+                            <li>Scaling playbooks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Principles Section -->
+        <section class="principles-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="fade-in">Core AI Operating Principles</h2>
+                    <p class="section-subtitle fade-in stagger-1">
+                        The non-negotiables of enterprise AI adoption.
+                    </p>
+                </div>
+                
+                <div class="principles-grid">
+                    <div class="principle-card fade-in stagger-2">
+                        <div class="principle-icon">
+                            <i data-lucide="lock"></i>
+                        </div>
+                        <h4 class="principle-title">Data Sovereignty</h4>
+                        <p class="principle-description">
+                            Your data never leaves your control. Every AI interaction respects data boundaries 
+                            and ownership.
+                        </p>
+                    </div>
+                    
+                    <div class="principle-card fade-in stagger-3">
+                        <div class="principle-icon">
+                            <i data-lucide="eye"></i>
+                        </div>
+                        <h4 class="principle-title">Transparent Operations</h4>
+                        <p class="principle-description">
+                            No black boxes. Every AI decision can be explained, audited, and understood by 
+                            stakeholders.
+                        </p>
+                    </div>
+                    
+                    <div class="principle-card fade-in stagger-4">
+                        <div class="principle-icon">
+                            <i data-lucide="user-check"></i>
+                        </div>
+                        <h4 class="principle-title">Human Authority</h4>
+                        <p class="principle-description">
+                            Humans make the decisions that matter. AI provides insights and recommendations, 
+                            not ultimatums.
+                        </p>
+                    </div>
+                    
+                    <div class="principle-card fade-in stagger-5">
+                        <div class="principle-icon">
+                            <i data-lucide="gauge"></i>
+                        </div>
+                        <h4 class="principle-title">Measured Risk</h4>
+                        <p class="principle-description">
+                            Start small, prove value, scale fast. Every AI initiative has clear success metrics 
+                            and risk boundaries.
+                        </p>
+                    </div>
+                    
+                    <div class="principle-card fade-in stagger-6">
+                        <div class="principle-icon">
+                            <i data-lucide="refresh-cw"></i>
+                        </div>
+                        <h4 class="principle-title">Continuous Learning</h4>
+                        <p class="principle-description">
+                            AI systems that get smarter over time through feedback loops and performance monitoring.
+                        </p>
+                    </div>
+                    
+                    <div class="principle-card fade-in stagger-7">
+                        <div class="principle-icon">
+                            <i data-lucide="shield"></i>
+                        </div>
+                        <h4 class="principle-title">Ethical Boundaries</h4>
+                        <p class="principle-description">
+                            Clear ethical guidelines that ensure AI serves all stakeholders fairly and responsibly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Results Section -->
+        <section class="implementation-section">
+            <div class="container">
+                <div class="implementation-content fade-in">
+                    <h2 style="color: var(--primary-white); margin-bottom: 24px;">Real Results from Disciplined AI</h2>
+                    <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 16px; color: rgba(255, 255, 255, 0.9);">
+                        When teams can move fast with confidence, transformation happens at enterprise scale.
+                    </p>
+                    
+                    <div class="implementation-grid">
+                        <div class="implementation-item stagger-2">
+                            <span class="implementation-number">70%</span>
+                            <div class="implementation-label">Faster AI Deployment</div>
+                        </div>
+                        
+                        <div class="implementation-item stagger-3">
+                            <span class="implementation-number">100%</span>
+                            <div class="implementation-label">Compliance Rate</div>
+                        </div>
+                        
+                        <div class="implementation-item stagger-4">
+                            <span class="implementation-number">3.5x</span>
+                            <div class="implementation-label">ROI on AI Initiatives</div>
+                        </div>
+                        
+                        <div class="implementation-item stagger-5">
+                            <span class="implementation-number">Zero</span>
+                            <div class="implementation-label">Data Breaches</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content fade-in">
+                    <h3 class="cta-title">Ready to Operationalize AI?</h3>
+                    <p class="cta-description">
+                        Stop talking about AI and start deploying it. Let's build a disciplined AI culture 
+                        that delivers real business value while keeping your data safe and your humans in control.
+                    </p>
+                    <a href="../../contact.html" class="btn btn-primary btn-large">Build Your AI Operating System</a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -47,10 +685,49 @@
 
     <!-- Load Navigation Script -->
     <script src="../../navigation.js"></script>
+    
+    <!-- Initialize Lucide Icons and animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            lucide.createIcons();
+            
+            // Setup scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-<!-- Cookie Consent -->
-<script>
-</script>
-<script src="../../cookie-consent.js"></script>
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Cookie Consent -->
+    <script>
+    </script>
+    <script src="../../cookie-consent.js"></script>
 </body>
 </html>

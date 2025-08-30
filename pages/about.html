@@ -3,14 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Mattis&Co</title>
+    <title>About - Mattis & Co | Private Equity AI Advisory & Operational Excellence</title>
+    
+    <!-- Enhanced Meta Tags for SEO -->
+    <meta name="description" content="Learn about Mattis & Co's approach to private equity and strategic advisory. Operators, not bankers. Building value that lasts.">
+    <meta name="keywords" content="about mattis, private equity AI advisory, operational due diligence services, community-first PE firm, AI integration in PE">
+    <meta name="author" content="Mattis & Co">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="About - Mattis & Co | Private Equity AI Advisory & Operational Excellence">
+    <meta property="og:description" content="Operators, not bankers. We combine private equity discipline with hands-on operational expertise.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mattisandco.com/pages/about.html">
+    <meta property="og:site_name" content="Mattis & Co">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About - Mattis & Co | Private Equity AI Advisory">
+    <meta name="twitter:description" content="Operators, not bankers. Building value that lasts.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="../styles.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+    
+    <!-- Page-specific styles for unique sections -->
+    <style>
+        /* Enhanced Page Header with Hero Image */
+        .page-header {
+            background-image: url('../assets/Baltimore.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding: 180px 0 120px;
+            position: relative;
+            overflow: hidden;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(26, 26, 26, 0.7) 0%,
+                rgba(26, 26, 26, 0.6) 50%,
+                rgba(26, 26, 26, 0.7) 100%
+            );
+            z-index: 1;
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .page-tagline {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            margin-bottom: 32px;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 0.95;
+            color: var(--primary-white);
+        }
+
+        .page-description {
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Story Section */
+        .story-section {
+            background: var(--primary-white);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .story-text h3 {
+            margin-bottom: 32px;
+            color: var(--text-primary);
+            font-size: 2rem;
+        }
+
+        .story-text p {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+        }
+
+        .story-highlight {
+            background: var(--background-light);
+            padding: 40px;
+            border-radius: var(--border-radius-large);
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .story-highlight h4 {
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .story-highlight p {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 0;
+        }
+
+        /* Values Grid Enhancement */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+
+        .value-card {
+            background: var(--primary-white);
+            padding: 40px 32px;
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-light);
+            transition: var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-green);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .value-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--accent-green);
+        }
+
+        .value-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            margin-bottom: 24px;
+            background: rgba(186, 218, 85, 0.1);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.1);
+            background: var(--accent-green);
+            color: var(--text-primary);
+        }
+
+        /* Approach Section */
+        .approach-section {
+            background: var(--primary-white);
+        }
+
+        .approach-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .approach-text h3 {
+            margin-bottom: 32px;
+            color: var(--text-primary);
+            font-size: 2rem;
+        }
+
+        .approach-list {
+            list-style: none;
+            margin-top: 32px;
+        }
+
+        .approach-list li {
+            padding: 16px 0;
+            padding-left: 32px;
+            position: relative;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-light);
+            font-size: 1.05rem;
+        }
+
+        .approach-list li:last-child {
+            border-bottom: none;
+        }
+
+        .approach-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .approach-stats {
+            display: grid;
+            gap: 32px;
+        }
+
+        .stat-card {
+            background: var(--background-light);
+            padding: 32px;
+            border-radius: var(--border-radius-large);
+            text-align: center;
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            display: block;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        /* Team Philosophy Section */
+        .team-philosophy {
+            background: var(--dark-grey);
+            color: var(--primary-white);
+            padding: var(--section-padding);
+        }
+
+        .philosophy-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .philosophy-quote {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 32px;
+            color: var(--primary-white);
+            font-style: italic;
+        }
+
+        .philosophy-author {
+            color: var(--accent-green);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        .philosophy-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .pillar {
+            padding: 32px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-large);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .pillar:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-green);
+            transform: translateY(-4px);
+        }
+
+        .pillar h4 {
+            color: var(--accent-green);
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+
+        .pillar p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--background-light);
+            text-align: center;
+            padding: var(--section-padding);
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            margin-bottom: 24px;
+            font-size: 2.5rem;
+        }
+
+        .cta-description {
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .story-content,
+            .approach-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .philosophy-pillars {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 140px 0 80px;
+                min-height: 60vh;
+                background-attachment: scroll;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .philosophy-quote {
+                font-size: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .value-card,
+            .stat-card,
+            .pillar {
+                padding: 32px 24px;
+            }
+
+            .story-highlight {
+                padding: 32px 24px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Navigation -->
@@ -22,20 +437,183 @@
 
     <!-- Main Content -->
     <main>
-        <div class="page-header">
+        <!-- Page Header -->
+        <section class="page-header">
             <div class="container">
-                <h1>About</h1>
-            </div>
-        </div>
-        
-        <div class="container">
-            <div class="page-content">
-                <p>Page content goes here.</p>
-                <div class="content-placeholder">
-                    [Page Content]
+                <div class="page-header-content">
+                    <div class="page-tagline">About Mattis & Co</div>
+                    <h1 class="page-title">Operators.<br>Not bankers.</h1>
+                    <p class="page-description">
+                        We're building a different kind of firm. One that combines the discipline of private equity 
+                        with the hands-on expertise of seasoned operators.
+                    </p>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Our Story -->
+        <section class="section story-section">
+            <div class="container">
+                <div class="story-content fade-in">
+                    <div class="story-text">
+                        <h3>Our Story</h3>
+                        <p>
+                            Mattis & Co was founded on a simple premise: the best investors are those who've built, 
+                            operated, and scaled businesses themselves. We're not career financiers. We're operators 
+                            who happen to invest.
+                        </p>
+                        <p>
+                            After decades of building and running companies across technology, infrastructure, and services, 
+                            we saw an opportunity to do private equity differently. To focus on businesses that matter. 
+                            To work with founders and management teams as partners, not overlords.
+                        </p>
+                        <p>
+                            Today, we split our time between investing in overlooked opportunities that rebuild communities 
+                            and advising leaders through the complex transformations that define modern business. 
+                            Two practices. One mission: Building value that lasts.
+                        </p>
+                    </div>
+                    
+                    <div class="story-highlight stagger-2">
+                        <h4>Our Philosophy</h4>
+                        <p>
+                            "We invest in places others ignore and advise companies through changes others avoid. 
+                            The best opportunities aren't found in boardrooms—they're discovered in communities, 
+                            built in the field, and proven in the market."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Values -->
+        <section class="section values-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="fade-in">What Drives Us</h2>
+                    <p class="section-subtitle fade-in stagger-1">
+                        Our values shape every investment decision and advisory engagement.
+                    </p>
+                </div>
+                
+                <div class="values-grid">
+                    <div class="value-card fade-in stagger-2">
+                        <div class="value-icon">
+                            <i data-lucide="compass"></i>
+                        </div>
+                        <h4>Community-Centered Impact</h4>
+                        <p>We believe business success and community prosperity go hand in hand. Every investment should strengthen the places where people live and work.</p>
+                    </div>
+                    
+                    <div class="value-card fade-in stagger-3">
+                        <div class="value-icon">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <h4>Operational Excellence</h4>
+                        <p>Great companies are built through great operations. We roll up our sleeves and work alongside management teams to execute what matters.</p>
+                    </div>
+                    
+                    <div class="value-card fade-in stagger-4">
+                        <div class="value-icon">
+                            <i data-lucide="clock"></i>
+                        </div>
+                        <h4>Long-Term Thinking</h4>
+                        <p>Sustainable value creation takes time. We're patient capital, focused on building businesses that thrive for decades, not quarters.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Approach -->
+        <section class="section approach-section">
+            <div class="container">
+                <div class="approach-content fade-in">
+                    <div class="approach-text">
+                        <h3>How We Work</h3>
+                        <p>
+                            Whether we're investing in a business or advising its leadership, our approach remains consistent: 
+                            deep engagement, practical solutions, and a relentless focus on execution.
+                        </p>
+                        <p>
+                            We don't believe in the traditional PE playbook of financial engineering and cost cutting. 
+                            We grow companies by making them better—better products, better processes, better teams.
+                        </p>
+                        
+                        <ul class="approach-list">
+                            <li>Partner with management teams, don't replace them</li>
+                            <li>Focus on operational improvements over financial engineering</li>
+                            <li>Invest in businesses that serve essential needs</li>
+                            <li>Take a hands-on approach to value creation</li>
+                            <li>Build for the long term, not the next exit</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="approach-stats stagger-2">
+                        <div class="stat-card">
+                            <span class="stat-number">3-7</span>
+                            <div class="stat-label">Year Hold Period</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <span class="stat-number">95%</span>
+                            <div class="stat-label">Management Retention</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <span class="stat-number">100%</span>
+                            <div class="stat-label">Hands-On Engagement</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Philosophy -->
+        <section class="section team-philosophy">
+            <div class="container">
+                <div class="philosophy-content fade-in">
+                    <div class="philosophy-quote">
+                        "The best deals aren't won in pitch meetings. They're earned through years of building trust, 
+                        proving competence, and showing up when it matters."
+                    </div>
+                    <div class="philosophy-author">Our Investment Philosophy</div>
+                    
+                    <div class="philosophy-pillars">
+                        <div class="pillar stagger-2">
+                            <h4>Earn Our Place</h4>
+                            <p>We don't expect trust—we earn it. Every relationship starts with proving our value through action, not promises.</p>
+                        </div>
+                        
+                        <div class="pillar stagger-3">
+                            <h4>Stay Humble</h4>
+                            <p>The best operators know they don't have all the answers. We listen first, learn constantly, and adapt quickly.</p>
+                        </div>
+                        
+                        <div class="pillar stagger-4">
+                            <h4>Do the Work</h4>
+                            <p>Value creation happens in the details. We're not afraid to get into the weeds and tackle the unglamorous work that drives results.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section cta-section">
+            <div class="container">
+                <div class="cta-content fade-in">
+                    <h3 class="cta-title">Ready to Work Together?</h3>
+                    <p class="cta-description">
+                        Whether you're looking for investment capital or strategic advisory support, 
+                        we'd love to learn about your business and explore how we can help.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="../index.html#contact" class="btn btn-primary btn-large">Send Us a Deal</a>
+                        <a href="../index.html#contact" class="btn btn-secondary btn-large">Engage Our Advisors</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -45,10 +623,49 @@
 
     <!-- Load Navigation Script -->
     <script src="../navigation.js"></script>
+    
+    <!-- Initialize Lucide Icons and animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            lucide.createIcons();
+            
+            // Setup scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-<!-- Cookie Consent -->
-<script>
-</script>
-<script src="../cookie-consent.js"></script>
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Cookie Consent -->
+    <script>
+    </script>
+    <script src="../cookie-consent.js"></script>
 </body>
 </html>
