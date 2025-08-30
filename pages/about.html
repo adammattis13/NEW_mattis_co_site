@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Mattis & Co | Private Equity AI Advisory & Operational Excellence</title>
+    <title>About - Mattis & Co | Private Equity & Strategic Advisory</title>
     
     <!-- Enhanced Meta Tags for SEO -->
-    <meta name="description" content="Learn about Mattis & Co's approach to private equity and strategic advisory. Operators, not bankers. Building value that lasts.">
-    <meta name="keywords" content="about mattis, private equity AI advisory, operational due diligence services, community-first PE firm, AI integration in PE">
+    <meta name="description" content="Learn about Mattis & Co's two distinct practices: Private Equity investing in essential businesses and Strategic Advisory for enterprise transformation.">
+    <meta name="keywords" content="about mattis, private equity, strategic advisory, operational excellence, SAFe implementation, regional consolidation">
     <meta name="author" content="Mattis & Co">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="About - Mattis & Co | Private Equity AI Advisory & Operational Excellence">
-    <meta property="og:description" content="Operators, not bankers. We combine private equity discipline with hands-on operational expertise.">
+    <meta property="og:title" content="About - Mattis & Co | Private Equity & Strategic Advisory">
+    <meta property="og:description" content="Two practices. One philosophy: Operators building lasting value.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mattisandco.com/pages/about.html">
     <meta property="og:site_name" content="Mattis & Co">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="About - Mattis & Co | Private Equity AI Advisory">
-    <meta name="twitter:description" content="Operators, not bankers. Building value that lasts.">
+    <meta name="twitter:title" content="About - Mattis & Co">
+    <meta name="twitter:description" content="Private Equity & Strategic Advisory. Operators, not bankers.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
     
-    <!-- Page-specific styles for unique sections -->
+    <!-- Page-specific styles -->
     <style>
         /* Enhanced Page Header with Hero Image */
         .page-header {
@@ -99,48 +99,195 @@
             margin: 0 auto;
         }
 
-        /* Story Section */
-        .story-section {
+        /* Two Practices Section */
+        .practices-section {
             background: var(--primary-white);
+            padding: 100px 0;
         }
 
-        .story-content {
+        .practices-intro {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 80px;
+        }
+
+        .practices-intro h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .practices-intro p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .practices-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: start;
+            gap: 60px;
         }
 
-        .story-text h3 {
-            margin-bottom: 32px;
-            color: var(--text-primary);
-            font-size: 2rem;
-        }
-
-        .story-text p {
-            margin-bottom: 24px;
-            font-size: 1.1rem;
-        }
-
-        .story-highlight {
+        .practice-card {
             background: var(--background-light);
+            border-radius: var(--border-radius-large);
+            padding: 48px;
+            border: 1px solid var(--border-light);
+            transition: var(--transition-slow);
+        }
+
+        .practice-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--accent-green);
+        }
+
+        .practice-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+
+        .practice-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .practice-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .practice-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .practice-features li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .practice-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .practice-cta {
+            display: inline-block;
+            color: var(--accent-green);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .practice-cta:hover {
+            transform: translateX(4px);
+        }
+
+        /* Credentials Section */
+        .credentials-section {
+            background: var(--background-light);
+            padding: 80px 0;
+        }
+
+        .credentials-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .credentials-badges {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .credential-badge {
+            background: var(--primary-white);
+            padding: 32px;
+            border-radius: var(--border-radius-large);
+            border: 1px solid var(--border-light);
+        }
+
+        .credential-badge h4 {
+            color: var(--accent-green);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .credential-badge p {
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .client-logos {
+            background: var(--primary-white);
             padding: 40px;
             border-radius: var(--border-radius-large);
-            border-left: 4px solid var(--accent-green);
+            border: 1px solid var(--border-light);
         }
 
-        .story-highlight h4 {
-            margin-bottom: 16px;
+        .client-logos h4 {
             color: var(--text-primary);
+            margin-bottom: 32px;
         }
 
-        .story-highlight p {
+        .logos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 24px;
             color: var(--text-secondary);
-            font-style: italic;
-            margin-bottom: 0;
+            font-weight: 600;
         }
 
-        /* Values Grid Enhancement */
+        /* Philosophy Section */
+        .philosophy-section {
+            background: var(--dark-grey);
+            color: var(--primary-white);
+            padding: 100px 0;
+        }
+
+        .philosophy-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .philosophy-quote {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 32px;
+            color: var(--primary-white);
+            font-style: italic;
+        }
+
+        .philosophy-author {
+            color: var(--accent-green);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        /* Values Grid */
         .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -200,156 +347,11 @@
             color: var(--text-primary);
         }
 
-        /* Approach Section */
-        .approach-section {
-            background: var(--primary-white);
-        }
-
-        .approach-content {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 80px;
-            align-items: start;
-        }
-
-        .approach-text h3 {
-            margin-bottom: 32px;
-            color: var(--text-primary);
-            font-size: 2rem;
-        }
-
-        .approach-list {
-            list-style: none;
-            margin-top: 32px;
-        }
-
-        .approach-list li {
-            padding: 16px 0;
-            padding-left: 32px;
-            position: relative;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border-light);
-            font-size: 1.05rem;
-        }
-
-        .approach-list li:last-child {
-            border-bottom: none;
-        }
-
-        .approach-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-            font-weight: 600;
-            font-size: 18px;
-        }
-
-        .approach-stats {
-            display: grid;
-            gap: 32px;
-        }
-
-        .stat-card {
-            background: var(--background-light);
-            padding: 32px;
-            border-radius: var(--border-radius-large);
-            text-align: center;
-            border: 1px solid var(--border-light);
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            border-color: var(--accent-green);
-            transform: translateY(-2px);
-        }
-
-        .stat-number {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-green);
-            display: block;
-            margin-bottom: 8px;
-            line-height: 1;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-        }
-
-        /* Team Philosophy Section */
-        .team-philosophy {
-            background: var(--dark-grey);
-            color: var(--primary-white);
-            padding: var(--section-padding);
-        }
-
-        .philosophy-content {
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .philosophy-quote {
-            font-size: 2rem;
-            font-weight: 300;
-            line-height: 1.3;
-            margin-bottom: 32px;
-            color: var(--primary-white);
-            font-style: italic;
-        }
-
-        .philosophy-author {
-            color: var(--accent-green);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-        }
-
-        .philosophy-pillars {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .pillar {
-            padding: 32px 24px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--border-radius-large);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-        }
-
-        .pillar:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-green);
-            transform: translateY(-4px);
-        }
-
-        .pillar h4 {
-            color: var(--accent-green);
-            margin-bottom: 16px;
-            font-size: 1.1rem;
-        }
-
-        .pillar p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
         /* CTA Section */
         .cta-section {
             background: var(--background-light);
             text-align: center;
-            padding: var(--section-padding);
+            padding: 100px 0;
         }
 
         .cta-content {
@@ -376,15 +378,13 @@
 
         /* Responsive adjustments */
         @media (max-width: 1024px) {
-            .story-content,
-            .approach-content {
+            .practices-grid {
                 grid-template-columns: 1fr;
-                gap: 60px;
+                gap: 40px;
             }
 
-            .philosophy-pillars {
+            .credentials-badges {
                 grid-template-columns: 1fr;
-                gap: 32px;
             }
         }
 
@@ -412,17 +412,23 @@
                 width: 100%;
                 max-width: 300px;
             }
+
+            .practice-card {
+                padding: 40px 32px;
+            }
         }
 
         @media (max-width: 480px) {
-            .value-card,
-            .stat-card,
-            .pillar {
+            .value-card {
                 padding: 32px 24px;
             }
 
-            .story-highlight {
+            .practice-card {
                 padding: 32px 24px;
+            }
+
+            .credential-badge {
+                padding: 24px;
             }
         }
     </style>
@@ -442,46 +448,128 @@
             <div class="container">
                 <div class="page-header-content">
                     <div class="page-tagline">About Mattis & Co</div>
-                    <h1 class="page-title">Operators.<br>Not bankers.</h1>
+                    <h1 class="page-title">Two practices.<br>One philosophy.</h1>
                     <p class="page-description">
-                        We're building a different kind of firm. One that combines the discipline of private equity 
-                        with the hands-on expertise of seasoned operators.
+                        We're operators who invest and advisors who've done it. Building lasting value 
+                        through disciplined capital deployment and battle-tested transformation expertise.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Our Story -->
-        <section class="section story-section">
+        <!-- Two Practices Section -->
+        <section class="practices-section">
             <div class="container">
-                <div class="story-content fade-in">
-                    <div class="story-text">
-                        <h3>Our Story</h3>
-                        <p>
-                            Mattis & Co was founded on a simple premise: the best investors are those who've built, 
-                            operated, and scaled businesses themselves. We're not career financiers. We're operators 
-                            who happen to invest.
+                <div class="practices-intro fade-in">
+                    <h2>Built Different By Design</h2>
+                    <p>
+                        Mattis & Co operates through two distinct practices, each bringing operational excellence 
+                        to different challenges. Whether deploying capital or transformation expertise, we're 
+                        operators first, always.
+                    </p>
+                </div>
+
+                <div class="practices-grid">
+                    <div class="practice-card fade-in stagger-2">
+                        <div class="practice-number">Practice 01</div>
+                        <h3 class="practice-title">Private Equity</h3>
+                        <p class="practice-description">
+                            We invest in essential businesses that others overlook. Regional service companies. 
+                            Critical infrastructure. The boring businesses that keep communities running. 
+                            We don't do financial engineering—we do operational transformation.
                         </p>
-                        <p>
-                            After decades of building and running companies across technology, infrastructure, and services, 
-                            we saw an opportunity to do private equity differently. To focus on businesses that matter. 
-                            To work with founders and management teams as partners, not overlords.
-                        </p>
-                        <p>
-                            Today, we split our time between investing in overlooked opportunities that rebuild communities 
-                            and advising leaders through the complex transformations that define modern business. 
-                            Two practices. One mission: Building value that lasts.
-                        </p>
+                        <ul class="practice-features">
+                            <li><strong>Regional Service Consolidation:</strong> Rolling up fragmented local services to create efficient regional champions</li>
+                            <li><strong>Essential Infrastructure:</strong> Building next-gen fiber networks and decentralized energy systems</li>
+                            <li><strong>3-7 Year Holds:</strong> Patient capital focused on sustainable value creation</li>
+                            <li><strong>$10-50M Investments:</strong> Growth equity and buyouts in overlooked markets</li>
+                        </ul>
+                        <a href="../pages/theses.html" class="practice-cta">Learn about our investment theses →</a>
                     </div>
-                    
-                    <div class="story-highlight stagger-2">
-                        <h4>Our Philosophy</h4>
-                        <p>
-                            "We invest in places others ignore and advise companies through changes others avoid. 
-                            The best opportunities aren't found in boardrooms—they're discovered in communities, 
-                            built in the field, and proven in the market."
+
+                    <div class="practice-card fade-in stagger-3">
+                        <div class="practice-number">Practice 02</div>
+                        <h3 class="practice-title">Strategic Advisory</h3>
+                        <p class="practice-description">
+                            We help ambitious leaders navigate complex transformations. From SAFe implementations 
+                            to AI operationalization, from M&A integration to operating model redesigns. 
+                            We've done it at scale. Now we help others do it right.
                         </p>
+                        <ul class="practice-features">
+                            <li><strong>Adaptive Enterprise:</strong> SAFe implementation and change resilience (SAFe Fellow-led)</li>
+                            <li><strong>AI Operationalization:</strong> Building disciplined AI cultures (SAI AI-Native Partner)</li>
+                            <li><strong>M&A & Integration:</strong> Deal strategy through post-merger value capture</li>
+                            <li><strong>Operating Model:</strong> Org design, process optimization, capability building</li>
+                        </ul>
+                        <a href="../pages/contact.html" class="practice-cta">Engage our advisors →</a>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Credentials Section -->
+        <section class="credentials-section">
+            <div class="container">
+                <div class="credentials-content fade-in">
+                    <div class="credentials-badges">
+                        <div class="credential-badge stagger-2">
+                            <h4>SAFe Fellow & Gold SPCT Partner</h4>
+                            <p>
+                                Our team includes a SAFe Fellow—one of only a select few globally recognized 
+                                thought leaders in Scaled Agile. Gold Partner status with Scaled Agile, Inc.
+                            </p>
+                        </div>
+                        <div class="credential-badge stagger-3">
+                            <h4>ServiceNow Partner</h4>
+                            <p>
+                                Transform operations with enterprise workflow automation. We leverage ServiceNow 
+                                to drive 85% process automation and 3.2x efficiency gains.
+                            </p>
+                        </div>
+                        <div class="credential-badge stagger-4">
+                            <h4>Planisware Partner</h4>
+                            <p>
+                                Master complex portfolios with enterprise PPM excellence. We deploy Planisware for 
+                                real-time visibility into projects, resources, and strategic initiatives.
+                            </p>
+                        </div>
+                        <div class="credential-badge stagger-5">
+                            <h4>AI-Native Partner</h4>
+                            <p>
+                                Official AI-Native Partner bringing enterprise-grade AI expertise backed by 
+                                industry-leading frameworks and implementation methodologies.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="client-logos stagger-4">
+                        <h4>Trusted by Global Leaders</h4>
+                        <div class="logos-grid">
+                            <div>FedEx</div>
+                            <div>Mercedes-Benz</div>
+                            <div>Porsche</div>
+                            <div>Under Armour</div>
+                            <div>USAA</div>
+                            <div>State Farm</div>
+                            <div>Ascension Health</div>
+                            <div>JetBlue</div>
+                            <div>Carnival</div>
+                            <div>Hearst</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy Section -->
+        <section class="philosophy-section">
+            <div class="container">
+                <div class="philosophy-content fade-in">
+                    <div class="philosophy-quote">
+                        "The best deals aren't won in boardrooms. They're earned in the field, 
+                        proven through execution, and measured by the communities they strengthen."
+                    </div>
+                    <div class="philosophy-author">Our Operating Philosophy</div>
                 </div>
             </div>
         </section>
@@ -490,126 +578,76 @@
         <section class="section values-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="fade-in">What Drives Us</h2>
+                    <h2 class="fade-in">What Drives Both Practices</h2>
                     <p class="section-subtitle fade-in stagger-1">
-                        Our values shape every investment decision and advisory engagement.
+                        Whether investing or advising, these principles guide everything we do.
                     </p>
                 </div>
                 
                 <div class="values-grid">
                     <div class="value-card fade-in stagger-2">
                         <div class="value-icon">
-                            <i data-lucide="compass"></i>
+                            <i data-lucide="wrench"></i>
                         </div>
-                        <h4>Community-Centered Impact</h4>
-                        <p>We believe business success and community prosperity go hand in hand. Every investment should strengthen the places where people live and work.</p>
+                        <h4>Operational Excellence</h4>
+                        <p>We don't theorize about value creation—we roll up our sleeves and build it. Every investment, every engagement starts with operational improvement.</p>
                     </div>
                     
                     <div class="value-card fade-in stagger-3">
                         <div class="value-icon">
                             <i data-lucide="users"></i>
                         </div>
-                        <h4>Operational Excellence</h4>
-                        <p>Great companies are built through great operations. We roll up our sleeves and work alongside management teams to execute what matters.</p>
+                        <h4>Community Impact</h4>
+                        <p>Business success and community prosperity aren't mutually exclusive. We invest in and advise businesses that strengthen the places people live and work.</p>
                     </div>
                     
                     <div class="value-card fade-in stagger-4">
                         <div class="value-icon">
+                            <i data-lucide="target"></i>
+                        </div>
+                        <h4>Practical Results</h4>
+                        <p>No PowerPoints without implementation. No investments without operational plans. Everything we do drives toward measurable, practical outcomes.</p>
+                    </div>
+                    
+                    <div class="value-card fade-in stagger-5">
+                        <div class="value-icon">
                             <i data-lucide="clock"></i>
                         </div>
                         <h4>Long-Term Thinking</h4>
-                        <p>Sustainable value creation takes time. We're patient capital, focused on building businesses that thrive for decades, not quarters.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Our Approach -->
-        <section class="section approach-section">
-            <div class="container">
-                <div class="approach-content fade-in">
-                    <div class="approach-text">
-                        <h3>How We Work</h3>
-                        <p>
-                            Whether we're investing in a business or advising its leadership, our approach remains consistent: 
-                            deep engagement, practical solutions, and a relentless focus on execution.
-                        </p>
-                        <p>
-                            We don't believe in the traditional PE playbook of financial engineering and cost cutting. 
-                            We grow companies by making them better—better products, better processes, better teams.
-                        </p>
-                        
-                        <ul class="approach-list">
-                            <li>Partner with management teams, don't replace them</li>
-                            <li>Focus on operational improvements over financial engineering</li>
-                            <li>Invest in businesses that serve essential needs</li>
-                            <li>Take a hands-on approach to value creation</li>
-                            <li>Build for the long term, not the next exit</li>
-                        </ul>
+                        <p>Quick flips and quick fixes don't build lasting value. We take the time to do things right, whether holding an investment or executing a transformation.</p>
                     </div>
                     
-                    <div class="approach-stats stagger-2">
-                        <div class="stat-card">
-                            <span class="stat-number">3-7</span>
-                            <div class="stat-label">Year Hold Period</div>
+                    <div class="value-card fade-in stagger-6">
+                        <div class="value-icon">
+                            <i data-lucide="handshake"></i>
                         </div>
-                        
-                        <div class="stat-card">
-                            <span class="stat-number">95%</span>
-                            <div class="stat-label">Management Retention</div>
-                        </div>
-                        
-                        <div class="stat-card">
-                            <span class="stat-number">100%</span>
-                            <div class="stat-label">Hands-On Engagement</div>
-                        </div>
+                        <h4>True Partnership</h4>
+                        <p>We don't dictate from above—we partner alongside. Management teams stay. Transformation teams lead. We succeed together or not at all.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Team Philosophy -->
-        <section class="section team-philosophy">
-            <div class="container">
-                <div class="philosophy-content fade-in">
-                    <div class="philosophy-quote">
-                        "The best deals aren't won in pitch meetings. They're earned through years of building trust, 
-                        proving competence, and showing up when it matters."
-                    </div>
-                    <div class="philosophy-author">Our Investment Philosophy</div>
                     
-                    <div class="philosophy-pillars">
-                        <div class="pillar stagger-2">
-                            <h4>Earn Our Place</h4>
-                            <p>We don't expect trust—we earn it. Every relationship starts with proving our value through action, not promises.</p>
+                    <div class="value-card fade-in stagger-7">
+                        <div class="value-icon">
+                            <i data-lucide="compass"></i>
                         </div>
-                        
-                        <div class="pillar stagger-3">
-                            <h4>Stay Humble</h4>
-                            <p>The best operators know they don't have all the answers. We listen first, learn constantly, and adapt quickly.</p>
-                        </div>
-                        
-                        <div class="pillar stagger-4">
-                            <h4>Do the Work</h4>
-                            <p>Value creation happens in the details. We're not afraid to get into the weeds and tackle the unglamorous work that drives results.</p>
-                        </div>
+                        <h4>Earned Trust</h4>
+                        <p>Trust isn't given, it's earned through consistent execution. Every relationship starts with proving our value through action, not promises.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- CTA Section -->
-        <section class="section cta-section">
+        <section class="cta-section">
             <div class="container">
                 <div class="cta-content fade-in">
-                    <h3 class="cta-title">Ready to Work Together?</h3>
+                    <h3 class="cta-title">Ready to Work with Operators?</h3>
                     <p class="cta-description">
-                        Whether you're looking for investment capital or strategic advisory support, 
-                        we'd love to learn about your business and explore how we can help.
+                        Whether you need growth capital for an essential business or transformation 
+                        expertise for a complex challenge, let's explore how we can build value together.
                     </p>
                     <div class="cta-buttons">
-                        <a href="../index.html#contact" class="btn btn-primary btn-large">Send Us a Deal</a>
-                        <a href="../index.html#contact" class="btn btn-secondary btn-large">Engage Our Advisors</a>
+                        <a href="../pages/contact.html" class="btn btn-primary btn-large">Private Equity Opportunities</a>
+                        <a href="../pages/contact.html" class="btn btn-primary btn-large">Advisory Engagements</a>
                     </div>
                 </div>
             </div>
