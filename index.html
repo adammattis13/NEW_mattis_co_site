@@ -3,423 +3,1207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mattis&Co - The firm that doesn't feel like a firm.</title>
+    <title>Mattis & Company - AI Integration That Works</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="We help enterprises win with AI while competitors waste millions. Operators who turn AI strategy into operational reality.">
+    <meta name="keywords" content="AI integration, enterprise AI, AI operating model, AI advisory, operational excellence">
+    <meta name="author" content="Mattis & Company">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Mattis & Company - AI Integration That Works">
+    <meta property="og:description" content="Most companies are wasting millions on AI. We help you win.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mattisco.com">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Lucide Icons - Load with defer for better performance -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+    <style>
+        :root {
+            /* Mattis & Co Brand Colors */
+            --primary-white: #ffffff;
+            --text-primary: #1f1f1f;
+            --text-secondary: #6c757d;
+            --text-light: #adb5bd;
+            --accent-green: #bada55;
+            --accent-green-dark: #a6cb4f;
+            --dark-grey: #1a1a1a;
+            --light-grey: #f8f9fa;
+            --medium-grey: #e9ecef;
+            --background-light: #fafbfc;
+            --border-light: rgba(212, 212, 212, 0.2);
+            
+            /* Transitions and Shadows */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --border-radius: 8px;
+            --border-radius-large: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--primary-white);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .mono {
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 24px;
+            font-weight: 900;
+        }
+        
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 24px;
+            font-weight: 800;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.65;
+        }
+        
+        strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-image {
+            height: 40px;
+            width: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .logo-image:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        
+        .tagline {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background-image: url('assets/supercomputer.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+            padding-top: 120px;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(26, 26, 26, 0.8) 0%,
+                rgba(26, 26, 26, 0.7) 50%,
+                rgba(26, 26, 26, 0.8) 100%
+            );
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            max-width: 900px;
+            color: var(--primary-white);
+        }
+        
+        .hero-subheadline {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin-bottom: 48px;
+            font-weight: 400;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--dark-grey);
+            padding: 18px 48px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: var(--transition);
+            border: 2px solid var(--accent-green);
+        }
+        
+        .cta-button:hover {
+            background: var(--accent-green-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .supporting-tagline {
+            display: block;
+            margin-top: 32px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        /* Problem Section */
+        .problem {
+            background: var(--primary-white);
+        }
+        
+        .problem-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        
+        .stat-highlight {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--dark-grey);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        .trap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .trap-card {
+            padding: 48px 40px;
+            background: var(--background-light);
+            border-radius: var(--border-radius-large);
+            border: 2px solid var(--border-light);
+            transition: var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .trap-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--accent-green);
+            transition: height 0.4s ease;
+        }
+        
+        .trap-card:hover::before {
+            height: 100%;
+        }
+        
+        .trap-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+            background: var(--primary-white);
+        }
+        
+        .trap-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(186, 218, 85, 0.1);
+            font-family: 'IBM Plex Mono', monospace;
+            line-height: 1;
+        }
+        
+        .trap-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(186, 218, 85, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+        
+        .trap-icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--accent-green);
+        }
+        
+        .trap-card:hover .trap-icon {
+            background: var(--accent-green);
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .trap-card:hover .trap-icon svg {
+            color: var(--dark-grey);
+        }
+        
+        .trap-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 12px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        .trap-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+        
+        .trap-description {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .trap-impact {
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+        
+        .cost-statement {
+            margin-top: 60px;
+            padding: 60px 48px;
+            background: linear-gradient(135deg, var(--dark-grey) 0%, #2a2a2a 100%);
+            color: var(--primary-white);
+            border-radius: var(--border-radius-large);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cost-statement::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(186, 218, 85, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .cost-statement-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cost-label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        .cost-statement h3 {
+            color: var(--primary-white);
+            font-size: 2rem;
+            margin-bottom: 24px;
+            font-weight: 800;
+        }
+        
+        .cost-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+        
+        .cost-item {
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .cost-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-green);
+            transform: translateY(-4px);
+        }
+        
+        .cost-item-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+        
+        .cost-item-value {
+            font-size: 1.25rem;
+            color: var(--primary-white);
+            font-weight: 700;
+        }
+        
+        /* Solution Section */
+        .solution {
+            background: var(--background-light);
+            position: relative;
+        }
+        
+        .solution-intro {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            text-align: center;
+        }
+        
+        .solution-intro h2 {
+            margin-bottom: 24px;
+        }
+        
+        .solution-highlight {
+            background: var(--primary-white);
+            padding: 48px;
+            border-radius: var(--border-radius-large);
+            margin-bottom: 60px;
+            border: 2px solid var(--border-light);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .differentiator-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+        
+        .differentiator {
+            display: flex;
+            gap: 24px;
+            align-items: start;
+            padding: 32px;
+            background: var(--primary-white);
+            border-radius: var(--border-radius-large);
+            border: 2px solid var(--border-light);
+            transition: var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .differentiator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green) 0%, transparent 100%);
+            opacity: 0.05;
+            transition: width 0.4s ease;
+        }
+        
+        .differentiator:hover::before {
+            width: 100%;
+        }
+        
+        .differentiator:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .differentiator-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        
+        .differentiator-icon svg {
+            width: 28px;
+            height: 28px;
+            color: var(--dark-grey);
+        }
+        
+        .differentiator:hover .differentiator-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+        
+        .differentiator-content {
+            flex: 1;
+        }
+        
+        .differentiator-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        
+        .differentiator-content p {
+            font-size: 1.05rem;
+            margin: 0;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* How We Work */
+        .how-we-work {
+            background: var(--primary-white);
+        }
+        
+        .engagement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 48px;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .engagement-grid::before {
+            content: '';
+            position: absolute;
+            top: 80px;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--accent-green) 0%, 
+                var(--accent-green) 33%, 
+                var(--border-light) 33%, 
+                var(--border-light) 66%, 
+                var(--border-light) 66%, 
+                var(--border-light) 100%
+            );
+            z-index: 0;
+        }
+        
+        .engagement-card {
+            position: relative;
+            padding: 48px 40px;
+            border: 2px solid var(--border-light);
+            border-radius: var(--border-radius-large);
+            transition: var(--transition-slow);
+            background: var(--primary-white);
+            z-index: 1;
+        }
+        
+        .engagement-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
+            border-radius: var(--border-radius-large);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .engagement-card:hover::before {
+            opacity: 1;
+        }
+        
+        .engagement-card:hover {
+            border-color: transparent;
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .engagement-number {
+            width: 64px;
+            height: 64px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--dark-grey);
+            margin: 0 auto 24px;
+            font-family: 'IBM Plex Mono', monospace;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 12px rgba(186, 218, 85, 0.3);
+        }
+        
+        .engagement-card:hover .engagement-number {
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(186, 218, 85, 0.4);
+        }
+        
+        .engagement-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        
+        .engagement-card p {
+            text-align: center;
+            line-height: 1.7;
+        }
+        
+        .engagement-note {
+            margin-top: 60px;
+            padding: 40px 48px;
+            background: linear-gradient(135deg, var(--background-light) 0%, var(--primary-white) 100%);
+            border-left: 4px solid var(--accent-green);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .engagement-note p {
+            font-size: 1.1rem;
+            margin: 0;
+            color: var(--text-primary);
+        }
+        
+        .engagement-note strong {
+            color: var(--text-primary);
+        }
+        
+        /* Who We Serve */
+        .who-we-serve {
+            background: var(--background-light);
+        }
+        
+        .criteria-list {
+            margin-top: 32px;
+            margin-bottom: 48px;
+        }
+        
+        .criteria-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            font-size: 1.125rem;
+        }
+        
+        .criteria-item::before {
+            content: "→";
+            color: var(--accent-green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .industries {
+            padding: 24px 32px;
+            background: var(--primary-white);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-light);
+        }
+        
+        .industries p {
+            margin: 0;
+            font-size: 1rem;
+        }
+        
+        /* Philosophy */
+        .philosophy {
+            background: var(--dark-grey);
+            color: var(--primary-white);
+        }
+        
+        .philosophy h2 {
+            color: var(--primary-white);
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 48px;
+        }
+        
+        .philosophy-item h3 {
+            color: var(--primary-white);
+            font-size: 1.25rem;
+        }
+        
+        .philosophy-item p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+        
+        /* Final CTA */
+        .final-cta {
+            background: var(--primary-white);
+            text-align: center;
+            padding: 120px 0;
+        }
+        
+        .final-cta h2 {
+            max-width: 700px;
+            margin: 0 auto 24px;
+        }
+        
+        .final-cta-text {
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+        
+        .contact-email {
+            display: block;
+            margin-top: 24px;
+            font-size: 1rem;
+            color: var(--text-light);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        .contact-email a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .contact-email a:hover {
+            color: var(--accent-green);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-grey);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 32px;
+        }
+        
+        .footer-brand h3 {
+            color: var(--primary-white);
+            margin-bottom: 8px;
+        }
+        
+        .footer-logo-image {
+            height: 45px;
+            width: auto;
+            display: block;
+            filter: brightness(0) invert(1);
+            opacity: 0.95;
+            transition: var(--transition);
+            margin-bottom: 12px;
+        }
+        
+        .footer-logo-image:hover {
+            opacity: 1;
+            transform: scale(1.03);
+        }
+        
+        .footer-tagline {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+        
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .differentiator-list {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .engagement-grid::before {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero {
+                padding-top: 140px;
+                padding-bottom: 80px;
+                background-attachment: scroll;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subheadline {
+                font-size: 1.25rem;
+            }
+            
+            .trap-grid,
+            .engagement-grid,
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .trap-card {
+                padding: 40px 32px;
+            }
+            
+            .trap-number {
+                font-size: 3rem;
+            }
+            
+            .cost-statement {
+                padding: 40px 32px;
+            }
+            
+            .cost-items {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .differentiator {
+                padding: 24px;
+            }
+            
+            .differentiator-icon {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .differentiator-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .engagement-card {
+                padding: 32px 24px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header Navigation -->
+    <!-- Header -->
     <header>
-        <nav class="main-nav">
-            <!-- Navigation will be inserted by JavaScript -->
-        </nav>
+        <div class="header-content">
+            <div class="logo">
+                <a href="#hero">
+                    <img src="assets/mattisco - logo.webp" alt="Mattis & Company" class="logo-image" />
+                </a>
+            </div>
+            <div class="tagline">Operators. Systems. Results.</div>
+        </div>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Premium Hero Section -->
-        <section class="hero">
-            <div class="hero-overlay"></div>
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-tagline">
-                        <a href="#private-equity" class="tagline-link">
-                            <span>Private Equity</span>
-                            <span class="tagline-underline"></span>
-                        </a>
-                        <span class="divider"></span>
-                        <a href="#advisory" class="tagline-link">
-                            <span>Strategic Advisory</span>
-                            <span class="tagline-underline"></span>
-                        </a>
-                    </div>
-                    <h1 class="hero-title">The firm that<br>doesn't feel like a firm.</h1>
-                    <p class="hero-subtitle">Capital for growth. Clarity for scale. Intelligence for the edge.</p>
-                    <p class="hero-description">
-                        <strong>We buy boring businesses — and turn them into operational machines.</strong> 
-                        Our private equity and strategic advisory approach combines operational excellence, systems thinking, and human grit. 
-                        No financial engineering. No strip-and-flip. Just real operators building real value through 
-                        operational transformation in overlooked places.
-                    </p>
-                    
-                    <!-- Immediate CTA Area -->
-                    <div class="hero-cta">
-                        <a href="#contact" class="btn btn-primary btn-large">Send Us a Deal</a>
-                        <a href="#private-equity" class="btn btn-outline btn-large">Explore Our Approach</a>
-                    </div>
-                    
-                    <div class="value-props">
-                        <div class="value-prop-card">
-                            <div class="prop-number">01 — Private Equity</div>
-                            <h3 class="prop-title">We don't strip. We build.</h3>
-                            <p class="prop-description">
-                                Long-hold private equity investing in essential services and infrastructure. 
-                                Real capital paired with operational excellence for businesses serving real communities.
-                            </p>
-                            <ul class="prop-features">
-                                <li>Regional service consolidation plays</li>
-                                <li>Essential infrastructure (fiber, energy)</li>
-                                <li>Community-focused businesses</li>
-                                <li>3-7 year value creation horizons</li>
-                            </ul>
-                            <a href="pages/contact.html" class="btn btn-primary">Send Us a Deal</a>
-                        </div>
-                        
-                        <div class="value-prop-card">
-                            <div class="prop-number">02 — Strategic Advisory</div>
-                            <h3 class="prop-title">Transformation. Not PowerPoints.</h3>
-                            <p class="prop-description">
-                                We've scaled companies. Built adaptive enterprises. Operationalized AI. 
-                                Now we help ambitious teams navigate their hardest transformation challenges.
-                            </p>
-                            <ul class="prop-features">
-                                <li>SAFe & adaptive enterprise transformation</li>
-                                <li>AI operationalization & governance</li>
-                                <li>M&A strategy & integration</li>
-                                <li>Operating model & org design</li>
-                            </ul>
-                            <a href="pages/contact.html" class="btn btn-primary">Engage Our Advisors</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Most Companies Are Wasting Millions on AI. We Help You Win.</h1>
+            <p class="hero-subheadline">We turn AI strategy into operational reality — so you can move faster than competitors still stuck in pilot purgatory.</p>
+            <a href="#contact" class="cta-button">Let's Talk</a>
+            <span class="supporting-tagline">Operators. Systems. Results.</span>
+        </div>
+    </section>
 
-        <!-- Private Equity Section -->
-        <section id="private-equity" class="section pe-services service-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="fade-in">Private Equity Investment Theses</h2>
-                    <p class="section-subtitle fade-in stagger-1">
-                        We invest where others won't look. In the essential businesses that keep communities running.
-                    </p>
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <div class="problem-intro">
+                <div class="stat-highlight">Only 5%</div>
+                <h2>Why Only 5% of AI Initiatives Succeed</h2>
+                <p style="font-size: 1.2rem;"><strong>Most companies are stuck in one of three traps:</strong></p>
+            </div>
+            
+            <div class="trap-grid">
+                <div class="trap-card">
+                    <span class="trap-number">01</span>
+                    <div class="trap-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                    </div>
+                    <div class="trap-label">Trap #1</div>
+                    <div class="trap-title">Strategy Without Execution</div>
+                    <p class="trap-description">Beautiful slide decks. Ambitious roadmaps. Zero operational change. Your strategy sits in a drawer while your teams keep working the old way.</p>
+                    <p class="trap-impact">→ Wasted: 6-12 months, $500K+ in consulting fees</p>
                 </div>
                 
-                <div class="services-grid">
-                    <div class="service-card fade-in stagger-2">
-                        <div class="service-icon">
-                            <i data-lucide="layers"></i>
-                        </div>
-                        <h3>Regional Service Consolidation</h3>
-                        <p>Rolling up fragmented local services—HVAC, plumbing, electrical, landscaping. Creating efficient regional champions while preserving local relationships and jobs.</p>
-                        <a href="pages/theses/consolidation.html" style="color: var(--accent-green); font-weight: 600; margin-top: 16px; display: inline-block;">Learn more →</a>
+                <div class="trap-card">
+                    <span class="trap-number">02</span>
+                    <div class="trap-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
                     </div>
-                    
-                    <div class="service-card fade-in stagger-3">
-                        <div class="service-icon">
-                            <i data-lucide="zap"></i>
-                        </div>
-                        <h3>Essential Infrastructure</h3>
-                        <p>Next-generation fiber networks and decentralized energy systems including micro-nuclear. The unglamorous backbone that powers the data economy.</p>
-                        <a href="pages/theses/infrastructure.html" style="color: var(--accent-green); font-weight: 600; margin-top: 16px; display: inline-block;">Learn more →</a>
-                    </div>
+                    <div class="trap-label">Trap #2</div>
+                    <div class="trap-title">Technology Without Operating Model</div>
+                    <p class="trap-description">You bought the tools. Licenses are spinning. But your organization doesn't know how to use them. No governance. No training. No integration.</p>
+                    <p class="trap-impact">→ Wasted: $2M+ in licenses, frustrated employees</p>
                 </div>
                 
-                <div style="text-align: center; margin-top: 60px;" class="fade-in stagger-4">
-                    <a href="pages/portfolio.html" class="btn btn-secondary btn-large">
-                        View Our Portfolio
-                        <i data-lucide="arrow-right" style="width: 20px; height: 20px;"></i>
-                    </a>
+                <div class="trap-card">
+                    <span class="trap-number">03</span>
+                    <div class="trap-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <div class="trap-label">Trap #3</div>
+                    <div class="trap-title">Pilots Without Scale</div>
+                    <p class="trap-description">47 AI experiments across departments. Each one "promising." None adopted enterprise-wide. You're stuck in perpetual proof-of-concept mode.</p>
+                    <p class="trap-impact">→ Wasted: Countless hours, fragmented efforts, zero ROI</p>
                 </div>
             </div>
-        </section>
+            
+            <div class="cost-statement">
+                <div class="cost-statement-content">
+                    <div class="cost-label">The Real Cost</div>
+                    <h3>While You're Stuck, Competitors Are Moving</h3>
+                    <div class="cost-items">
+                        <div class="cost-item">
+                            <div class="cost-item-label">Capital Burned</div>
+                            <div class="cost-item-value">Millions Spent</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-item-label">Returns Generated</div>
+                            <div class="cost-item-value">Minimal Impact</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-item-label">Market Position</div>
+                            <div class="cost-item-value">Falling Behind</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- Advisory Services Section -->
-        <section id="advisory" class="section advisory-services service-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="fade-in">Strategic Advisory Services</h2>
-                    <p class="section-subtitle fade-in stagger-1">
-                        Your business is complex. Your advisors shouldn't make it worse.
-                    </p>
-                </div>
-                
-                <div class="advisory-content">
-                    <div class="advisory-text fade-in stagger-2">
-                        <h3>Led by operators who've done it.</h3>
-                        <p class="advisory-description">
-                            <strong>SAFe Fellows. AI-Native Partners. Fortune 500 transformation leaders.</strong>
-                        </p>
-                        <p class="advisory-description">
-                            We've implemented SAFe at FedEx, Mercedes-Benz, and Porsche. Built AI governance for 
-                            financial services. Led digital transformations for global enterprises. Now we bring 
-                            that expertise to ambitious teams ready to evolve.
-                        </p>
-                        <p style="color: var(--text-secondary); margin-bottom: 40px;">
-                            Whether you're building adaptive enterprises, operationalizing AI, navigating M&A, 
-                            or redesigning your operating model—we've been there. We don't deliver decks. 
-                            We deliver transformation.
-                        </p>
-                        <a href="pages/contact.html" class="btn btn-primary btn-large">Let's Talk</a>
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="container">
+            <div class="solution-intro">
+                <h2>AI Integration Built Into a System That Works</h2>
+                <p style="font-size: 1.25rem; color: var(--text-primary);"><strong>We don't merely advise. We execute alongside you.</strong></p>
+            </div>
+            
+            <div class="solution-highlight">
+                <p style="font-size: 1.15rem; line-height: 1.7; margin: 0;">Our approach combines systems thinking, enterprise scaling expertise, and operational discipline to help you build the AI operating model that creates sustainable competitive advantage.</p>
+            </div>
+            
+            <h3 style="text-align: center; margin-bottom: 40px; font-size: 2rem;">What Makes Us Different</h3>
+            
+            <div class="differentiator-list">
+                <div class="differentiator">
+                    <div class="differentiator-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                        </svg>
                     </div>
-                    
-                    <div class="advisory-features fade-in stagger-3">
-                        <div class="advisory-feature">
-                            <div class="advisory-feature-icon">
-                                <i data-lucide="activity"></i>
-                            </div>
-                            <div class="advisory-feature-content">
-                                <h4>Adaptive Enterprise</h4>
-                                <p>SAFe implementation, change resilience, operational agility</p>
-                            </div>
-                        </div>
-                        
-                        <div class="advisory-feature">
-                            <div class="advisory-feature-icon">
-                                <i data-lucide="brain"></i>
-                            </div>
-                            <div class="advisory-feature-content">
-                                <h4>AI Operationalization</h4>
-                                <p>Disciplined AI cultures, governance, human-in-the-loop systems</p>
-                            </div>
-                        </div>
-                        
-                        <div class="advisory-feature">
-                            <div class="advisory-feature-icon">
-                                <i data-lucide="git-merge"></i>
-                            </div>
-                            <div class="advisory-feature-content">
-                                <h4>M&A & Integration</h4>
-                                <p>Deal strategy, due diligence, post-merger integration</p>
-                            </div>
-                        </div>
-                        
-                        <div class="advisory-feature">
-                            <div class="advisory-feature-icon">
-                                <i data-lucide="settings"></i>
-                            </div>
-                            <div class="advisory-feature-content">
-                                <h4>Operating Model Design</h4>
-                                <p>Org design, process optimization, capability building</p>
-                            </div>
-                        </div>
-                        
-                        <div class="advisory-feature">
-                            <div class="advisory-feature-icon">
-                                <i data-lucide="compass"></i>
-                            </div>
-                            <div class="advisory-feature-content">
-                                <h4>Enterprise Strategy</h4>
-                                <p>Growth strategy, business expansion, portfolio optimization</p>
-                            </div>
-                        </div>
-                        
-                        <div class="advisory-feature">
-                            <div class="advisory-feature-icon">
-                                <i data-lucide="dollar-sign"></i>
-                            </div>
-                            <div class="advisory-feature-content">
-                                <h4>Investment Advisory</h4>
-                                <p>Capital strategy, investor relations, value creation planning</p>
-                            </div>
-                        </div>
+                    <div class="differentiator-content">
+                        <h3>Operators First</h3>
+                        <p>We've built and scaled enterprise operations for 20+ years. We know what works because we've done it—not because we read about it.</p>
                     </div>
                 </div>
                 
-                <div style="background: var(--background-light); border-radius: var(--border-radius-large); padding: 48px; margin-top: 60px; border: 1px solid var(--border-light);" class="fade-in stagger-4">
-                    <h3 style="text-align: center; margin-bottom: 32px; color: var(--text-primary);">Trusted by Global Leaders</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; text-align: center; color: var(--text-secondary); font-weight: 600;">
-                        <div>FedEx</div>
-                        <div>Mercedes-Benz</div>
-                        <div>Porsche</div>
-                        <div>Under Armour</div>
-                        <div>USAA</div>
-                        <div>State Farm</div>
-                        <div>Ascension Health</div>
-                        <div>JetBlue</div>
-                        <div>Carnival</div>
-                        <div>Hearst</div>
+                <div class="differentiator">
+                    <div class="differentiator-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M12 1v6m0 6v6"></path>
+                            <path d="m4.93 4.93 4.24 4.24m5.66 5.66 4.24 4.24"></path>
+                            <path d="m19.07 4.93-4.24 4.24m-5.66 5.66-4.24 4.24"></path>
+                        </svg>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Investment Theses Section -->
-        <section id="theses" class="section theses">
-            <div class="container">
-                <div class="section-header">
-                    <h2 style="color: white;" class="fade-in">Our Investment Focus</h2>
-                    <p class="section-subtitle fade-in stagger-1">
-                        Where everyone else sees problems, we see profit.
-                    </p>
-                </div>
-                
-                <div class="theses-grid" style="max-width: 900px; margin: 0 auto;">
-                    <a href="pages/theses/consolidation.html" class="thesis-card fade-in stagger-2">
-                        <div class="thesis-label">Investment Thesis 01</div>
-                        <div class="thesis-icon">
-                            <i data-lucide="layers"></i>
-                        </div>
-                        <h4>Regional Service Consolidation</h4>
-                        <p>Rolling up fragmented local services to create efficient, reliable, customer-centric regional champions. We preserve local relationships while bringing enterprise-level operations to Main Street businesses.</p>
-                    </a>
-                    
-                    <a href="pages/theses/infrastructure.html" class="thesis-card fade-in stagger-3">
-                        <div class="thesis-label">Investment Thesis 02</div>
-                        <div class="thesis-icon">
-                            <i data-lucide="zap"></i>
-                        </div>
-                        <h4>Essential Infrastructure</h4>
-                        <p>Building the backbone of the data economy through next-generation fiber networks and decentralized energy systems including micro-nuclear. The picks and shovels of the information age.</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Team Section -->
-        <section id="team" class="section team">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="fade-in">Operators. Not Bankers.</h2>
-                    <p class="section-subtitle fade-in stagger-1">
-                        We've built companies. Shipped products. Met payroll. Now we invest and advise.
-                    </p>
-                </div>
-                
-                <div class="team-grid">
-                    <div class="team-member fade-in stagger-2">
-                        <div class="member-photo">MC</div>
-                        <div class="member-name">Managing Partner</div>
-                        <div class="member-title">Builder. Operator. Investor.<br>Community-focused.</div>
+                    <div class="differentiator-content">
+                        <h3>Systems Thinkers</h3>
+                        <p>We design operating models, not pilot projects. Every engagement is built to scale across your entire enterprise.</p>
                     </div>
                 </div>
                 
-                <div style="text-align: center; margin-top: 40px;">
-                    <a href="pages/about.html" class="btn btn-secondary">Learn More About Our Approach</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Where We're Going Section -->
-        <section class="section">
-            <div class="container">
-                <div style="text-align: center; max-width: 800px; margin: 0 auto;">
-                    <h2 class="fade-in">Where We're Going</h2>
-                    <p class="lead fade-in stagger-1" style="margin-top: 24px; margin-bottom: 40px;">
-                        We believe the next decade belongs to operators who understand that true value creation 
-                        comes from operational excellence, not financial engineering. The future isn't about 
-                        disruption—it's about building durable, efficient, fundamentally essential businesses 
-                        that serve real communities with excellence.
-                    </p>
-                    <a href="pages/contact.html" class="btn btn-primary btn-large fade-in stagger-2">
-                        Start a Conversation
-                        <i data-lucide="arrow-right" style="width: 20px; height: 20px;"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section contact-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="fade-in">Let's Build Something Essential</h2>
-                    <p class="section-subtitle fade-in stagger-1">
-                        Got a boring business that prints cash? Need transformation expertise? 
-                        We're the PE and advisory firm that actually gets it done.
-                    </p>
+                <div class="differentiator">
+                    <div class="differentiator-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="differentiator-content">
+                        <h3>Execution Focused</h3>
+                        <p>We deliver measurable results in 90 days, not 18 months. Bias toward action over endless analysis.</p>
+                    </div>
                 </div>
                 
-                <div class="contact-form-wrapper fade-in stagger-2">
-                    <form class="contact-form" action="#" method="POST">
-                        <div class="form-field">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" id="name" name="name" required class="form-input">
-                        </div>
-                        
-                        <div class="form-field">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" name="email" required class="form-input">
-                        </div>
-                        
-                        <div class="form-field">
-                            <label for="company" class="form-label">Company</label>
-                            <input type="text" id="company" name="company" class="form-input">
-                        </div>
-                        
-                        <div class="form-field">
-                            <label for="interest" class="form-label">I'm interested in...</label>
-                            <select id="interest" name="interest" required class="form-select">
-                                <option value="">Select an option</option>
-                                <option value="private-equity">Private Equity - Send Us a Deal</option>
-                                <option value="advisory">Strategic Advisory Services</option>
-                                <option value="partnership">Investment Partnership</option>
-                                <option value="other">Something Else</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-field">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea id="message" name="message" placeholder="Tell us about your opportunity or challenge..." required class="form-textarea"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-large">
-                            Send Message
-                        </button>
-                        
-                        <div class="form-response-note">
-                            We typically respond within 24 hours
-                        </div>
-                    </form>
+                <div class="differentiator">
+                    <div class="differentiator-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20M2 12h20"></path>
+                            <path d="m5 5 14 14M5 19 19 5"></path>
+                        </svg>
+                    </div>
+                    <div class="differentiator-content">
+                        <h3>Battle-Tested</h3>
+                        <p>We know what works under pressure. Our frameworks have been proven in high-stakes enterprise environments.</p>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- How We Work -->
+    <section class="how-we-work">
+        <div class="container">
+            <h2 style="text-align: center;">From Assessment to Integration</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto; font-size: 1.2rem;"><strong>We meet you where you are and move fast.</strong></p>
+            
+            <div class="engagement-grid">
+                <div class="engagement-card">
+                    <div class="engagement-number">01</div>
+                    <h3>Assessment</h3>
+                    <p>Understand your current state, identify gaps, and build your roadmap to AI operational excellence. We analyze your people, processes, technology, and governance to create a clear path forward.</p>
+                </div>
+                
+                <div class="engagement-card">
+                    <div class="engagement-number">02</div>
+                    <h3>Integration</h3>
+                    <p>Design and implement your AI operating model — from governance and talent to process and technology integration. We build the systems that enable sustainable AI adoption at scale.</p>
+                </div>
+                
+                <div class="engagement-card">
+                    <div class="engagement-number">03</div>
+                    <h3>Advisory</h3>
+                    <p>Ongoing strategic guidance as you scale AI across your enterprise. We stay with you through the critical phases of adoption, helping you navigate challenges and seize opportunities.</p>
+                </div>
+            </div>
+            
+            <div class="engagement-note">
+                <p><strong>Every engagement is customized.</strong> We're not selling a methodology — we're solving your specific problem. Our approach adapts to your organization's maturity, culture, and strategic objectives.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Serve -->
+    <section class="who-we-serve">
+        <div class="container">
+            <h2>Built for Enterprise Leaders Who Execute</h2>
+            <p><strong>We work with organizations that:</strong></p>
+            
+            <div class="criteria-list">
+                <div class="criteria-item">Are tired of pilots that go nowhere</div>
+                <div class="criteria-item">Need operational change, not strategy documents</div>
+                <div class="criteria-item">Want to move faster than their competitors</div>
+                <div class="criteria-item">Understand that AI is an operating model challenge, not just a technology challenge</div>
+            </div>
+            
+            <div class="industries">
+                <p><strong>Industries:</strong> Technology, Financial Services, Healthcare, Manufacturing, Government/Defense</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="philosophy">
+        <div class="container">
+            <h2>Speed and Discipline Win</h2>
+            <p style="color: rgba(255, 255, 255, 0.9);"><strong>We believe in:</strong></p>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-item">
+                    <h3>Operational Excellence</h3>
+                    <p>Systems thinking applied to enterprise adoption. Every engagement is designed to scale.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <h3>Bias Toward Action</h3>
+                    <p>90-day sprints. Measurable results. No endless analysis.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <h3>Intellectual Honesty</h3>
+                    <p>We tell you what you need to hear, not what you want to hear.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <h3>Long-Term Partnership</h3>
+                    <p>We're building something that lasts — not extracting fees and disappearing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="contact" class="final-cta">
+        <div class="container">
+            <h2>Ready to Move Beyond Strategy?</h2>
+            <p class="final-cta-text">Let's discuss what AI integration looks like for your organization.</p>
+            <a href="mailto:contact@mattisco.com" class="cta-button">Schedule a Conversation</a>
+            <span class="contact-email">Email: <a href="mailto:contact@mattisco.com">contact@mattisco.com</a></span>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
-        <!-- Footer will be inserted by JavaScript -->
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/mattisco - logo.webp" alt="Mattis & Company" class="footer-logo-image" />
+                    <div class="footer-tagline">Operators. Systems. Results.</div>
+                </div>
+                <div class="footer-links">
+                    <a href="https://linkedin.com/company/mattisco" target="_blank">LinkedIn</a>
+                    <a href="mailto:contact@mattisco.com">Email</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Mattis & Company LLC. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
-
-    <!-- Load Navigation Script -->
-    <script src="navigation.js"></script>
-    
-    <!-- Initialize Lucide Icons and animations -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Lucide icons
-            lucide.createIcons();
-            
-            // Setup scroll animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animationPlayState = 'running';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-            document.querySelectorAll('.fade-in').forEach(el => {
-                el.style.animationPlayState = 'paused';
-                observer.observe(el);
-            });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        const headerHeight = document.querySelector('header').offsetHeight;
-                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
