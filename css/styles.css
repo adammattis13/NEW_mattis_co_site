@@ -186,6 +186,27 @@ nav.scrolled {
   padding-top: 80px;
   position: relative;
   overflow: hidden;
+  background-image: url('../assets/images/Hero - supercomputer.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Dark overlay for readability */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 1;
 }
 
 .hero::before {
