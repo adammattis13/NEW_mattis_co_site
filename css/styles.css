@@ -145,6 +145,60 @@ nav.scrolled {
   background: var(--lime-dark);
 }
 
+/* Dropdown Menu Styles */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  background: rgba(0, 0, 0, 0.98);
+  border: 1px solid rgba(186, 218, 85, 0.3);
+  min-width: 220px;
+  padding: 0.5rem 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+/* Create invisible hover bridge between link and menu */
+.dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 0.5rem;
+  background: transparent;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  list-style: none;
+  padding: 0;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  color: var(--white);
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(186, 218, 85, 0.1);
+  color: var(--lime);
+  padding-left: 1.5rem;
+}
+
 /* Mobile Menu */
 .mobile-menu-toggle {
   display: none;
